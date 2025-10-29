@@ -4,9 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>منصة عاشق التاريخ | Ancient History Platform</title>
-    <!-- تحميل Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- تضمين أيقونات جميلة -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       rel="stylesheet"
@@ -16,7 +14,8 @@
       @import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap");
       body {
         font-family: "Tajawal", sans-serif;
-        background-color: #0a0a0a;
+        background-color: #050505;
+        opacity: 1;
         color: #eaeaea;
       }
       /* الألوان الذهبية */
@@ -48,14 +47,28 @@
         box-shadow: 0 15px 30px rgba(212, 175, 55, 0.5);
       }
 
+      /* **** الكود المُعدل للخلفية (أغمق وأهدأ) **** */
       .hero-bg {
-        background-color: #0a0a0a;
-        background-image: radial-gradient(
-          circle at 10% 20%,
-          #1a1a1a 0%,
-          #0a0a0a 100%
-        );
-        animation: subtle-pulse 10s infinite alternate;
+        background-color: #050505;
+        opacity: 1;
+
+        background-image:
+            /* طبقة تظليل داكنة فوق الصورة لتغميقها */ linear-gradient(
+            rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.6)
+          ),
+          /* التدرج الدائري الأصلي للحركة الناعمة */
+            radial-gradient(
+              circle at 10% 20%,
+              rgba(16, 16, 16, 0.3) 0%,
+              rgba(5, 5, 5, 0.8) 100%
+            ),
+          /* الصورة الأصلية */ url(/images/bg.png);
+
+        background-size: cover;
+        background-attachment: fixed;
+        /* حركة أنعم وأهدأ (20 ثانية بدلاً من 10) */
+        animation: subtle-pulse 20s infinite alternate ease-in-out;
       }
       @keyframes subtle-pulse {
         from {
@@ -132,640 +145,844 @@
       }
     </style>
   </head>
-  <body class="min-h-screen">
-    <!-- Modal لتسجيل الدخول / التسجيل (تم تحديثه) -->
-    <div
-      id="auth-modal"
-      class="fixed inset-0 bg-black bg-opacity-75 z-[100] hidden flex items-center justify-center"
-    >
-      <div id="auth-card" class="p-8 rounded-xl w-full max-w-md gold-shadow">
-        <div
-          class="flex justify-between items-center mb-6 border-b gold-border pb-2"
-        >
-          <h3 class="text-2xl gold-color font-bold" id="auth-title">
-            تسجيل الدخول
-          </h3>
-          <button
-            onclick="document.getElementById('auth-modal').classList.add('hidden')"
-            class="text-white hover:gold-color text-2xl"
-          >
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-
-        <!-- نموذج تسجيل الدخول -->
-        <form id="login-form" class="space-y-4">
-          <div>
-            <input
-              type="email"
-              id="login-email"
-              required
-              placeholder="البريد الإلكتروني"
-              class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-            />
-          </div>
-          <!-- حقل كلمة المرور مع زر الإظهار/الإخفاء -->
-          <div class="password-container">
-            <input
-              type="password"
-              id="login-password"
-              required
-              placeholder="كلمة المرور"
-              class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-            />
-            <i
-              class="fas fa-eye toggle-password"
-              data-target="login-password"
-              onclick="togglePasswordVisibility(this)"
-            ></i>
-          </div>
-
-          <button
-            type="submit"
-            class="w-full py-3 gold-bg text-gray-900 font-bold rounded-lg gold-shadow hover:bg-yellow-500 transition"
-          >
-            تسجيل الدخول
-          </button>
-          <p class="text-center text-sm text-gray-400 mt-4">
-            ليس لديك حساب؟
-            <a
-              href="#"
-              id="switch-to-signup"
-              class="gold-color hover:text-yellow-500"
-              >سجل الآن</a
-            >
-          </p>
-          <div
-            id="auth-message-box"
-            class="mt-4 p-3 rounded-lg hidden text-sm text-center font-medium gold-shadow bg-gray-700 text-yellow-300"
-          ></div>
-        </form>
-
-        <!-- نموذج التسجيل -->
-        <form id="signup-form" class="space-y-4 hidden">
-          <div>
-            <input
-              type="text"
-              id="signup-name"
-              required
-              placeholder="اسم المستخدم (Admin للوصول كمدير)"
-              class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-            />
-          </div>
-          <div>
-            <input
-              type="email"
-              id="signup-email"
-              required
-              placeholder="البريد الإلكتروني"
-              class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-            />
-          </div>
-          <!-- حقل كلمة المرور مع زر الإظهار/الإخفاء -->
-          <div class="password-container">
-            <input
-              type="password"
-              id="signup-password"
-              required
-              placeholder="كلمة المرور (6 أحرف على الأقل)"
-              class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-            />
-            <i
-              class="fas fa-eye toggle-password"
-              data-target="signup-password"
-              onclick="togglePasswordVisibility(this)"
-            ></i>
-          </div>
-
-          <button
-            type="submit"
-            id="signup-submit-btn"
-            class="w-full py-3 gold-bg text-gray-900 font-bold rounded-lg gold-shadow hover:bg-yellow-500 transition"
-          >
-            تسجيل حساب جديد
-          </button>
-          <p class="text-center text-sm text-gray-400 mt-4">
-            لديك حساب بالفعل؟
-            <a
-              href="#"
-              id="switch-to-login"
-              class="gold-color hover:text-yellow-500"
-              >تسجيل الدخول</a
-            >
-          </p>
-        </form>
-      </div>
-    </div>
-
-    <header
-      class="sticky top-0 z-50 p-4 bg-gray-900/90 backdrop-blur-sm shadow-xl border-b border-yellow-800/50"
-    >
+  <body class="hero-bg">
+    <div id="auth-modal-container">
       <div
-        class="max-w-7xl mx-auto flex justify-between items-center flex-wrap"
+        id="auth-modal"
+        class="fixed inset-0 bg-black bg-opacity-75 z-[100] hidden flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300"
       >
-        <div class="flex items-center space-x-3 space-x-reverse mb-2 md:mb-0">
-          <!-- تم تكبير أيقونة الهرم إلى text-4xl -->
-          <i class="fas fa-pyramid w-10 h-10 gold-color text-4xl"></i>
-          <img src="images/logo.png" alt="imge" class="w-[140px] h-[120px]" />
-          <h1 class="text-2xl gold-color font-extrabold tracking-wider ml-5">
-            عاشق التاريخ
-          </h1>
-        </div>
-
-        <nav class="flex items-center space-x-6 space-x-reverse font-medium">
-          <!-- رابط حصة الأونلاين الجديدة -->
-          <a
-            href="#"
-            id="nav-live-session"
-            class="text-white hover:gold-color transition hidden"
+        <div id="auth-card" class="p-8 rounded-xl w-full max-w-md gold-shadow">
+          <div
+            class="flex justify-between items-center mb-6 border-b gold-border pb-2"
           >
-            <i class="fas fa-video nav-icon gold-color animate-pulse"></i> شرح
-            الدرس المباشر
-          </a>
-
-          <!-- الروابط الأساسية -->
-          <a
-            href="#lessons-section"
-            class="text-white hover:gold-color transition"
-            ><i class="fas fa-book-open nav-icon gold-color"></i> الدروس</a
-          >
-          <a
-            href="#characters-section"
-            id="nav-characters"
-            class="text-white hover:gold-color transition"
-            ><i class="fas fa-user-friends nav-icon gold-color"></i> الشخصيات</a
-          >
-          <a
-            href="#quizzes-section"
-            id="nav-quizzes"
-            class="text-white hover:gold-color transition"
-            ><i class="fas fa-clipboard-list nav-icon gold-color"></i>
-            الاختبارات</a
-          >
-
-          <!-- زر التحكم بالأدوار (للمدير فقط) -->
-          <button
-            id="admin-toggle-btn"
-            class="py-1 px-3 rounded-full text-xs font-bold transition duration-300 gold-shadow hidden"
-            style="background-color: #1a1a1a; border: 1px solid #d4af37"
-          >
-            وضع المدير (Admin Mode)
-          </button>
-
-          <!-- أيقونة تسجيل الدخول / حالة المستخدم -->
-          <button
-            id="auth-button"
-            class="gold-color text-xl p-2 rounded-full hover:bg-gray-800 transition"
-          >
-            <i class="fas fa-sign-in-alt" id="auth-icon"></i>
-          </button>
-        </nav>
-      </div>
-    </header>
-
-    <main>
-      <!-- قسم البطل (Hero Section) (لم يتغير) -->
-      <section
-        id="hero"
-        class="hero-bg py-24 md:py-32 text-center border-b border-yellow-700/50 gold-shadow"
-      >
-        <div class="max-w-4xl mx-auto px-6">
-          <p
-            class="text-4xl md:text-6xl font-black mb-6 leading-tight gold-color"
-          >
-            تعلم التاريخ... بطريقة تحيي الماضي
-          </p>
-          <p
-            id="access-status"
-            class="text-lg text-gray-400 font-medium mb-10 hidden"
-          >
-            <i class="fas fa-lock ml-2"></i> يُرجى تسجيل الدخول أو انتظار موافقة
-            المدير للوصول إلى المحتوى.
-          </p>
-          <a
-            href="#lessons-section"
-            class="inline-block py-4 px-10 rounded-full gold-bg text-gray-900 font-bold text-lg gold-shadow hover:bg-yellow-500 transition transform hover:scale-105 duration-300 ease-in-out"
-          >
-            ابدأ التعلم الآن <i class="fas fa-long-arrow-alt-left mr-2"></i>
-          </a>
-        </div>
-      </section>
-
-      <!-- ****** أقسام لوحة تحكم المدير ****** -->
-
-      <!-- قسم إدارة الجلسة المباشرة -->
-      <section
-        id="admin-live-session-section"
-        class="hidden max-w-7xl mx-auto my-12 p-6 md:p-12 bg-gray-900/80 rounded-xl border gold-border gold-shadow"
-      >
-        <h2
-          class="text-2xl font-bold mb-6 text-white border-b pb-2 gold-border flex items-center"
-        >
-          <i class="fas fa-broadcast-tower gold-color ml-2"></i> إدارة رابط البث
-          المباشر
-        </h2>
-        <form id="live-session-form" class="space-y-4">
-          <div>
-            <label
-              for="live-session-url"
-              class="block text-sm font-medium gold-color mb-1"
-              >رابط الجلسة المباشرة (Meet أو Zoom)</label
+            <h3 class="text-2xl gold-color font-bold" id="auth-title">
+              تسجيل الدخول
+            </h3>
+            <button
+              onclick="closeAuthModal()"
+              class="text-white hover:gold-color text-2xl"
             >
-            <input
-              type="url"
-              id="live-session-url"
-              required
-              class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-              placeholder="https://meet.google.com/abc-xyz-123"
-            />
+              <i class="fas fa-times"></i>
+            </button>
           </div>
-          <div>
-            <label
-              for="live-session-desc"
-              class="block text-sm font-medium gold-color mb-1"
-              >وصف الجلسة</label
-            >
-            <input
-              type="text"
-              id="live-session-desc"
-              class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-              placeholder="مثال: مراجعة الوحدة الثانية، اليوم: الخميس 7 مساءً"
-            />
-          </div>
-          <button
-            type="submit"
-            id="update-live-session-btn"
-            class="w-full py-3 px-4 rounded-lg bg-green-700 text-white font-bold hover:bg-green-600 transition gold-shadow"
-          >
-            حفظ / تحديث رابط الجلسة المباشرة
-          </button>
-        </form>
-        <div
-          id="live-session-status-message"
-          class="mt-4 p-3 rounded-lg hidden text-sm text-center font-medium gold-shadow"
-        ></div>
-      </section>
 
-      <!-- قسم لوحة تحكم المدير: إدارة المستخدمين -->
-      <section
-        id="admin-users-approval"
-        class="hidden max-w-7xl mx-auto my-12 p-6 md:p-12 bg-gray-900/80 rounded-xl border gold-border gold-shadow"
-      >
-        <h2
-          class="text-2xl font-bold mb-6 text-white border-b pb-2 gold-border flex items-center"
-        >
-          <i class="fas fa-users-cog gold-color ml-2"></i> إدارة المستخدمين
-          والأدوار
-        </h2>
-
-        <div class="mb-4">
-          <input
-            type="text"
-            id="user-search-input"
-            placeholder="ابحث بالاسم أو البريد الإلكتروني"
-            class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-          />
-        </div>
-
-        <div id="pending-users-list" class="space-y-4">
-          <p class="text-gray-500" id="users-loading-status">
-            جارٍ تحميل قائمة المستخدمين...
-          </p>
-        </div>
-      </section>
-
-      <!-- قسم إضافة درس جديد -->
-      <section
-        id="add-lesson-section"
-        class="hidden max-w-7xl mx-auto mb-12 p-6 md:p-12 bg-gray-900/80 rounded-xl border gold-border gold-shadow"
-      >
-        <h2
-          class="text-2xl font-bold mb-6 text-white border-b pb-2 gold-border flex items-center"
-        >
-          <i class="fas fa-cogs gold-color ml-2"></i> لوحة تحكم المدير: إضافة
-          درس جديد
-        </h2>
-        <form id="add-lesson-form" class="space-y-4">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <form id="login-form" class="space-y-4">
             <div>
-              <label
-                for="lesson-title"
-                class="block text-sm font-medium gold-color mb-1"
-                >عنوان الدرس</label
+              <input
+                type="email"
+                id="login-email"
+                required
+                placeholder="البريد الإلكتروني"
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+              />
+            </div>
+            <div class="password-container">
+              <input
+                type="password"
+                id="login-password"
+                required
+                placeholder="كلمة المرور"
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+              />
+              <i
+                class="fas fa-eye toggle-password"
+                data-target="login-password"
+                onclick="togglePasswordVisibility(this)"
+              ></i>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full py-3 gold-bg text-gray-900 font-bold rounded-lg gold-shadow hover:bg-yellow-500 transition"
+            >
+              تسجيل الدخول
+            </button>
+            <p class="text-center text-sm text-gray-400 mt-4">
+              ليس لديك حساب؟
+              <a
+                href="#"
+                id="switch-to-signup"
+                class="gold-color hover:text-yellow-500"
+                >سجل الآن</a
               >
+            </p>
+            <div
+              id="auth-message-box"
+              class="mt-4 p-3 rounded-lg hidden text-sm text-center font-medium gold-shadow bg-gray-700 text-yellow-300"
+            ></div>
+          </form>
+
+          <form id="signup-form" class="space-y-4 hidden">
+            <div>
               <input
                 type="text"
-                id="lesson-title"
+                id="signup-name"
                 required
+                placeholder="اسم المستخدم (Admin للوصول كمدير)"
                 class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-                placeholder="مثال: عصر الأسرات"
               />
             </div>
             <div>
+              <input
+                type="email"
+                id="signup-email"
+                required
+                placeholder="البريد الإلكتروني"
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+              />
+            </div>
+            <div class="password-container">
+              <input
+                type="password"
+                id="signup-password"
+                required
+                placeholder="كلمة المرور (6 أحرف على الأقل)"
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+              />
+              <i
+                class="fas fa-eye toggle-password"
+                data-target="signup-password"
+                onclick="togglePasswordVisibility(this)"
+              ></i>
+            </div>
+
+            <button
+              type="submit"
+              id="signup-submit-btn"
+              class="w-full py-3 gold-bg text-gray-900 font-bold rounded-lg gold-shadow hover:bg-yellow-500 transition"
+            >
+              تسجيل حساب جديد
+            </button>
+            <p class="text-center text-sm text-gray-400 mt-4">
+              لديك حساب بالفعل؟
+              <a
+                href="#"
+                id="switch-to-login"
+                class="gold-color hover:text-yellow-500"
+                >تسجيل الدخول</a
+              >
+            </p>
+          </form>
+        </div>
+      </div>
+
+      <header
+        class="sticky top-0 z-50 p-4 bg-gray-900/90 backdrop-blur-sm shadow-xl border-b border-yellow-800/50"
+      >
+        <div
+          class="max-w-7xl mx-auto flex justify-between items-center flex-wrap"
+        >
+          <div class="flex items-center space-x-3 space-x-reverse mb-2 md:mb-0">
+            <i class="fas fa-pyramid w-10 h-10 gold-color text-4xl"></i>
+            <img src="images/logo.png" alt="imge" class="w-[140px] h-[120px]" />
+            <h1
+              class="text-xl md:text-2xl gold-color font-extrabold tracking-wider ml-5"
+            >
+              عاشق التاريخ
+            </h1>
+          </div>
+
+          <button
+            id="mobile-menu-button"
+            class="md:hidden gold-color text-2xl p-2 rounded-full hover:bg-gray-800 transition focus:outline-none"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <nav
+            id="main-nav-links"
+            class="hidden md:flex flex-col md:flex-row items-center space-x-6 space-x-reverse font-medium w-full md:w-auto mt-4 md:mt-0"
+          >
+            <a
+              href="#"
+              id="nav-live-session"
+              class="text-white hover:gold-color transition block md:inline-block w-full md:w-auto p-2 md:p-0 hidden"
+            >
+              <i class="fas fa-video nav-icon gold-color animate-pulse"></i>
+              مباشر
+            </a>
+
+            <a
+              href="#lessons-section"
+              class="text-white hover:gold-color transition block md:inline-block w-full md:w-auto p-2 md:p-0"
+              ><i class="fas fa-book-open nav-icon gold-color"></i> الدروس</a
+            >
+            <a
+              href="#characters-section"
+              id="nav-characters"
+              class="text-white hover:gold-color transition block md:inline-block w-full md:w-auto p-2 md:p-0"
+              ><i class="fas fa-user-friends nav-icon gold-color"></i>
+              الشخصيات</a
+            >
+            <a
+              href="#quizzes-section"
+              id="nav-quizzes"
+              class="text-white hover:gold-color transition block md:inline-block w-full md:w-auto p-2 md:p-0"
+              ><i class="fas fa-clipboard-list nav-icon gold-color"></i>
+              الاختبارات</a
+            >
+
+            <button
+              id="admin-toggle-btn"
+              class="py-1 px-3 rounded-full text-xs font-bold transition duration-300 gold-shadow hidden mt-2 md:mt-0"
+              style="background-color: #1a1a1a; border: 1px solid #d4af37"
+            >
+              (Admin Mode)
+            </button>
+
+            <button
+              id="auth-button"
+              class="gold-color text-xl p-2 rounded-full hover:bg-gray-800 transition mt-2 md:mt-0"
+            >
+              <i class="fas fa-sign-in-alt" id="auth-icon"></i>
+            </button>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section
+          id="hero"
+          class="hero-bg py-24 md:py-32 text-center border-b border-yellow-700/50 gold-shadow"
+        >
+          <div class="max-w-4xl mx-auto px-6">
+            <p
+              class="text-4xl md:text-6xl font-black mb-6 leading-tight gold-color"
+            >
+              تعلم التاريخ ... بطريقة تحيي الماضي
+            </p>
+            <p
+              id="access-status"
+              class="text-lg text-gray-400 font-medium mb-10 hidden"
+            >
+              <i class="fas fa-lock ml-2"></i> يُرجى تسجيل الدخول أو انتظار
+              موافقة المدير للوصول إلى المحتوى.
+            </p>
+            <a
+              href="#lessons-section"
+              class="inline-block py-4 px-10 rounded-full gold-bg text-gray-900 font-bold text-lg gold-shadow hover:bg-yellow-500 transition transform hover:scale-105 duration-300 ease-in-out"
+            >
+              ابدأ التعلم الآن <i class="fas fa-long-arrow-alt-left mr-2"></i>
+            </a>
+          </div>
+        </section>
+
+        <section
+          id="admin-live-session-section"
+          class="hidden max-w-7xl mx-auto my-12 p-6 md:p-12 bg-gray-900/80 rounded-xl border gold-border gold-shadow"
+        >
+          <h2
+            class="text-2xl font-bold mb-6 text-white border-b pb-2 gold-border flex items-center"
+          >
+            <i class="fas fa-broadcast-tower gold-color ml-2"></i> إدارة رابط
+            البث المباشر
+          </h2>
+          <form id="live-session-form" class="space-y-4">
+            <div>
               <label
-                for="lesson-pdf-url"
+                for="live-session-url"
                 class="block text-sm font-medium gold-color mb-1"
-                >رابط ملف PDF المباشر (اختياري)</label
+                >رابط الجلسة المباشرة (Meet أو Zoom)</label
               >
               <input
                 type="url"
-                id="lesson-pdf-url"
+                id="live-session-url"
+                required
                 class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-                placeholder="https://example.com/document.pdf"
+                placeholder="https://meet.google.com/abc-xyz-123"
               />
             </div>
-          </div>
-          <div>
-            <label
-              for="lesson-summary"
-              class="block text-sm font-medium gold-color mb-1"
-              >ملخص قصير</label
+            <div>
+              <label
+                for="live-session-desc"
+                class="block text-sm font-medium gold-color mb-1"
+                >وصف الجلسة</label
+              >
+              <input
+                type="text"
+                id="live-session-desc"
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+                placeholder="مثال: مراجعة الوحدة الثانية، اليوم: الخميس 7 مساءً"
+              />
+            </div>
+            <button
+              type="submit"
+              id="update-live-session-btn"
+              class="w-full py-3 px-4 rounded-lg bg-green-700 text-white font-bold hover:bg-green-600 transition gold-shadow"
             >
-            <textarea
-              id="lesson-summary"
-              rows="3"
-              required
-              class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-              placeholder="وصف موجز"
-            ></textarea>
-          </div>
-          <div>
-            <label
-              for="lesson-video-url"
-              class="block text-sm font-medium gold-color mb-1"
-              >رابط ملف الفيديو المباشر (اختياري)</label
-            >
-            <input
-              type="url"
-              id="lesson-video-url"
-              class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-              placeholder="https://example.com/video.mp4"
-            />
-          </div>
-          <button
-            type="submit"
-            id="add-lesson-btn"
-            class="w-full py-3 px-4 rounded-lg gold-bg text-gray-900 font-bold hover:bg-yellow-500 transition gold-shadow disabled:opacity-50"
-          >
-            نشر الدرس بالروابط
-          </button>
-        </form>
-        <div
-          id="lesson-status-message"
-          class="mt-4 p-3 rounded-lg hidden text-sm text-center font-medium gold-shadow"
-        ></div>
-      </section>
+              حفظ / تحديث رابط الجلسة المباشرة
+            </button>
+          </form>
+          <div
+            id="live-session-status-message"
+            class="mt-4 p-3 rounded-lg hidden text-sm text-center font-medium gold-shadow"
+          ></div>
+        </section>
 
-      <!-- قسم إضافة الشخصيات الجديدة -->
-      <section
-        id="add-character-section"
-        class="hidden max-w-7xl mx-auto mb-12 p-6 md:p-12 bg-gray-900/80 rounded-xl border gold-border gold-shadow"
-      >
-        <h2
-          class="text-2xl font-bold mb-6 text-white border-b pb-2 gold-border flex items-center"
+        <section
+          id="admin-users-approval"
+          class="hidden max-w-7xl mx-auto my-12 p-6 md:p-12 bg-gray-900/80 rounded-xl border gold-border gold-shadow"
         >
-          <i class="fas fa-mask gold-color ml-2"></i> لوحة تحكم المدير: إضافة
-          شخصية تاريخية جديدة
-        </h2>
-        <form id="add-character-form" class="space-y-4">
-          <div>
-            <label
-              for="char-name"
-              class="block text-sm font-medium gold-color mb-1"
-              >اسم الشخصية</label
-            >
+          <h2
+            class="text-2xl font-bold mb-6 text-white border-b pb-2 gold-border flex items-center"
+          >
+            <i class="fas fa-users-cog gold-color ml-2"></i> إدارة المستخدمين
+            والأدوار
+          </h2>
+
+          <div class="mb-4">
             <input
               type="text"
-              id="char-name"
-              required
+              id="user-search-input"
+              placeholder="ابحث بالاسم أو البريد الإلكتروني"
               class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-              placeholder="مثال: الملك أحمس الأول"
             />
           </div>
-          <div>
-            <label
-              for="char-era"
-              class="block text-sm font-medium gold-color mb-1"
-              >العصر/الحقبة</label
-            >
-            <input
-              type="text"
-              id="char-era"
-              required
-              class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-              placeholder="مثال: الدولة الحديثة، عصر الأسرة الثامنة عشرة"
-            />
+
+          <div id="pending-users-list" class="space-y-4">
+            <p class="text-gray-500" id="users-loading-status">
+              جارٍ تحميل قائمة المستخدمين...
+            </p>
           </div>
-          <div>
-            <label
-              for="char-bio"
-              class="block text-sm font-medium gold-color mb-1"
-              >نبذة مختصرة عن الإنجازات</label
-            >
-            <textarea
-              id="char-bio"
-              rows="4"
-              required
-              class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-              placeholder="أهم إنجازاته ومكانته التاريخية"
-            ></textarea>
-          </div>
-          <button
-            type="submit"
-            id="add-character-btn"
-            class="w-full py-3 px-4 rounded-lg gold-bg text-gray-900 font-bold hover:bg-yellow-500 transition gold-shadow disabled:opacity-50"
+        </section>
+
+        <!-- ****** قسم رصد الدرجات ****** -->
+        <section
+          id="admin-score-entry-section"
+          class="hidden max-w-7xl mx-auto my-12 p-6 md:p-12 bg-gray-900/80 rounded-xl border gold-border gold-shadow"
+        >
+          <h2
+            class="text-2xl font-bold mb-6 text-white border-b pb-2 gold-border flex items-center"
           >
-            نشر الشخصية
-          </button>
-        </form>
-        <div
-          id="char-status-message"
-          class="mt-4 p-3 rounded-lg hidden text-sm text-center font-medium gold-shadow"
-        ></div>
-      </section>
+            <i class="fas fa-calculator gold-color ml-2"></i> رصد درجات
+            الاختبارات
+          </h2>
+          <form id="score-entry-form" class="space-y-4">
+            <div>
+              <label
+                for="score-student-uid"
+                class="block text-sm font-medium gold-color mb-1"
+              >
+                اسم/بريد الطالب (للبحث)
+              </label>
+              <input
+                type="text"
+                id="score-student-search"
+                placeholder="ابحث عن اسم الطالب أو بريده الإلكتروني"
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+              />
+              <select
+                id="score-student-select"
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white mt-2"
+                required
+              >
+                <option value="">-- حدد الطالب --</option>
+              </select>
+            </div>
 
-      <!-- قسم إضافة الاختبارات الجديدة -->
-      <section
-        id="add-quiz-section"
-        class="hidden max-w-7xl mx-auto mb-12 p-6 md:p-12 bg-gray-900/80 rounded-xl border gold-border gold-shadow"
-      >
-        <h2
-          class="text-2xl font-bold mb-6 text-white border-b pb-2 gold-border flex items-center"
+            <div>
+              <label
+                for="score-quiz-select"
+                class="block text-sm font-medium gold-color mb-1"
+              >
+                اسم الاختبار
+              </label>
+              <select
+                id="score-quiz-select"
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white"
+                required
+              >
+                <option value="">-- حدد الاختبار --</option>
+              </select>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="score-value"
+                  class="block text-sm font-medium gold-color mb-1"
+                >
+                  الدرجة المحققة
+                </label>
+                <input
+                  type="number"
+                  id="score-value"
+                  required
+                  min="0"
+                  placeholder="درجة الطالب"
+                  class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium gold-color mb-1">
+                  الدرجة الكلية (تلقائي)
+                </label>
+                <input
+                  type="number"
+                  id="score-max-display"
+                  readonly
+                  class="w-full p-3 rounded-lg bg-gray-700 border gold-border text-white placeholder-gray-500"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                for="score-notes"
+                class="block text-sm font-medium gold-color mb-1"
+              >
+                ملاحظات المدير (اختياري)
+              </label>
+              <textarea
+                id="score-notes"
+                rows="2"
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+                placeholder="ملاحظات حول أداء الطالب"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              id="submit-score-btn"
+              class="w-full py-3 px-4 rounded-lg gold-bg text-gray-900 font-bold hover:bg-yellow-500 transition gold-shadow disabled:opacity-50"
+            >
+              تسجيل الدرجة للطالب
+            </button>
+          </form>
+          <div
+            id="score-status-message"
+            class="mt-4 p-3 rounded-lg hidden text-sm text-center font-medium gold-shadow"
+          ></div>
+        </section>
+        <!-- ****** نهاية قسم رصد الدرجات ****** -->
+
+        <section
+          id="add-lesson-section"
+          class="hidden max-w-7xl mx-auto mb-12 p-6 md:p-12 bg-gray-900/80 rounded-xl border gold-border gold-shadow"
         >
-          <i class="fas fa-pencil-alt gold-color ml-2"></i> لوحة تحكم المدير:
-          إضافة اختبار جديد
-        </h2>
-        <form id="add-quiz-form" class="space-y-4">
-          <div>
-            <label
-              for="quiz-title"
-              class="block text-sm font-medium gold-color mb-1"
-              >عنوان الاختبار</label
-            >
-            <input
-              type="text"
-              id="quiz-title"
-              required
-              class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-              placeholder="مثال: اختبار الوحدة الأولى: العصر الفرعوني"
-            />
-          </div>
-          <div>
-            <label
-              for="quiz-google-form-url"
-              class="block text-sm font-medium gold-color mb-1"
-              >رابط نموذج Google Form (إلزامي)</label
-            >
-            <input
-              type="url"
-              id="quiz-google-form-url"
-              required
-              class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-              placeholder="https://docs.google.com/forms/d/e/1FAIpQL.../viewform"
-            />
-          </div>
-          <div>
-            <label
-              for="quiz-max-score"
-              class="block text-sm font-medium gold-color mb-1"
-              >الدرجة الكلية للاختبار</label
-            >
-            <input
-              type="number"
-              id="quiz-max-score"
-              required
-              min="1"
-              value="10"
-              class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-            />
-          </div>
-          <div>
-            <label
-              for="quiz-description"
-              class="block text-sm font-medium gold-color mb-1"
-              >وصف الاختبار (تعليمات)</label
-            >
-            <textarea
-              id="quiz-description"
-              rows="2"
-              class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-              placeholder="هذا الاختبار يقيس مدى فهمك لمفاهيم..."
-            ></textarea>
-          </div>
-          <button
-            type="submit"
-            id="add-quiz-btn"
-            class="w-full py-3 px-4 rounded-lg gold-bg text-gray-900 font-bold hover:bg-yellow-500 transition gold-shadow disabled:opacity-50"
+          <h2
+            class="text-2xl font-bold mb-6 text-white border-b pb-2 gold-border flex items-center"
           >
-            نشر الاختبار (Google Form)
-          </button>
-        </form>
-        <div
-          id="quiz-status-message"
-          class="mt-4 p-3 rounded-lg hidden text-sm text-center font-medium gold-shadow"
-        ></div>
-      </section>
+            <i class="fas fa-cogs gold-color ml-2"></i> لوحة تحكم المدير: إضافة
+            درس جديد
+          </h2>
+          <form id="add-lesson-form" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="lesson-title"
+                  class="block text-sm font-medium gold-color mb-1"
+                  >عنوان الدرس</label
+                >
+                <input
+                  type="text"
+                  id="lesson-title"
+                  required
+                  class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+                  placeholder="مثال: عصر الأسرات"
+                />
+              </div>
+              <div>
+                <label
+                  for="lesson-pdf-url"
+                  class="block text-sm font-medium gold-color mb-1"
+                  >رابط ملف PDF المباشر (اختياري)</label
+                >
+                <input
+                  type="url"
+                  id="lesson-pdf-url"
+                  class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+                  placeholder="https://example.com/document.pdf"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                for="lesson-summary"
+                class="block text-sm font-medium gold-color mb-1"
+                >ملخص قصير</label
+              >
+              <textarea
+                id="lesson-summary"
+                rows="3"
+                required
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+                placeholder="وصف موجز"
+              ></textarea>
+            </div>
+            <div>
+              <label
+                for="lesson-video-url"
+                class="block text-sm font-medium gold-color mb-1"
+                >رابط ملف الفيديو المباشر (اختياري)</label
+              >
+              <input
+                type="url"
+                id="lesson-video-url"
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+                placeholder="https://example.com/video.mp4"
+              />
+            </div>
+            <button
+              type="submit"
+              id="add-lesson-btn"
+              class="w-full py-3 px-4 rounded-lg gold-bg text-gray-900 font-bold hover:bg-yellow-500 transition gold-shadow disabled:opacity-50"
+            >
+              نشر الدرس بالروابط
+            </button>
+          </form>
+          <div
+            id="lesson-status-message"
+            class="mt-4 p-3 rounded-lg hidden text-sm text-center font-medium gold-shadow"
+          ></div>
+        </section>
 
-      <!-- ****** أقسام عرض المحتوى للمستخدمين ****** -->
-
-      <!-- قسم قائمة الدروس التفاعلية -->
-      <section id="lessons-section" class="max-w-7xl mx-auto p-6 md:p-12">
-        <h2
-          class="text-2xl font-bold mb-8 text-white border-b pb-2 gold-border"
+        <section
+          id="add-character-section"
+          class="hidden max-w-7xl mx-auto mb-12 p-6 md:p-12 bg-gray-900/80 rounded-xl border gold-border gold-shadow"
         >
-          مكتبة الدروس المتاحة
-        </h2>
-        <p id="lessons-loading-status" class="text-center text-gray-500 my-8">
-          ... يتم تحميل البيانات من سجلات التاريخ (Firebase)
-        </p>
-        <div
-          id="lessons-list"
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          <!-- بطاقات الدروس ستُعرض هنا تلقائياً من Firebase -->
-        </div>
-      </section>
+          <h2
+            class="text-2xl font-bold mb-6 text-white border-b pb-2 gold-border flex items-center"
+          >
+            <i class="fas fa-mask gold-color ml-2"></i> لوحة تحكم المدير: إضافة
+            شخصية تاريخية جديدة
+          </h2>
+          <form id="add-character-form" class="space-y-4">
+            <div>
+              <label
+                for="char-name"
+                class="block text-sm font-medium gold-color mb-1"
+                >اسم الشخصية</label
+              >
+              <input
+                type="text"
+                id="char-name"
+                required
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+                placeholder="مثال: الملك أحمس الأول"
+              />
+            </div>
+            <div>
+              <label
+                for="char-era"
+                class="block text-sm font-medium gold-color mb-1"
+                >العصر/الحقبة</label
+              >
+              <input
+                type="text"
+                id="char-era"
+                required
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+                placeholder="مثال: الدولة الحديثة، عصر الأسرة الثامنة عشرة"
+              />
+            </div>
+            <div>
+              <label
+                for="char-bio"
+                class="block text-sm font-medium gold-color mb-1"
+                >نبذة مختصرة عن الإنجازات</label
+              >
+              <textarea
+                id="char-bio"
+                rows="4"
+                required
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+                placeholder="أهم إنجازاته ومكانته التاريخية"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              id="add-character-btn"
+              class="w-full py-3 px-4 rounded-lg gold-bg text-gray-900 font-bold hover:bg-yellow-500 transition gold-shadow disabled:opacity-50"
+            >
+              نشر الشخصية
+            </button>
+          </form>
+          <div
+            id="char-status-message"
+            class="mt-4 p-3 rounded-lg hidden text-sm text-center font-medium gold-shadow"
+          ></div>
+        </section>
 
-      <!-- قسم عرض الشخصيات التاريخية -->
-      <section id="characters-section" class="max-w-7xl mx-auto p-6 md:p-12">
-        <h2
-          class="text-2xl font-bold mb-8 text-white border-b pb-2 gold-border"
+        <section
+          id="add-quiz-section"
+          class="hidden max-w-7xl mx-auto mb-12 p-6 md:p-12 bg-gray-900/80 rounded-xl border gold-border gold-shadow"
         >
-          أبرز الشخصيات التاريخية
-        </h2>
-        <p
-          id="characters-loading-status"
-          class="text-center text-gray-500 my-8"
-        >
-          ... يتم تحميل سجلات الشخصيات
-        </p>
-        <div
-          id="characters-list"
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
-          <!-- بطاقات الشخصيات ستُعرض هنا تلقائياً من Firebase -->
-        </div>
-      </section>
+          <h2
+            class="text-2xl font-bold mb-6 text-white border-b pb-2 gold-border flex items-center"
+          >
+            <i class="fas fa-pencil-alt gold-color ml-2"></i> لوحة تحكم المدير:
+            إضافة اختبار جديد
+          </h2>
+          <form id="add-quiz-form" class="space-y-4">
+            <div>
+              <label
+                for="quiz-title"
+                class="block text-sm font-medium gold-color mb-1"
+                >عنوان الاختبار</label
+              >
+              <input
+                type="text"
+                id="quiz-title"
+                required
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+                placeholder="مثال: اختبار الوحدة الأولى: العصر الفرعوني"
+              />
+            </div>
+            <div>
+              <label
+                for="quiz-google-form-url"
+                class="block text-sm font-medium gold-color mb-1"
+                >رابط نموذج Google Form (إلزامي)</label
+              >
+              <input
+                type="url"
+                id="quiz-google-form-url"
+                required
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+                placeholder="https://docs.google.com/forms/d/e/1FAIpQL.../viewform"
+              />
+            </div>
+            <div>
+              <label
+                for="quiz-max-score"
+                class="block text-sm font-medium gold-color mb-1"
+                >الدرجة الكلية للاختبار</label
+              >
+              <input
+                type="number"
+                id="quiz-max-score"
+                required
+                min="1"
+                value="10"
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+              />
+            </div>
+            <div>
+              <label
+                for="quiz-description"
+                class="block text-sm font-medium gold-color mb-1"
+                >وصف الاختبار (تعليمات)</label
+              >
+              <textarea
+                id="quiz-description"
+                rows="2"
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+                placeholder="هذا الاختبار يقيس مدى فهمك لمفاهيم..."
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              id="add-quiz-btn"
+              class="w-full py-3 px-4 rounded-lg gold-bg text-gray-900 font-bold hover:bg-yellow-500 transition gold-shadow disabled:opacity-50"
+            >
+              نشر الاختبار
+            </button>
+          </form>
+          <div
+            id="quiz-status-message"
+            class="mt-4 p-3 rounded-lg hidden text-sm text-center font-medium gold-shadow"
+          ></div>
+        </section>
 
-      <!-- قسم عرض الاختبارات ونتائج الطالب -->
-      <section id="quizzes-section" class="max-w-7xl mx-auto p-6 md:p-12">
-        <h2
-          class="text-2xl font-bold mb-8 text-white border-b pb-2 gold-border"
-          id="quizzes-title"
-        >
-          الاختبارات والتقييمات
-        </h2>
-        <p id="quizzes-loading-status" class="text-center text-gray-500 my-8">
-          ... يتم تحميل قائمة الاختبارات وتقييماتك الشخصية
-        </p>
+        <section id="lessons-section" class="max-w-7xl mx-auto p-6 md:p-12">
+          <h2
+            class="text-2xl font-bold mb-8 text-white border-b pb-2 gold-border"
+          >
+            مكتبة الدروس المتاحة
+          </h2>
+          <p id="lessons-loading-status" class="text-center text-gray-500 my-8">
+            ... يتم تحميل البيانات من سجلات التاريخ
+          </p>
+          <div
+            id="lessons-list"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          ></div>
+        </section>
 
-        <div id="quizzes-list" class="space-y-6">
-          <!-- ستظهر هنا قائمة الاختبارات أو النتائج الخاصة بالطالب -->
-        </div>
-      </section>
+        <section id="characters-section" class="max-w-7xl mx-auto p-6 md:p-12">
+          <h2
+            class="text-2xl font-bold mb-8 text-white border-b pb-2 gold-border"
+          >
+            شخصيات تاريخية بارزة
+          </h2>
+          <p
+            id="characters-loading-status"
+            class="text-center text-gray-500 my-8"
+          >
+            ... يتم تحميل الشخصيات التاريخية
+          </p>
+          <div
+            id="characters-list"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          ></div>
+        </section>
 
-      <!-- منطقة عرض معرف المستخدم (لم يتغير) -->
-      <section
-        class="mt-12 text-center text-xs text-gray-600 p-4 border-t border-gray-700 max-w-7xl mx-auto"
-      >
-        حالة النظام:
-        <span id="current-user-info" class="font-mono text-gray-400">...</span>
-      </section>
-    </main>
+        <section id="quizzes-section" class="max-w-7xl mx-auto p-6 md:p-12">
+          <h2
+            id="quizzes-title"
+            class="text-2xl font-bold mb-8 text-white border-b pb-2 gold-border"
+          >
+            الاختبارات والنتائج
+          </h2>
+          <p id="quizzes-loading-status" class="text-center text-gray-500 my-8">
+            ... يتم تحميل الاختبارات والنتائج
+          </p>
+          <div
+            id="quizzes-list"
+            class="grid grid-cols-1 md:grid-cols-2 gap-6"
+          ></div>
+          <div id="quiz-admin-all-results" class="hidden mt-8"></div>
+        </section>
+      </main>
+    </div>
 
-    <!-- تضمين مكتبات Firebase والمنطق البرمجي -->
     <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+      // ** 🛑 إعدادات Firebase الخاصة بمشروعك (مُطبقة) 🛑 **
+      const firebaseConfig = {
+        apiKey: "AIzaSyAt9RuqyoOUkbDW8465aEXA8qzC413XSDw",
+        authDomain: "history-notes-a88e0.firebaseapp.com",
+        projectId: "history-notes-a88e0",
+        storageBucket: "history-notes-a88e0.firebasestorage.app",
+        messagingSenderId: "946649985119",
+        appId: "1:946649985119:web:03630ee34ca1d31f752bea",
+        measurementId: "G-C528QQV2HS",
+      };
+
+      // استيراد وظائف Firebase الأساسية
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
       import {
         getAuth,
-        signInWithCustomToken,
-        onAuthStateChanged,
         createUserWithEmailAndPassword,
         signInWithEmailAndPassword,
         signOut,
-      } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        onAuthStateChanged,
+        updateProfile, // 👈 مُضافة للاستخدام في التسجيل
+      } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
       import {
         getFirestore,
-        collection,
-        addDoc,
-        onSnapshot,
-        query,
-        deleteDoc,
         doc,
         setDoc,
         getDoc,
-        where,
-        setLogLevel,
+        collection,
+        onSnapshot,
         updateDoc,
-        getDocs,
+        addDoc,
+        deleteDoc,
+        query,
+        where,
         limit,
-      } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        getDocs,
+      } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
 
-      // **************** دالة تبديل إظهار/إخفاء كلمة المرور ****************
+      // تهيئة Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+      const analytics = getAnalytics(app);
+      const appId = firebaseConfig.appId;
+
+      // **********************************************
+      // ************ المتغيرات العامة ************
+      // **********************************************
+      const authModal = document.getElementById("auth-modal");
+      const authTitle = document.getElementById("auth-title");
+      const loginForm = document.getElementById("login-form");
+      const signupForm = document.getElementById("signup-form");
+      const signupSubmitBtn = document.getElementById("signup-submit-btn");
+      const authButton = document.getElementById("auth-button");
+      const authMessageBox = document.getElementById("auth-message-box");
+      const authIcon = document.getElementById("auth-icon");
+      const heroSection = document.getElementById("hero");
+      const accessStatus = document.getElementById("access-status");
+      const adminToggleBtn = document.getElementById("admin-toggle-btn");
+
+      const LIVE_SESSION_DOC_ID = "current_session";
+
+      // العناصر الخاصة بالمدير
+      const adminUsersApprovalSection = document.getElementById(
+        "admin-users-approval"
+      );
+      const addLessonSection = document.getElementById("add-lesson-section");
+      const addCharacterSection = document.getElementById(
+        "add-character-section"
+      );
+      const addQuizSection = document.getElementById("add-quiz-section");
+      const liveSessionForm = document.getElementById("live-session-form");
+      const liveSessionStatusMessageEl = document.getElementById(
+        "live-session-status-message"
+      );
+      const lessonStatusMessageEl = document.getElementById(
+        "lesson-status-message"
+      );
+      const charStatusMessageEl = document.getElementById(
+        "char-status-message"
+      );
+      const quizStatusMessageEl = document.getElementById(
+        "quiz-status-message"
+      );
+      const userSearchInput = document.getElementById("user-search-input");
+      const pendingUsersList = document.getElementById("pending-users-list");
+      const addLessonBtn = document.getElementById("add-lesson-btn");
+      const addCharacterBtn = document.getElementById("add-character-btn");
+      const addQuizBtn = document.getElementById("add-quiz-btn");
+      const currentUserInfoEl = document.getElementById("access-status");
+
+      // عناصر عرض المحتوى
+      const lessonsListEl = document.getElementById("lessons-list");
+      const charactersListEl = document.getElementById("characters-list");
+      const quizzesListEl = document.getElementById("quizzes-list");
+      const navLiveSession = document.getElementById("nav-live-session");
+
+      // حالة التطبيق
+      let userId = null;
+      let userData = null;
+      let isAuthReady = false;
+      let isUserAdmin = false;
+      let isAdminMode = false;
+      let unsubscribeUsers = null;
+      let studentsProfiles = [];
+      let allQuizzes = []; // لحفظ قائمة الاختبارات لاستخدامها في رصد الدرجات
+
+      // **********************************************
+      // ************ وظائف مساعدة للـ UI ************
+      // **********************************************
+
+      function showMessage(element, message, isError = false) {
+        if (!element) return;
+        element.textContent = message;
+        element.classList.remove("hidden", "text-yellow-300", "text-red-400");
+        element.classList.add(isError ? "text-red-400" : "text-yellow-300");
+        element.classList.remove("hidden");
+        setTimeout(() => {
+          element.classList.add("hidden");
+        }, 5000);
+      }
+
+      window.closeAuthModal = function () {
+        authModal.classList.add("opacity-0", "pointer-events-none");
+        authModal.classList.remove("opacity-100");
+        showMessage(authMessageBox, "", false);
+      };
+
+      function openAuthModal() {
+        authTitle.textContent = "تسجيل الدخول";
+        loginForm.classList.remove("hidden");
+        signupForm.classList.add("hidden");
+
+        authModal.classList.remove(
+          "opacity-0",
+          "pointer-events-none",
+          "hidden"
+        );
+        authModal.classList.add("opacity-100");
+        showMessage(authMessageBox, "الرجاء إدخال بياناتك.", false);
+      }
+
       window.togglePasswordVisibility = function (iconElement) {
         const targetId = iconElement.getAttribute("data-target");
         const passwordInput = document.getElementById(targetId);
-
         if (passwordInput.type === "password") {
           passwordInput.type = "text";
           iconElement.classList.remove("fa-eye");
@@ -777,507 +994,10 @@
         }
       };
 
-      // *************** متغيرات بيئة العمل الإلزامية ***************
-      const appId =
-        typeof __app_id !== "undefined" ? __app_id : "default-app-id";
-      const initialAuthToken =
-        typeof __initial_auth_token !== "undefined"
-          ? __initial_auth_token
-          : null;
+      // **********************************************
+      // ************ منطق تبديل النماذج ************
+      // **********************************************
 
-      // ⚠️⚠️⚠️ إعدادات Firebase الحقيقية للمشروع (يمكنك استبدالها بإعدادات مشروعك) ⚠️⚠️⚠️
-      const MY_LIVE_FIREBASE_CONFIG = {
-        apiKey: "AIzaSyAt9RuqyoOUkbDW8465aEXA8qzC413XSDw",
-        authDomain: "history-notes-a88e0.firebaseapp.com",
-        projectId: "history-notes-a88e0",
-        storageBucket: "history-notes-a88e0.appspot.com",
-        messagingSenderId: "946649985119",
-        appId: "1:946649985119:web:03630ee34ca1d31f752bea",
-      };
-      // ⚠️⚠️⚠️ نهاية إعدادات مشروع Firebase الحقيقي ⚠️⚠️⚠️
-
-      const firebaseConfigString =
-        typeof __firebase_config !== "undefined" ? __firebase_config : "{}";
-      let firebaseConfig = MY_LIVE_FIREBASE_CONFIG;
-      let configWasEmpty = false;
-
-      try {
-        if (
-          firebaseConfigString &&
-          firebaseConfigString.length > 5 &&
-          firebaseConfigString !== "{}"
-        ) {
-          const externalConfig = JSON.parse(firebaseConfigString);
-          if (externalConfig && externalConfig.projectId) {
-            firebaseConfig = externalConfig;
-          }
-        } else {
-          if (firebaseConfig.apiKey === MY_LIVE_FIREBASE_CONFIG.apiKey) {
-            configWasEmpty = false;
-            console.log("Using Hardcoded Config.");
-          }
-        }
-      } catch (e) {
-        console.error(
-          "Failed to parse Firebase config string, using hardcoded config:",
-          e
-        );
-      }
-
-      let db = null,
-        auth = null;
-      let userId = null;
-      let userData = null;
-      let isAuthReady = false;
-      let isAdminMode = false;
-      let isFirebaseInitialized = false;
-      let unsubscribeUsers = null;
-      let studentsProfiles = [];
-
-      // عناصر واجهة المستخدم الرئيسية
-      const lessonsListEl = document.getElementById("lessons-list");
-      const charactersListEl = document.getElementById("characters-list");
-      const quizzesListEl = document.getElementById("quizzes-list");
-      const authButton = document.getElementById("auth-button");
-      const authIcon = document.getElementById("auth-icon");
-      const authModal = document.getElementById("auth-modal");
-      const authTitle = document.getElementById("auth-title");
-      const authMessageBox = document.getElementById("auth-message-box");
-      const loginForm = document.getElementById("login-form");
-      const signupForm = document.getElementById("signup-form");
-      const signupSubmitBtn = document.getElementById("signup-submit-btn");
-      const addLessonForm = document.getElementById("add-lesson-form");
-      const addLessonSection = document.getElementById("add-lesson-section");
-      const addCharacterForm = document.getElementById("add-character-form");
-      const addCharacterSection = document.getElementById(
-        "add-character-section"
-      );
-      const addQuizForm = document.getElementById("add-quiz-form");
-      const addQuizSection = document.getElementById("add-quiz-section");
-      const adminLiveSessionSection = document.getElementById(
-        "admin-live-session-section"
-      );
-      const liveSessionForm = document.getElementById("live-session-form");
-      const navLiveSession = document.getElementById("nav-live-session");
-      const adminToggleBtn = document.getElementById("admin-toggle-btn");
-      const adminUsersApprovalSection = document.getElementById(
-        "admin-users-approval"
-      );
-      const pendingUsersList = document.getElementById("pending-users-list");
-      const accessStatusEl = document.getElementById("access-status");
-      const currentUserInfoEl = document.getElementById("current-user-info");
-      const lessonStatusMessageEl = document.getElementById(
-        "lesson-status-message"
-      );
-      const charStatusMessageEl = document.getElementById(
-        "char-status-message"
-      );
-      const quizStatusMessageEl = document.getElementById(
-        "quiz-status-message"
-      );
-      const liveSessionStatusMessageEl = document.getElementById(
-        "live-session-status-message"
-      );
-      const addLessonBtn = document.getElementById("add-lesson-btn");
-      const addCharacterBtn = document.getElementById("add-character-btn");
-      const addQuizBtn = document.getElementById("add-quiz-btn");
-      const userSearchInput = document.getElementById("user-search-input");
-
-      // **************** مساعدة - إظهار الرسائل ****************
-      function showMessage(el, text, isError = false) {
-        el.textContent = text;
-        el.classList.remove(
-          "hidden",
-          "bg-red-900",
-          "bg-gray-700",
-          "text-yellow-300",
-          "text-red-400"
-        );
-        if (isError) {
-          el.classList.add("bg-red-900", "text-red-400");
-        } else {
-          el.classList.add("bg-gray-700", "text-yellow-300");
-        }
-        // إظهار الرسالة لوقت محدد (5 ثواني)
-        setTimeout(() => {
-          el.classList.add("hidden");
-        }, 5000);
-        console.log(isError ? "ERROR: " : "INFO: ", text);
-      }
-
-      // **************** دالة التحقق من التكوين ****************
-      function checkFirebaseStatus() {
-        const initialized = isFirebaseInitialized;
-        if (!initialized) {
-          showMessage(
-            currentUserInfoEl,
-            "خطأ حرج: فشل تهيئة Firebase. يرجى مراجعة إعدادات المشروع.",
-            true
-          );
-        }
-        return initialized;
-      }
-
-      // **************** دالة تحديث واجهة المستخدم بناءً على الدور ****************
-      function updateUI() {
-        if (!isFirebaseInitialized) {
-          document.getElementById("lessons-loading-status").textContent =
-            "خطأ في الاتصال. النظام غير جاهز بعد. يرجى التأكد من إعدادات Firebase.";
-          return;
-        }
-
-        const loggedIn = userId !== null;
-        const isApproved = userData?.isApproved === true;
-        const isAdmin = userData?.role === "admin" && isApproved;
-
-        // 1. شريط التنقل وزر الدخول/الخروج
-        authIcon.className = loggedIn
-          ? "fas fa-sign-out-alt"
-          : "fas fa-sign-in-alt";
-        adminToggleBtn.classList.toggle("hidden", !isAdmin);
-
-        if (loggedIn) {
-          const status = isApproved ? "مُوافَق عليه" : "مُعَلَّق";
-          currentUserInfoEl.textContent = `${
-            userData?.name || "مستخدم"
-          } | الدور: ${
-            userData?.role || "طالب"
-          } | الموافقة: ${status} | ID: ${userId.substring(0, 8)}...`;
-        } else {
-          currentUserInfoEl.textContent = "غير موثق";
-        }
-
-        // 2. تفعيل/تعطيل وضع المدير
-        if (isAdmin) {
-          updateAdminModeUI(true);
-        } else {
-          isAdminMode = false;
-          updateAdminModeUI(false);
-        }
-
-        // 3. التحكم في الوصول للمحتوى
-        if (isApproved) {
-          document.getElementById("lessons-loading-status").textContent =
-            "جارٍ تحميل الدروس...";
-          document.getElementById("characters-loading-status").textContent =
-            "جارٍ تحميل الشخصيات...";
-          document.getElementById("quizzes-loading-status").textContent =
-            "جارٍ تحميل الاختبارات والنتائج...";
-
-          lessonsListEl.classList.remove("opacity-50", "pointer-events-none");
-          accessStatusEl.classList.add("hidden");
-
-          loadLessons();
-          loadCharacters();
-          loadQuizzesAndResults();
-          loadLiveSession();
-        } else {
-          let statusMessage = loggedIn
-            ? "حسابك قيد المراجعة. يُرجى انتظار موافقة المدير."
-            : "يُرجى تسجيل الدخول أو انتظار موافقة المدير للوصول إلى المحتوى.";
-
-          document.getElementById("lessons-loading-status").textContent =
-            "لا يمكن الوصول إلى المحتوى. " + statusMessage;
-          lessonsListEl.innerHTML = "";
-          charactersListEl.innerHTML = "";
-          quizzesListEl.innerHTML = "";
-          lessonsListEl.classList.add("opacity-50", "pointer-events-none");
-          accessStatusEl.textContent = statusMessage;
-          accessStatusEl.classList.remove("hidden");
-        }
-      }
-
-      // **************** دالة تبديل وضع المدير ****************
-      function updateAdminModeUI(isUserAdmin) {
-        const shouldShowAdminSections = isUserAdmin && isAdminMode;
-
-        adminToggleBtn.textContent = shouldShowAdminSections
-          ? "وضع المدير (مفعل)"
-          : "وضع الطالب (عرض)";
-        adminToggleBtn.classList.remove("text-white");
-        adminToggleBtn.classList.add("gold-color");
-
-        adminLiveSessionSection.classList.toggle(
-          "hidden",
-          !shouldShowAdminSections
-        );
-        addLessonSection.classList.toggle("hidden", !shouldShowAdminSections);
-        addCharacterSection.classList.toggle(
-          "hidden",
-          !shouldShowAdminSections
-        );
-        addQuizSection.classList.toggle("hidden", !shouldShowAdminSections);
-        adminUsersApprovalSection.classList.toggle(
-          "hidden",
-          !shouldShowAdminSections
-        );
-
-        if (shouldShowAdminSections) {
-          loadAllUsers();
-        } else {
-          pendingUsersList.innerHTML =
-            '<p class="text-gray-500">تم إخفاء قائمة المستخدمين.</p>';
-          if (unsubscribeUsers) {
-            unsubscribeUsers();
-            unsubscribeUsers = null;
-          }
-        }
-
-        // إعادة تحميل المحتوى ليعكس أزرار الحذف للمدير
-        if (isAuthReady && userData?.isApproved) {
-          loadLessons();
-          loadCharacters();
-          loadQuizzesAndResults();
-        }
-      }
-
-      adminToggleBtn.addEventListener("click", () => {
-        if (userData?.role === "admin") {
-          isAdminMode = !isAdminMode;
-          updateAdminModeUI(true);
-        }
-      });
-
-      // **************** دالة إضافة محتوى تجريبي ****************
-      async function seedInitialContent() {
-        if (!db) return;
-        // يجب أن يكون المستخدم قد قام بتسجيل الدخول وحصل على ملف تعريف لتجنب أخطاء الصلاحيات
-        if (!userId) {
-          console.warn("Skipping content seeding: User is not authenticated.");
-          return;
-        }
-
-        console.log("Attempting to seed initial content...");
-
-        // Lesson Seeding
-        const lessonsRef = collection(
-          db,
-          "artifacts",
-          appId,
-          "public",
-          "data",
-          "history_lessons"
-        );
-        try {
-          const q1 = query(lessonsRef, where("isSeeded", "==", 1), limit(1));
-          const snapshot1 = await getDocs(q1);
-
-          if (snapshot1.empty) {
-            // إذا لم تكن هناك صلاحيات للكتابة، لن يتم حفظ هذه الوثائق
-            await setDoc(doc(lessonsRef), {
-              title: "الدرس 1: الحضارة والتاريخ (الصف الأول الثانوي)",
-              summary:
-                "شرح تجريبي مفصل لمفهوم الحضارة والتعريف بالتاريخ، مع إشارة خاصة لعصور ما قبل التاريخ في مصر.",
-              pdfUrl:
-                "https://placehold.co/600x400/D4AF37/0A0A0A?text=PDF+تجريبي",
-              videoUrl:
-                "https://placehold.co/600x400/D4AF37/0A0A0A?text=فيديو+شرح+تجريبي",
-              isSeeded: 1,
-              authorId: "system",
-              createdAt: new Date().toISOString(),
-            });
-            console.log("Initial lesson 1 seeded.");
-          }
-        } catch (e) {
-          console.error("Error seeding initial lesson:", e);
-        }
-
-        // Character Seeding
-        const charsRef = collection(
-          db,
-          "artifacts",
-          appId,
-          "public",
-          "data",
-          "historical_characters"
-        );
-        try {
-          const q2 = query(charsRef, where("isSeeded", "==", 1), limit(1));
-          const snapshot2 = await getDocs(q2);
-          if (snapshot2.empty) {
-            await setDoc(doc(charsRef), {
-              name: "الملكة حتشبسوت",
-              era: "الأسرة الثامنة عشرة",
-              bio: "إحدى أهم الملكات في مصر القديمة. حكمت كفرعون، وتميز عصرها بالسلام وتوسيع التجارة، وتشييد المعابد الضخمة مثل معبد الدير البحري.",
-              isSeeded: 1,
-              authorId: "system",
-              createdAt: new Date().toISOString(),
-            });
-            console.log("Initial character 1 seeded.");
-          }
-        } catch (e) {
-          console.error("Error seeding initial character:", e);
-        }
-
-        // Quiz Seeding
-        const quizzesRef = collection(
-          db,
-          "artifacts",
-          appId,
-          "public",
-          "data",
-          "quizzes"
-        );
-        try {
-          const q3 = query(quizzesRef, where("isSeeded", "==", 1), limit(1));
-          const snapshot3 = await getDocs(q3);
-          if (snapshot3.empty) {
-            await setDoc(doc(quizzesRef), {
-              title: "اختبار على الوحدة الأولى (تجريبي)",
-              maxScore: 20,
-              googleFormUrl: "https://forms.gle/XXXXXXXXXXXXXXXXX",
-              description:
-                "يرجى الإجابة بتركيز. هذا الاختبار يشمل الحضارة القديمة في الرافدين ومصر.",
-              isSeeded: 1,
-              authorId: "system",
-              createdAt: new Date().toISOString(),
-            });
-            console.log("Initial quiz 1 seeded.");
-          }
-        } catch (e) {
-          console.error("Error seeding initial quiz:", e);
-        }
-      }
-
-      // **************** دالة التوثيق الأساسية (متابعة حالة المستخدم) ****************
-      async function setupAuthAndFirestore() {
-        // ⚠️ محاولة تهيئة Firebase
-        if (!isFirebaseInitialized) {
-          setLogLevel("Debug");
-          try {
-            const app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-            db = getFirestore(app);
-            isFirebaseInitialized = true;
-
-            currentUserInfoEl.textContent = "نظام Firebase مُهيأ بنجاح.";
-
-            if (configWasEmpty) {
-              showMessage(
-                currentUserInfoEl,
-                "⚠️ نجحت التهيئة بإعدادات غير مكتملة. لن يعمل الاتصال بالشبكة.",
-                true
-              );
-            } else {
-              console.log("Firebase services initialized successfully.");
-            }
-          } catch (e) {
-            console.error("Firebase Initialization Error:", e);
-            document.getElementById("lessons-loading-status").textContent =
-              "❌ فشل حرج في تهيئة Firebase. يرجى التحقق من إعدادات المشروع وخدماته.";
-            showMessage(
-              currentUserInfoEl,
-              "خطأ في التهيئة. تحقق من خدمات المشروع.",
-              true
-            );
-            return;
-          }
-        }
-
-        // ثانياً: محاولة تسجيل الدخول بالـ Token المخصص
-        if (initialAuthToken && !auth.currentUser) {
-          try {
-            const userCredential = await signInWithCustomToken(
-              auth,
-              initialAuthToken
-            );
-
-            userId = userCredential.user.uid;
-            const userDocRef = doc(
-              db,
-              "artifacts",
-              appId,
-              "user_profiles",
-              userId
-            );
-            const docSnap = await getDoc(userDocRef);
-            if (docSnap.exists()) {
-              userData = docSnap.data();
-            } else {
-              // إنشاء ملف تعريف للمستخدم المخصص كـ Admin طوارئ
-              userData = {
-                uid: userId,
-                name: "Emergency Admin",
-                email:
-                  userCredential.user.email ||
-                  `emergency_${userId.substring(0, 8)}@admin.com`,
-                role: "admin",
-                isApproved: true,
-                createdAt: new Date().toISOString(),
-              };
-              await setDoc(userDocRef, userData);
-            }
-            seedInitialContent();
-            // لا نعود هنا، بل نترك onAuthStateChanged لإنهاء العملية
-          } catch (error) {
-            console.warn(
-              "Custom token sign-in failed, proceeding with login state:",
-              error
-            );
-          }
-        }
-
-        // ثالثاً: إعداد مستمع حالة التوثيق الدائم
-        onAuthStateChanged(auth, async (user) => {
-          userId = user ? user.uid : null;
-          userData = null;
-          isAuthReady = true;
-
-          if (user) {
-            const userDocRef = doc(
-              db,
-              "artifacts",
-              appId,
-              "user_profiles",
-              userId
-            );
-            try {
-              const docSnap = await getDoc(userDocRef);
-
-              if (docSnap.exists()) {
-                userData = docSnap.data();
-
-                // تأكيد حالة المدير
-                if (userData.role === "admin" && userData.isApproved !== true) {
-                  userData.isApproved = true;
-                  await updateDoc(userDocRef, { isApproved: true });
-                }
-              } else {
-                // إذا كان المستخدم غير مجهول وملف التعريف مفقود، نقوم بتسجيل الخروج
-                if (user.isAnonymous === false) {
-                  console.error(
-                    "Error fetching user profile: FirebaseError: Missing or insufficient permissions."
-                  );
-                  showMessage(
-                    currentUserInfoEl,
-                    "خطأ في جلب ملف التعريف. تم تسجيل الخروج. يرجى التسجيل أولاً.",
-                    true
-                  );
-                  await signOut(auth); // تسجيل الخروج لتنظيف الحالة
-                  userId = null;
-                }
-              }
-            } catch (error) {
-              console.error("Error fetching user profile:", error);
-              // قد يحدث هذا الخطأ إذا كان المدير يحاول قراءة بياناته قبل نشر القواعد
-              showMessage(
-                currentUserInfoEl,
-                `خطأ في جلب بيانات ملف التعريف: ${error.message}. يرجى مراجعة القواعد.`,
-                true
-              );
-              userId = null;
-            }
-          }
-
-          // إعادة تشغيل التحميلات بعد اكتمال التوثيق
-          if (userId) {
-            seedInitialContent();
-          }
-          updateUI();
-        });
-      }
-
-      // **************** معالجة التبديل بين الدخول والتسجيل ****************
       document
         .getElementById("switch-to-signup")
         .addEventListener("click", (e) => {
@@ -1285,8 +1005,7 @@
           authTitle.textContent = "إنشاء حساب جديد";
           loginForm.classList.add("hidden");
           signupForm.classList.remove("hidden");
-          authMessageBox.classList.add("hidden");
-          authMessageBox.textContent = "";
+          showMessage(authMessageBox, "", false);
         });
 
       document
@@ -1294,175 +1013,80 @@
         .addEventListener("click", (e) => {
           e.preventDefault();
           authTitle.textContent = "تسجيل الدخول";
-          loginForm.classList.remove("hidden");
           signupForm.classList.add("hidden");
-          authMessageBox.classList.add("hidden");
-          authMessageBox.textContent = "";
+          loginForm.classList.remove("hidden");
+          showMessage(authMessageBox, "", false);
         });
 
-      // **************** وظيفة زر الدخول/الخروج في الـ Navbar ****************
-      authButton.addEventListener("click", async () => {
-        if (!isFirebaseInitialized) {
-          showMessage(
-            currentUserInfoEl,
-            "خطأ: لم تكتمل تهيئة Firebase بعد. حاول مرة أخرى.",
-            true
-          );
-          return;
-        }
+      // ****************************************************
+      // ************ منطق Firebase Authentication ************
+      // ****************************************************
 
-        if (userId) {
-          // تسجيل الخروج
-          try {
-            await signOut(auth);
-            showMessage(currentUserInfoEl, "تم تسجيل الخروج بنجاح.", false);
-          } catch (e) {
-            showMessage(
-              currentUserInfoEl,
-              `فشل تسجيل الخروج: ${e.message}`,
-              true
-            );
-          }
-        } else {
-          // فتح نافذة التوثيق
-          authModal.classList.remove("hidden");
-          document.getElementById("switch-to-login").click();
-          showMessage(authMessageBox, "الرجاء إدخال بياناتك.", false);
-        }
-      });
-
-      // **************** معالجة تسجيل الدخول ****************
+      // 1. تسجيل الدخول
       loginForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        if (!checkFirebaseStatus()) return;
-
-        if (configWasEmpty) {
-          showMessage(
-            authMessageBox,
-            "⚠️ فشل تسجيل الدخول: إعدادات Firebase مفقودة أو غير صحيحة. لا يمكن الاتصال بقاعدة البيانات.",
-            true
-          );
-          return;
-        }
-
         const email = document.getElementById("login-email").value;
         const password = document.getElementById("login-password").value;
-        authMessageBox.classList.add("hidden");
         showMessage(authMessageBox, "جاري تسجيل الدخول...", false);
 
         try {
-          const userCredential = await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-          );
-          const uid = userCredential.user.uid;
-
-          const userDocRef = doc(db, "artifacts", appId, "user_profiles", uid);
-          const docSnap = await getDoc(userDocRef);
-
-          let userProfile = null;
-
-          if (docSnap.exists()) {
-            userProfile = docSnap.data();
-
-            if (
-              userProfile.role === "admin" &&
-              userProfile.isApproved !== true
-            ) {
-              await updateDoc(userDocRef, { isApproved: true });
-              userProfile.isApproved = true;
-            }
-          }
-
-          if (!userProfile) {
-            await signOut(auth);
-            throw new Error("PROFILE_FETCH_FAILED");
-          }
-
-          if (userProfile?.isApproved !== true) {
-            await signOut(auth);
-            // رسالة توضيحية للطالب المعلق
-            showMessage(
-              authMessageBox,
-              "حسابك مسجل وقيد المراجعة. لن تتمكن من الدخول حتى موافقة المدير.",
-              true
-            );
-          } else {
-            authModal.classList.add("hidden");
-            showMessage(
-              currentUserInfoEl,
-              `تم تسجيل الدخول بنجاح. مرحباً بك يا ${userProfile.name}!`,
-              false
-            );
-          }
+          await signInWithEmailAndPassword(auth, email, password);
+          // onAuthStateChanged سيتولى الباقي (جلب/إنشاء الملف الشخصي)
         } catch (error) {
-          console.error("Login attempt failed:", error);
-
-          let message = `فشل تسجيل الدخول. سبب الخطأ: ${error.message}`;
-
-          if (error.code) {
-            if (
-              error.code === "auth/user-not-found" ||
-              error.code === "auth/invalid-credential" ||
-              error.code === "auth/wrong-password"
-            ) {
-              message =
-                "بيانات تسجيل الدخول غير صحيحة. يرجى مراجعة البريد الإلكتروني وكلمة المرور.";
-            } else if (error.code.includes("auth/network-request-failed")) {
-              message =
-                "خطأ في الاتصال بالشبكة. يرجى التحقق من اتصالك بالإنترنت.";
-            } else {
-              message = `خطأ في التوثيق: ${error.code}. يرجى مراجعة إعدادات Firebase.`;
-            }
-          } else if (error.message.includes("PROFILE_FETCH_FAILED")) {
-            message =
-              "خطأ حرج: لم يتم العثور على ملف تعريف المستخدم في قاعدة البيانات. يرجى التأكد من أنك سجلت حسابك أولاً.";
+          let errorMessage =
+            "خطأ في تسجيل الدخول. تأكد من البريد وكلمة المرور.";
+          if (
+            error.code === "auth/wrong-password" ||
+            error.code === "auth/user-not-found"
+          ) {
+            errorMessage = "بيانات تسجيل الدخول غير صحيحة.";
+          } else if (error.code === "auth/network-request-failed") {
+            errorMessage = "خطأ في الاتصال بالشبكة. يرجى التحقق من اتصالك.";
           }
-
-          showMessage(authMessageBox, message, true);
+          showMessage(authMessageBox, errorMessage, true);
         }
       });
 
-      // **************** معالجة التسجيل ****************
+      // 2. تسجيل حساب جديد
       signupForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        if (!checkFirebaseStatus()) return;
-
-        if (configWasEmpty) {
-          showMessage(
-            authMessageBox,
-            "⚠️ فشل التسجيل: إعدادات Firebase مفقودة أو غير صحيحة. لا يمكن إنشاء حساب.",
-            true
-          );
-          return;
-        }
-
         const name = document.getElementById("signup-name").value.trim();
         const email = document.getElementById("signup-email").value;
         const password = document.getElementById("signup-password").value;
 
+        if (password.length < 6) {
+          showMessage(
+            authMessageBox,
+            "كلمة المرور يجب أن تكون 6 أحرف على الأقل.",
+            true
+          );
+          return;
+        }
+
+        // تحديد دور وموافقة المدير بناءً على البيانات المتفق عليها
+        const is_admin_match = name === "admin" && email === "admin@gmail.com";
+        const userRole = is_admin_match ? "admin" : "student";
+        const isApprovedStatus = is_admin_match;
+
         signupSubmitBtn.disabled = true;
-        authMessageBox.classList.add("hidden");
         showMessage(authMessageBox, "جاري إنشاء الحساب...", false);
 
-        const is_admin_request = name.toLowerCase() === "admin";
-        const userRole = is_admin_request ? "admin" : "student";
-        const isApprovedStatus = is_admin_request;
-
         try {
-          // 1. إنشاء المستخدم في Firebase Auth
           const userCredential = await createUserWithEmailAndPassword(
             auth,
             email,
             password
           );
-          const uid = userCredential.user.uid;
+          const user = userCredential.user;
 
-          // 2. إنشاء ملف تعريف في Firestore
-          const userDocRef = doc(db, "artifacts", appId, "user_profiles", uid);
-          await setDoc(userDocRef, {
-            uid: uid,
+          // تحديث اسم العرض
+          if (user.displayName !== name) {
+            await updateProfile(user, { displayName: name });
+          }
+
+          // حفظ ملف تعريف المستخدم في Firestore
+          await setDoc(doc(db, "artifacts", appId, "user_profiles", user.uid), {
+            uid: user.uid,
             name: name,
             email: email,
             role: userRole,
@@ -1470,240 +1094,247 @@
             createdAt: new Date().toISOString(),
           });
 
-          // 3. رسالة الرد والانتقال
-          if (isApprovedStatus) {
-            authModal.classList.add("hidden");
-
-            userId = uid;
-            userData = {
-              uid,
-              name,
-              email,
-              role: userRole,
-              isApproved: isApprovedStatus,
-              createdAt: new Date().toISOString(),
-            };
-            updateUI();
-
-            showMessage(
-              currentUserInfoEl,
-              "تم إنشاء حساب المدير بنجاح. يتم تسجيل دخولك تلقائيًا.",
-              false
-            );
-          } else {
-            // رسالة توضيحية للطالب المعلق
+          if (!isApprovedStatus) {
+            // إذا كان طالباً، نسجل الخروج لإجباره على انتظار الموافقة
             await signOut(auth);
             showMessage(
               authMessageBox,
-              "✅ تم إنشاء حسابك بنجاح. لن تتمكن من الدخول إلا بعد الموافقة عليه من قبل المدير.",
+              "✅ تم إنشاء حسابك بنجاح. لن تتمكن من الدخول إلا بعد موافقة المدير.",
               false
             );
             document.getElementById("switch-to-login").click();
+          } else {
+            // إذا كان مديراً، يظل مسجل الدخول و onAuthStateChanged سيتولى الباقي
+            // لا نغلق الـ modal هنا، نتركه لـ onAuthStateChanged
           }
         } catch (error) {
-          console.error("Signup attempt failed:", error);
-          let message = `خطأ في إنشاء الحساب. السبب: ${error.message}`;
-
-          if (error.code) {
-            if (error.code === "auth/email-already-in-use") {
-              message = "هذا البريد الإلكتروني مستخدم بالفعل.";
-            } else if (error.code === "auth/weak-password") {
-              message =
-                "كلمة المرور ضعيفة جداً (يجب أن تكون 6 أحرف على الأقل).";
-            } else if (
-              error.code.includes("auth/operation-not-allowed") ||
-              error.message.includes("permission")
-            ) {
-              // **رسالة تنبيه قوية بخصوص الصلاحيات**
-              message = `❌ فشل حرج! يرجى التحقق من *قواعد أمان Firestore* أو إعدادات Firebase Auth. السبب: ${error.message}`;
-            } else {
-              message = `خطأ في التوثيق: ${
-                error.code || error.message
-              }. يرجى مراجعة إعدادات Firebase.`;
-            }
+          let errorMessage = "حدث خطأ أثناء التسجيل.";
+          if (error.code === "auth/email-already-in-use") {
+            errorMessage = "هذا البريد الإلكتروني مستخدم بالفعل.";
+          } else if (error.code === "auth/weak-password") {
+            errorMessage =
+              "كلمة المرور ضعيفة جداً (يجب أن تكون 6 أحرف على الأقل).";
+          } else {
+            errorMessage = `❌ فشل حرج في التسجيل: ${
+              error.message
+            }. (كود الخطأ: ${
+              error.code || "غير معروف"
+            }). يرجى التحقق من مفتاح الـ API.`;
           }
-          showMessage(authMessageBox, message, true);
+          showMessage(authMessageBox, errorMessage, true);
         } finally {
           signupSubmitBtn.disabled = false;
         }
       });
 
-      // **************** دالة تحميل جميع المستخدمين ****************
-      function loadAllUsers() {
-        if (unsubscribeUsers) {
+      // 3. الخروج من الحساب
+      function handleLogout() {
+        signOut(auth).catch((error) => {
+          console.error("Logout Error:", error);
+        });
+      }
+
+      // **********************************************
+      // ************ إدارة حالة المستخدم والـ UI ************
+      // **********************************************
+
+      function toggleAdminUI(show) {
+        // حماية: تم التأكد من وجود العناصر هنا
+        const adminSections = [
+          adminUsersApprovalSection,
+          addLessonSection,
+          addCharacterSection,
+          addQuizSection,
+          document.getElementById("admin-score-entry-section"), // أضيف قسم رصد الدرجات هنا
+        ];
+
+        adminSections.forEach((section) => {
+          if (section) {
+            section.classList.toggle("hidden", !show);
+          }
+        });
+
+        if (show) {
+          loadAllUsers();
+          // تحديث قائمة الطلاب والاختبارات لنموذج رصد الدرجات
+          loadStudentsForScoreEntry();
+        } else if (unsubscribeUsers) {
           unsubscribeUsers();
           unsubscribeUsers = null;
         }
-
-        if (!db || !isAuthReady || userData?.role !== "admin" || !isAdminMode)
-          return;
-
-        const profilesRef = collection(db, "artifacts", appId, "user_profiles");
-        let usersQuery = query(profilesRef, limit(50));
-        const searchTerm = userSearchInput.value.trim().toLowerCase();
-
-        pendingUsersList.innerHTML = `<p class="text-gray-500" id="users-loading-status">جارٍ تحميل قائمة المستخدمين...</p>`;
-        studentsProfiles = [];
-
-        // بدء الاستماع للتغييرات
-        unsubscribeUsers = onSnapshot(
-          usersQuery,
-          (snapshot) => {
-            pendingUsersList.innerHTML = "";
-            let users = [];
-
-            snapshot.forEach((doc) => {
-              const profile = doc.data();
-
-              if (profile.role === "student" && profile.isApproved === true) {
-                studentsProfiles.push(profile);
-              }
-
-              if (
-                !searchTerm ||
-                profile.name.toLowerCase().includes(searchTerm) ||
-                profile.email.toLowerCase().includes(searchTerm)
-              ) {
-                if (profile.uid !== userId) {
-                  users.push(profile);
-                }
-              }
-            });
-
-            // إذا لم يتم العثور على نتائج، اعرض رسالة مناسبة
-            if (users.length === 0) {
-              pendingUsersList.innerHTML = `<p class="text-gray-500">لا يوجد مستخدمون مطابقون أو معلقون حالياً.</p>`;
-              return;
-            }
-
-            users.forEach((profile) => {
-              const userCard = document.createElement("div");
-              userCard.className =
-                "flex flex-col md:flex-row justify-between items-center p-4 bg-gray-800 rounded-lg gold-border border";
-
-              let statusBadge = profile.isApproved
-                ? profile.role === "admin"
-                  ? `<span class="text-green-400">مدير</span>`
-                  : `<span class="text-yellow-400">مُوافَق عليه</span>`
-                : `<span class="text-red-400">مُعَلَّق</span>`;
-
-              let actionButtons = "";
-
-              if (profile.role === "student" && profile.isApproved) {
-                actionButtons = `
-                         <button data-uid="${profile.uid}" data-action="set-admin" class="py-1 px-3 rounded-md admin-set-btn text-white text-sm hover:bg-yellow-700 transition">تعيين كمدير</button>
-                         <button data-uid="${profile.uid}" data-action="reject" class="py-1 px-3 rounded-md delete-btn text-white text-sm hover:bg-red-700 transition">حذف</button>
-                     `;
-              } else if (profile.role === "student" && !profile.isApproved) {
-                actionButtons = `
-                         <button data-uid="${profile.uid}" data-action="approve" class="py-1 px-3 rounded-md bg-green-700 text-white text-sm hover:bg-green-600 transition">موافقة (طالب)</button>
-                         <button data-uid="${profile.uid}" data-action="set-admin" class="py-1 px-3 rounded-md admin-set-btn text-white text-sm hover:bg-yellow-700 transition">تعيين كمدير</button>
-                         <button data-uid="${profile.uid}" data-action="reject" class="py-1 px-3 rounded-md delete-btn text-white text-sm hover:bg-red-700 transition">رفض/حذف</button>
-                     `;
-              } else if (profile.role === "admin") {
-                actionButtons = `<button data-uid="${profile.uid}" data-action="demote" class="py-1 px-3 rounded-md bg-gray-600 text-white text-sm hover:bg-gray-500 transition">إلغاء دور المدير</button>`;
-              }
-
-              userCard.innerHTML = `
-                     <div class="mb-2 md:mb-0 text-center md:text-right">
-                         <p class="font-bold gold-color">${
-                           profile.name
-                         } (${statusBadge})</p>
-                         <p class="text-sm text-gray-400">البريد: ${
-                           profile.email
-                         }</p>
-                         <p class="text-xs text-gray-500">ID: ${profile.uid.substring(
-                           0,
-                           8
-                         )}... | مسجل في: ${new Date(
-                profile.createdAt
-              ).toLocaleDateString("ar-EG")}</p>
-                     </div>
-                     <div class="space-x-2 space-x-reverse flex justify-center w-full md:w-auto mt-2 md:mt-0">
-                         ${actionButtons}
-                     </div>
-                 `;
-              pendingUsersList.appendChild(userCard);
-            });
-
-            pendingUsersList.querySelectorAll("button").forEach((btn) => {
-              btn.addEventListener("click", handleUserAction);
-            });
-          },
-          (error) => {
-            console.error("Error listening to users:", error);
-            pendingUsersList.innerHTML = `<p class="text-red-500">❌ Error listening to users: ${error.message}. يرجى مراجعة قواعد أمان Firestore لمسار user_profiles.</p>`;
-          }
-        );
       }
 
-      // **************** معالجة إجراءات المدير على المستخدم ****************
-      async function handleUserAction(e) {
-        const docId = e.currentTarget.dataset.uid;
-        const action = e.currentTarget.dataset.action;
-        const userDocRef = doc(db, "artifacts", appId, "user_profiles", docId);
+      // 4. الوظيفة المركزية التي تُحدّث واجهة المستخدم (المُعدلة)
+      onAuthStateChanged(auth, async (user) => {
+        isAuthReady = true;
+        userId = user ? user.uid : null;
+        userData = null;
 
-        if (!db || userData?.role !== "admin" || !isAdminMode) {
-          showMessage(
-            currentUserInfoEl,
-            "غير مسموح لك بإجراء هذا الإجراء.",
-            true
+        if (user) {
+          // 1. تحديث زر الدخول/الخروج
+          authIcon.classList.remove("fa-sign-in-alt");
+          authIcon.classList.add("fa-sign-out-alt");
+          authButton.onclick = handleLogout;
+
+          // 2. جلب دور المستخدم من Firestore
+          const userDocRef = doc(
+            db,
+            "artifacts",
+            appId,
+            "user_profiles",
+            user.uid
           );
-          return;
-        }
 
-        showMessage(
-          currentUserInfoEl,
-          `جاري تنفيذ الإجراء (${action}) على المستخدم...`,
-          false
-        );
+          try {
+            const userDoc = await getDoc(userDocRef);
 
-        try {
-          if (action === "approve") {
-            await updateDoc(userDocRef, { isApproved: true, role: "student" });
+            let profileData = null;
+            if (userDoc.exists()) {
+              profileData = userDoc.data();
+            } else {
+              // *** إذا لم يكن الملف موجودًا، نقوم بإنشائه كطالب جديد ***
+              console.log(
+                "User profile missing in Firestore. Creating default profile (Pending Student)."
+              );
+              const defaultProfile = {
+                uid: user.uid,
+                name: user.displayName || "طالب جديد",
+                email: user.email,
+                role: "student",
+                isApproved: false,
+                createdAt: new Date().toISOString(),
+              };
+              await setDoc(userDocRef, defaultProfile);
+              profileData = defaultProfile; // استخدام البيانات المنشأة حديثاً
+            }
+
+            // 3. التحقق من حالة المدير (إعادة فحص البريد/الاسم حتى لو تم إنشاء الملف يدوياً)
+            // هذا يضمن أن المستخدم admin@gmail.com يحصل على صلاحيات المدير فوراً
+            if (profileData.email === "admin@gmail.com") {
+              if (
+                profileData.role !== "admin" ||
+                profileData.isApproved !== true
+              ) {
+                await updateDoc(userDocRef, {
+                  role: "admin",
+                  isApproved: true,
+                });
+                profileData.role = "admin";
+                profileData.isApproved = true;
+              }
+            }
+
+            userData = profileData;
+
+            const role = userData.role || "pending";
+            const isApproved = userData.isApproved === true;
+
+            isUserAdmin = role === "admin" && isApproved;
+
+            // 4. تحديث واجهة المستخدم بناءً على الدور
+            if (isApproved) {
+              closeAuthModal();
+              heroSection.classList.remove("opacity-50");
+              accessStatus.classList.add("hidden");
+
+              adminToggleBtn.classList.toggle("hidden", !isUserAdmin);
+              adminToggleBtn.textContent = isAdminMode
+                ? "(User View)"
+                : "(Admin Mode)";
+              toggleAdminUI(isAdminMode && isUserAdmin);
+
+              loadLessons();
+              loadCharacters();
+              loadQuizzesAndResults();
+              loadLiveSession();
+            } else {
+              // دور pending (عرض حالة الانتظار)
+              heroSection.classList.add("opacity-50");
+              accessStatus.classList.remove("hidden");
+              accessStatus.textContent = `⚠️ حسابك قيد المراجعة. يُرجى انتظار موافقة المدير للوصول إلى المحتوى.`;
+              adminToggleBtn.classList.add("hidden");
+              toggleAdminUI(false);
+              navLiveSession.classList.add("hidden");
+            }
+          } catch (error) {
+            // خطأ في صلاحيات القراءة لملف المستخدم
+            console.error("Error fetching or creating user profile:", error);
             showMessage(
               currentUserInfoEl,
-              `تمت الموافقة على المستخدم كطالب بنجاح.`,
-              false
-            );
-          } else if (action === "set-admin") {
-            await updateDoc(userDocRef, { isApproved: true, role: "admin" });
-            showMessage(
-              currentUserInfoEl,
-              `تم تعيين المستخدم كمدير بنجاح.`,
-              false
-            );
-          } else if (action === "demote") {
-            await updateDoc(userDocRef, { role: "student" });
-            showMessage(
-              currentUserInfoEl,
-              `تم إلغاء دور المدير للمستخدم بنجاح.`,
-              false
-            );
-          } else if (action === "reject") {
-            await deleteDoc(userDocRef);
-            showMessage(
-              currentUserInfoEl,
-              `✅ تم حذف ملف المستخدم بنجاح. يرجى حذف حسابه يدوياً من Firebase Console > Authentication إذا أراد التسجيل بنفس البيانات لاحقاً.`,
+              `خطأ في جلب بيانات ملفك الشخصي. تحقق من قواعد Firestore: ${error.message}`,
               true
             );
           }
-        } catch (error) {
-          console.error(
-            `Error performing action (${action}) on user ${docId}:`,
-            error
-          );
-          // تعديل رسالة الخطأ لتوجيه المستخدم للتحقق من القواعد
-          showMessage(
-            currentUserInfoEl,
-            `❌ فشل تنفيذ الإجراء (ربما خطأ في صلاحيات Firestore): ${error.message.substring(
-              0,
-              50
-            )}...`,
-            true
-          );
+        } else {
+          // لا يوجد مستخدم مسجل
+          isUserAdmin = false;
+          isAdminMode = false;
+          userData = null;
+
+          // تحديث الـ UI
+          authIcon.classList.remove("fa-sign-out-alt");
+          authIcon.classList.add("fa-sign-in-alt");
+          authButton.onclick = openAuthModal;
+
+          heroSection.classList.add("opacity-50");
+          accessStatus.classList.remove("hidden");
+          accessStatus.textContent = `🔒 يُرجى تسجيل الدخول للوصول إلى المحتوى.`;
+          adminToggleBtn.classList.add("hidden");
+          toggleAdminUI(false);
+          navLiveSession.classList.add("hidden");
+
+          lessonsListEl.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">لا يمكن عرض المحتوى. يُرجى تسجيل الدخول.</p>`;
+          charactersListEl.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">لا يمكن عرض المحتوى. يُرجى تسجيل الدخول.</p>`;
+          quizzesListEl.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">لا يمكن عرض المحتوى. يُرجى تسجيل الدخول.</p>`;
         }
+      });
+
+      // 5. معالجة التبديل بين وضع المدير ووضع المستخدم
+      adminToggleBtn.addEventListener("click", () => {
+        if (isUserAdmin) {
+          isAdminMode = !isAdminMode;
+          adminToggleBtn.textContent = isAdminMode
+            ? "(User View)"
+            : "(Admin Mode)";
+          toggleAdminUI(isAdminMode);
+          loadLessons();
+          loadCharacters();
+          loadQuizzesAndResults();
+        }
+      });
+
+      // **********************************************
+      // ************ منطق التنقل على الهواتف ************
+      // **********************************************
+
+      const mobileMenuButton = document.getElementById("mobile-menu-button");
+      const mainNavLinks = document.getElementById("main-nav-links");
+
+      if (mobileMenuButton && mainNavLinks) {
+        mobileMenuButton.addEventListener("click", () => {
+          mainNavLinks.classList.toggle("hidden");
+          const icon = mobileMenuButton.querySelector("i");
+          if (mainNavLinks.classList.contains("hidden")) {
+            icon.classList.remove("fa-times");
+            icon.classList.add("fa-bars");
+          } else {
+            icon.classList.remove("fa-bars");
+            icon.classList.add("fa-times");
+          }
+        });
+
+        mainNavLinks.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            if (!mainNavLinks.classList.contains("hidden")) {
+              mobileMenuButton.click();
+            }
+          });
+        });
       }
+
+      // **********************************************
+      // ************ وظائف إدارة المحتوى والنتائج ************
+      // **********************************************
 
       // **************** دالة تحميل وعرض الدروس ****************
       function loadLessons() {
@@ -1717,7 +1348,7 @@
           "data",
           "history_lessons"
         );
-        const lessonsQuery = query(lessonsRef);
+        const lessonsQuery = query(lessonsRef, limit(50));
 
         onSnapshot(
           lessonsQuery,
@@ -1753,38 +1384,33 @@
 
         let mediaLinks = "";
         if (data.pdfUrl) {
-          mediaLinks += `<a href="${data.pdfUrl}" target="_blank" class="text-sm gold-color hover:text-yellow-500 transition ml-4">
-                            <i class="fas fa-file-pdf ml-1"></i> قراءة PDF
-                        </a>`;
+          mediaLinks += `<a href="${data.pdfUrl}" target="_blank" class="text-sm gold-color hover:text-yellow-500 transition ml-4"><i class="fas fa-file-pdf ml-1"></i> قراءة PDF</a>`;
         }
         if (data.videoUrl) {
-          mediaLinks += `<a href="${data.videoUrl}" target="_blank" class="text-sm gold-color hover:text-yellow-500 transition">
-                            <i class="fas fa-video ml-1"></i> مشاهدة فيديو
-                        </a>`;
+          mediaLinks += `<a href="${data.videoUrl}" target="_blank" class="text-sm gold-color hover:text-yellow-500 transition"><i class="fas fa-video ml-1"></i> مشاهدة فيديو</a>`;
         }
 
-        const showDeleteButton = isAdminMode && userData?.role === "admin";
+        const showDeleteButton = isAdminMode && isUserAdmin;
 
         const content = `
-            <div>
-                <span class="text-xs text-gray-500 mb-1 block">للصف: الأول الثانوي</span>
-                <h3 class="text-xl font-bold gold-color mb-2">${
-                  data.title || "درس بدون عنوان"
-                }</h3>
-                <p class="text-sm text-gray-400 mb-4">${
-                  data.summary || "لا يوجد ملخص."
-                }</p>
-            </div>
-            <div class="flex justify-between items-center pt-3 border-t border-gray-700/50 mt-4">
-                <div class="flex items-center space-x-4 space-x-reverse">${mediaLinks}</div>
-                
-                ${
-                  showDeleteButton
-                    ? `<button data-doc-id="${docId}" data-type="lesson" class="py-1 px-3 rounded-md delete-btn text-white text-sm transition">حذف</button>`
-                    : `<span class="text-xs text-gray-500">منشور بواسطة المدير</span>`
-                }
-            </div>
-        `;
+              <div>
+                  <span class="text-xs text-gray-500 mb-1 block">للصف: الأول الثانوي</span>
+                  <h3 class="text-xl font-bold gold-color mb-2">${
+                    data.title || "درس بدون عنوان"
+                  }</h3>
+                  <p class="text-sm text-gray-400 mb-4">${
+                    data.summary || "لا يوجد ملخص."
+                  }</p>
+              </div>
+              <div class="flex justify-between items-center pt-3 border-t border-gray-700/50 mt-4">
+                  <div class="flex items-center space-x-4 space-x-reverse">${mediaLinks}</div>
+                  ${
+                    showDeleteButton
+                      ? `<button data-doc-id="${docId}" data-type="lesson" class="py-1 px-3 rounded-md delete-btn text-white text-sm transition">حذف</button>`
+                      : `<span class="text-xs text-gray-500">منشور بواسطة المدير</span>`
+                  }
+              </div>
+          `;
         card.innerHTML = content;
         lessonsListEl.appendChild(card);
 
@@ -1795,84 +1421,63 @@
         }
       }
 
-      // **************** دالة إضافة درس جديد ****************
-      addLessonForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        if (!db || !userId || userData?.role !== "admin" || !isAdminMode) {
-          showMessage(
-            lessonStatusMessageEl,
-            "غير مسموح. يمكن للمدير فقط الإضافة.",
-            true
-          );
-          return;
-        }
+      // **************** دالة إضافة درس جديد (مُعالجة النموذج) ****************
+      document
+        .getElementById("add-lesson-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (!isUserAdmin || !isAdminMode) {
+            showMessage(
+              lessonStatusMessageEl,
+              "غير مسموح. يمكن للمدير فقط الإضافة.",
+              true
+            );
+            return;
+          }
 
-        const title = document.getElementById("lesson-title").value;
-        const summary = document.getElementById("lesson-summary").value;
-        const pdfUrlInput = document.getElementById("lesson-pdf-url").value;
-        const videoUrlInput = document.getElementById("lesson-video-url").value;
+          const title = document.getElementById("lesson-title").value;
+          const summary = document.getElementById("lesson-summary").value;
+          const pdfUrl = document.getElementById("lesson-pdf-url").value;
+          const videoUrl = document.getElementById("lesson-video-url").value;
 
-        const pdfUrl = pdfUrlInput.startsWith("http")
-          ? pdfUrlInput
-          : pdfUrlInput
-          ? "http://" + pdfUrlInput
-          : "";
-        const videoUrl = videoUrlInput.startsWith("http")
-          ? videoUrlInput
-          : videoUrlInput
-          ? "http://" + videoUrlInput
-          : "";
+          addLessonBtn.disabled = true;
+          showMessage(lessonStatusMessageEl, "جاري حفظ الدرس...", false);
 
-        if (!title || !summary) {
-          showMessage(
-            lessonStatusMessageEl,
-            "يجب ملء حقل العنوان والملخص على الأقل.",
-            true
-          );
-          return;
-        }
+          try {
+            const lessonsRef = collection(
+              db,
+              "artifacts",
+              appId,
+              "public",
+              "data",
+              "history_lessons"
+            );
+            await addDoc(lessonsRef, {
+              title: title,
+              summary: summary,
+              pdfUrl: pdfUrl,
+              videoUrl: videoUrl,
+              authorId: userId,
+              createdAt: new Date().toISOString(),
+            });
 
-        addLessonBtn.disabled = true;
-        showMessage(
-          lessonStatusMessageEl,
-          "جاري حفظ الدرس بالروابط المباشرة...",
-          false
-        );
-
-        try {
-          const lessonsRef = collection(
-            db,
-            "artifacts",
-            appId,
-            "public",
-            "data",
-            "history_lessons"
-          );
-
-          await addDoc(lessonsRef, {
-            title: title,
-            summary: summary,
-            pdfUrl: pdfUrl,
-            videoUrl: videoUrl,
-            authorId: userId,
-            createdAt: new Date().toISOString(),
-          });
-
-          showMessage(
-            lessonStatusMessageEl,
-            "✅ تم إضافة الدرس والروابط بنجاح!",
-            false
-          );
-          addLessonForm.reset();
-        } catch (e) {
-          console.error("Error adding document: ", e);
-          // تعديل رسالة الخطأ لتوجيه المستخدم للتحقق من القواعد
-          let errorMessage = `❌ خطأ في الإضافة: ${e.message}. يرجى مراجعة قواعد أمان Firestore.`;
-          showMessage(lessonStatusMessageEl, errorMessage, true);
-        } finally {
-          addLessonBtn.disabled = false;
-        }
-      });
+            showMessage(
+              lessonStatusMessageEl,
+              "✅ تم إضافة الدرس بنجاح!",
+              false
+            );
+            document.getElementById("add-lesson-form").reset();
+          } catch (e) {
+            console.error("Error adding document: ", e);
+            showMessage(
+              lessonStatusMessageEl,
+              `❌ خطأ في الإضافة: ${e.message}. يرجى مراجعة قواعد أمان Firestore.`,
+              true
+            );
+          } finally {
+            addLessonBtn.disabled = false;
+          }
+        });
 
       // **************** دالة تحميل وعرض الشخصيات التاريخية ****************
       function loadCharacters() {
@@ -1886,7 +1491,7 @@
           "data",
           "historical_characters"
         );
-        const charsQuery = query(charsRef);
+        const charsQuery = query(charsRef, limit(50));
 
         onSnapshot(
           charsQuery,
@@ -1920,26 +1525,26 @@
           "char-card p-4 bg-gray-900 rounded-xl gold-shadow flex flex-col justify-between items-start";
         card.dataset.docId = docId;
 
-        const showDeleteButton = isAdminMode && userData?.role === "admin";
+        const showDeleteButton = isAdminMode && isUserAdmin;
 
         const content = `
-            <i class="fas fa-crown gold-color text-2xl mb-2"></i>
-            <h3 class="text-lg font-bold text-white mb-1">${
-              data.name || "شخصية غير معروفة"
-            }</h3>
-            <p class="text-sm gold-color mb-2">${
-              data.era || "حقبة غير محددة"
-            }</p>
-            <p class="text-xs text-gray-400 mb-4 line-clamp-4">${
-              data.bio || "لا يوجد نبذة."
-            }</p>
-            
-            ${
-              showDeleteButton
-                ? `<button data-doc-id="${docId}" data-type="character" class="py-1 px-3 rounded-md delete-btn text-white text-xs transition mt-2 self-end">حذف</button>`
-                : ""
-            }
-        `;
+              <i class="fas fa-crown gold-color text-2xl mb-2"></i>
+              <h3 class="text-lg font-bold text-white mb-1">${
+                data.name || "شخصية غير معروفة"
+              }</h3>
+              <p class="text-sm gold-color mb-2">${
+                data.era || "حقبة غير محددة"
+              }</p>
+              <p class="text-xs text-gray-400 mb-4 line-clamp-4">${
+                data.bio || "لا يوجد نبذة."
+              }</p>
+
+              ${
+                showDeleteButton
+                  ? `<button data-doc-id="${docId}" data-type="character" class="py-1 px-3 rounded-md delete-btn text-white text-xs transition mt-2 self-end">حذف</button>`
+                  : ""
+              }
+          `;
         card.innerHTML = content;
         charactersListEl.appendChild(card);
 
@@ -1950,329 +1555,114 @@
         }
       }
 
-      // **************** دالة إضافة شخصية جديدة ****************
-      addCharacterForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        if (!db || !userId || userData?.role !== "admin" || !isAdminMode) {
-          showMessage(
-            charStatusMessageEl,
-            "غير مسموح. يمكن للمدير فقط الإضافة.",
-            true
-          );
-          return;
-        }
+      // **************** دالة إضافة شخصية جديدة (مُعالجة النموذج) ****************
+      document
+        .getElementById("add-character-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (!isUserAdmin || !isAdminMode) {
+            showMessage(
+              charStatusMessageEl,
+              "غير مسموح. يمكن للمدير فقط الإضافة.",
+              true
+            );
+            return;
+          }
 
-        const name = document.getElementById("char-name").value;
-        const era = document.getElementById("char-era").value;
-        const bio = document.getElementById("char-bio").value;
+          const name = document.getElementById("char-name").value;
+          const era = document.getElementById("char-era").value;
+          const bio = document.getElementById("char-bio").value;
 
-        if (!name || !era || !bio) {
-          showMessage(charStatusMessageEl, "يجب ملء جميع حقول الشخصية.", true);
-          return;
-        }
+          if (!name || !era || !bio) {
+            showMessage(
+              charStatusMessageEl,
+              "يجب ملء جميع حقول الشخصية.",
+              true
+            );
+            return;
+          }
 
-        addCharacterBtn.disabled = true;
-        showMessage(charStatusMessageEl, "جاري حفظ الشخصية...", false);
+          addCharacterBtn.disabled = true;
+          showMessage(charStatusMessageEl, "جاري حفظ الشخصية...", false);
 
-        try {
-          const charsRef = collection(
-            db,
-            "artifacts",
-            appId,
-            "public",
-            "data",
-            "historical_characters"
-          );
+          try {
+            const charsRef = collection(
+              db,
+              "artifacts",
+              appId,
+              "public",
+              "data",
+              "historical_characters"
+            );
 
-          await addDoc(charsRef, {
-            name: name,
-            era: era,
-            bio: bio,
-            authorId: userId,
-            createdAt: new Date().toISOString(),
-          });
-
-          showMessage(charStatusMessageEl, "✅ تم إضافة الشخصية بنجاح!", false);
-          addCharacterForm.reset();
-        } catch (e) {
-          console.error("Error adding character: ", e);
-          // تعديل رسالة الخطأ لتوجيه المستخدم للتحقق من القواعد
-          let errorMessage = `❌ خطأ في الإضافة: ${e.message}. يرجى مراجعة قواعد أمان Firestore.`;
-          showMessage(charStatusMessageEl, errorMessage, true);
-        } finally {
-          addCharacterBtn.disabled = false;
-        }
-      });
-
-      // **************** دالة تحميل الاختبارات وعرض النتائج ****************
-      function loadQuizzesAndResults() {
-        if (!db || !isAuthReady || userData?.isApproved !== true) return;
-
-        const quizzesRef = collection(
-          db,
-          "artifacts",
-          appId,
-          "public",
-          "data",
-          "quizzes"
-        );
-        // النتائج خاصة لكل طالب، لذا يتم حفظها في مجموعة خاصة به
-        const resultsRef = collection(
-          db,
-          "artifacts",
-          appId,
-          "users",
-          userId,
-          "quiz_results"
-        );
-
-        document.getElementById("quizzes-title").textContent =
-          userData?.role === "admin" && isAdminMode
-            ? "الاختبارات (لوحة تحكم المدير)"
-            : `نتائجي (${userData?.name || "طالب"})`;
-
-        document
-          .getElementById("quizzes-loading-status")
-          .classList.remove("hidden");
-
-        // 1. الاستماع لنتائج الطالب الخاصة به (مجموعة النتائج)
-        onSnapshot(
-          resultsRef,
-          (resultsSnapshot) => {
-            const resultsMap = {};
-            resultsSnapshot.forEach((doc) => {
-              // Quiz ID هو اسم الوثيقة في مجموعة النتائج
-              resultsMap[doc.id] = doc.data();
+            await addDoc(charsRef, {
+              name: name,
+              era: era,
+              bio: bio,
+              authorId: userId,
+              createdAt: new Date().toISOString(),
             });
 
-            // 2. الاستماع لقائمة الاختبارات العامة
-            onSnapshot(
-              quizzesRef,
-              (quizSnapshot) => {
-                quizzesListEl.innerHTML = "";
-                document
-                  .getElementById("quizzes-loading-status")
-                  .classList.add("hidden");
-                const quizzes = [];
-                quizSnapshot.forEach((doc) => {
-                  quizzes.push({ id: doc.id, ...doc.data() });
-                });
-
-                if (quizzes.length === 0) {
-                  quizzesListEl.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">لا توجد اختبارات متاحة حالياً.</p>`;
-                  return;
-                }
-
-                quizzes.forEach((quiz) => {
-                  // عرض النتائج للطالب العادي
-                  if (userData?.role !== "admin" || !isAdminMode) {
-                    renderStudentResult(quiz, resultsMap[quiz.id]);
-                  } else {
-                    // عرض بطاقة الاختبار فقط للمدير
-                    renderQuizCardForAdmin(quiz);
-                  }
-                });
-              },
-              (error) => {
-                console.error("Error listening to Firestore quizzes:", error);
-                document.getElementById("quizzes-loading-status").textContent =
-                  "خطأ في تحميل الاختبارات.";
-              }
+            showMessage(
+              charStatusMessageEl,
+              "✅ تم إضافة الشخصية بنجاح!",
+              false
             );
-          },
-          (error) => {
-            console.error("Error listening to Firestore quiz results:", error);
-            document.getElementById("quizzes-loading-status").textContent =
-              "خطأ في تحميل نتائجك الشخصية.";
+            document.getElementById("add-character-form").reset();
+          } catch (e) {
+            console.error("Error adding character: ", e);
+            showMessage(
+              charStatusMessageEl,
+              `❌ خطأ في الإضافة: ${e.message}. يرجى مراجعة قواعد أمان Firestore.`,
+              true
+            );
+          } finally {
+            addCharacterBtn.disabled = false;
           }
-        );
-      }
+        });
 
-      // **************** دالة عرض بطاقة نتيجة الطالب **************** function
-      function renderStudentResult(quiz, result) {
-        const card = document.createElement("div");
-        card.className =
-          "quiz-card p-6 bg-gray-900 rounded-xl gold-shadow flex flex-col justify-between";
+      // **************** دالة إدارة الجلسة المباشرة ****************
+      const LIVE_SESSION_REF = doc(
+        db,
+        "artifacts",
+        appId,
+        "public",
+        "data",
+        "live_session",
+        LIVE_SESSION_DOC_ID
+      );
 
-        const scoreText = result
-          ? `<span class="text-2xl font-bold gold-color">${result.score} / ${quiz.maxScore}</span>`
-          : `<span class="text-sm text-red-500">لم يتم رصد درجة بعد.</span>`;
-
-        const content = `
-            <div class="flex justify-between items-start mb-2">
-                <h3 class="text-xl font-bold text-white">${quiz.title}</h3>
-                <a href="${
-                  quiz.googleFormUrl
-                }" target="_blank" rel="noopener noreferrer" 
-                   class="live-btn py-2 px-4 rounded-lg text-white font-bold text-sm flex items-center gold-shadow hover:bg-green-600 transition">
-                    <i class="fas fa-external-link-alt ml-2"></i> ابدأ الاختبار (Google Form)
-                </a>
-            </div>
-            <p class="text-sm text-gray-400 mb-3">${quiz.description}</p>
-            <div class="flex justify-between items-center pt-3 border-t border-gray-700/50 mt-2">
-                <p class="text-sm text-gray-500">درجتك المسجلة:</p>
-                ${scoreText}
-            </div>
-            ${
-              result?.notes
-                ? `<p class="text-xs text-gray-400 mt-2">ملاحظات المدير: ${result.notes}</p>`
-                : ""
-            }
-        `;
-        card.innerHTML = content;
-        quizzesListEl.appendChild(card);
-      }
-
-      // **************** دالة عرض بطاقة الاختبار للمدير ****************
-      function renderQuizCardForAdmin(quiz) {
-        const card = document.createElement("div");
-        card.className =
-          "quiz-card p-4 bg-gray-800 rounded-xl gold-border border flex justify-between items-center";
-
-        const content = `
-            <div>
-                <h3 class="text-lg font-bold gold-color">${quiz.title}</h3>
-                <p class="text-sm text-gray-400">الدرجة الكلية: ${quiz.maxScore}</p>
-                <a href="${quiz.googleFormUrl}" target="_blank" class="text-xs text-blue-400 hover:underline flex items-center">
-                    <i class="fas fa-link ml-1"></i> رابط النموذج
-                </a>
-            </div>
-            <button data-doc-id="${quiz.id}" data-type="quiz" class="py-1 px-3 rounded-md delete-btn text-white text-xs transition">حذف الاختبار</button>
-        `;
-        card.innerHTML = content;
-        quizzesListEl.appendChild(card);
-
-        card
-          .querySelector(".delete-btn")
-          ?.addEventListener("click", handleDelete);
-      }
-
-      // **************** دالة إضافة اختبار جديد (Google Form) ****************
-      addQuizForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        if (!db || !userId || userData?.role !== "admin" || !isAdminMode) {
-          showMessage(
-            quizStatusMessageEl,
-            "غير مسموح. يمكن للمدير فقط الإضافة.",
-            true
-          );
-          return;
-        }
-
-        const title = document.getElementById("quiz-title").value;
-        const googleFormUrl = document.getElementById(
-          "quiz-google-form-url"
-        ).value;
-        const maxScore = parseInt(
-          document.getElementById("quiz-max-score").value
-        );
-        const description = document.getElementById("quiz-description").value;
-
-        if (!title || !googleFormUrl || isNaN(maxScore) || maxScore <= 0) {
-          showMessage(
-            quizStatusMessageEl,
-            "يجب ملء حقل العنوان ورابط Google Form والدرجة الكلية (أكبر من صفر).",
-            true
-          );
-          return;
-        }
-
-        addQuizBtn.disabled = true;
-        showMessage(
-          quizStatusMessageEl,
-          "جاري نشر الاختبار (Google Form)...",
-          false
-        );
-
-        try {
-          const quizzesRef = collection(
-            db,
-            "artifacts",
-            appId,
-            "public",
-            "data",
-            "quizzes"
-          );
-
-          await addDoc(quizzesRef, {
-            title: title,
-            maxScore: maxScore,
-            googleFormUrl: googleFormUrl,
-            description: description,
-            authorId: userId,
-            createdAt: new Date().toISOString(),
-          });
-
-          showMessage(
-            quizStatusMessageEl,
-            `✅ تم إضافة الاختبار بنجاح! يمكن للطلاب الوصول إليه الآن.`,
-            false
-          );
-          addQuizForm.reset();
-        } catch (e) {
-          console.error("Error adding quiz: ", e);
-          // تعديل رسالة الخطأ لتوجيه المستخدم للتحقق من القواعد
-          let errorMessage = `❌ خطأ في نشر الاختبار: ${e.message}. يرجى مراجعة قواعد أمان Firestore.`;
-          showMessage(quizStatusMessageEl, errorMessage, true);
-        } finally {
-          addQuizBtn.disabled = false;
-        }
-      });
-
-      // **************** دالة إدارة الجلسة المباشرة (جديد) ****************
-
-      const LIVE_SESSION_DOC_ID = "current_session";
-
-      // دالة تحميل وعرض رابط الجلسة المباشرة (للطالب والمدير)
       function loadLiveSession() {
         if (!db || !isAuthReady || userData?.isApproved !== true) {
           navLiveSession.classList.add("hidden");
           return;
         }
 
-        const liveSessionRef = doc(
-          db,
-          "artifacts",
-          appId,
-          "public",
-          "data",
-          "live_session",
-          LIVE_SESSION_DOC_ID
-        );
+        onSnapshot(LIVE_SESSION_REF, (docSnap) => {
+          if (docSnap.exists() && docSnap.data().url) {
+            const data = docSnap.data();
 
-        onSnapshot(
-          liveSessionRef,
-          (docSnap) => {
-            if (docSnap.exists() && docSnap.data().url) {
-              const data = docSnap.data();
+            navLiveSession.href = data.url;
+            navLiveSession.target = "_blank";
+            navLiveSession.classList.remove("hidden");
+            navLiveSession.title =
+              data.description || "اضغط للانضمام إلى البث المباشر!";
 
-              // تحديث رابط الـ Navbar لفتح تبويبة جديدة
-              navLiveSession.href = data.url;
-              navLiveSession.target = "_blank";
-              navLiveSession.classList.remove("hidden");
-              navLiveSession.title =
-                data.description || "اضغط للانضمام إلى البث المباشر!";
-
-              // تحديث نموذج المدير أيضاً
-              if (userData?.role === "admin" && isAdminMode) {
-                document.getElementById("live-session-url").value = data.url;
-                document.getElementById("live-session-desc").value =
-                  data.description || "";
-              }
-            } else {
-              navLiveSession.classList.add("hidden");
+            if (isUserAdmin && isAdminMode) {
+              document.getElementById("live-session-url").value = data.url;
+              document.getElementById("live-session-desc").value =
+                data.description || "";
             }
-          },
-          (error) => {
-            console.error("Error listening to live session:", error);
+          } else {
+            navLiveSession.classList.add("hidden");
           }
-        );
+        });
       }
 
       // دالة حفظ/تحديث رابط الجلسة المباشرة (للمدير فقط)
       liveSessionForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        if (!db || !userId || userData?.role !== "admin" || !isAdminMode) {
+        if (!isUserAdmin || !isAdminMode) {
           showMessage(
             liveSessionStatusMessageEl,
             "غير مسموح. يمكن للمدير فقط التحديث.",
@@ -2297,17 +1687,7 @@
         );
 
         try {
-          const liveSessionRef = doc(
-            db,
-            "artifacts",
-            appId,
-            "public",
-            "data",
-            "live_session",
-            LIVE_SESSION_DOC_ID
-          );
-
-          await setDoc(liveSessionRef, {
+          await setDoc(LIVE_SESSION_REF, {
             url: url,
             description: description,
             updatedBy: userId,
@@ -2321,7 +1701,6 @@
           );
         } catch (e) {
           console.error("Error updating live session: ", e);
-          // تعديل رسالة الخطأ لتوجيه المستخدم للتحقق من القواعد
           showMessage(
             liveSessionStatusMessageEl,
             `❌ خطأ في التحديث: ${e.message}. يرجى مراجعة قواعد أمان Firestore.`,
@@ -2332,56 +1711,534 @@
         }
       });
 
-      // **************** دالة حذف الدرس أو الشخصية أو الاختبار ****************
-      async function handleDelete(e) {
-        const docId = e.currentTarget.dataset.docId;
-        const docType = e.currentTarget.dataset.type;
+      // **************** دالة تحميل الاختبارات والنتائج ****************
+      function loadQuizzesAndResults() {
+        if (!db || !isAuthReady || userData?.isApproved !== true) return;
 
-        if (
-          !db ||
-          !userId ||
-          !docId ||
-          userData?.role !== "admin" ||
-          !isAdminMode
-        ) {
+        document.getElementById("quizzes-title").textContent =
+          isUserAdmin && isAdminMode
+            ? "الاختبارات (لوحة تحكم المدير)"
+            : `نتائجي (${userData?.name || "طالب"})`;
+        document
+          .getElementById("quizzes-loading-status")
+          .classList.remove("hidden");
+        quizzesListEl.innerHTML = "";
+
+        const quizzesRef = collection(
+          db,
+          "artifacts",
+          appId,
+          "public",
+          "data",
+          "quizzes"
+        );
+        const resultsRef = collection(
+          db,
+          "artifacts",
+          appId,
+          "users",
+          userId,
+          "quiz_results"
+        );
+
+        onSnapshot(
+          resultsRef,
+          (resultsSnapshot) => {
+            const resultsMap = {};
+            resultsSnapshot.forEach((doc) => {
+              resultsMap[doc.id] = doc.data();
+            });
+
+            onSnapshot(quizzesRef, (quizSnapshot) => {
+              document
+                .getElementById("quizzes-loading-status")
+                .classList.add("hidden");
+              quizzesListEl.innerHTML = "";
+              allQuizzes = []; // تحديث القائمة العامة للاختبارات
+              quizSnapshot.forEach((doc) => {
+                allQuizzes.push({ id: doc.id, ...doc.data() });
+              });
+
+              if (allQuizzes.length === 0) {
+                quizzesListEl.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">لا توجد اختبارات متاحة حالياً.</p>`;
+                return;
+              }
+
+              allQuizzes.forEach((quiz) => {
+                if (!isUserAdmin || !isAdminMode) {
+                  renderStudentResult(quiz, resultsMap[quiz.id]);
+                } else {
+                  renderQuizCardForAdmin(quiz);
+                }
+              });
+
+              // تحديث قائمة الاختبارات في نموذج رصد الدرجات
+              updateQuizSelectOptions();
+            });
+          },
+          (error) => {
+            console.error("Error loading quiz results/quizzes:", error);
+            document.getElementById("quizzes-loading-status").textContent =
+              "خطأ في تحميل الاختبارات/النتائج.";
+          }
+        );
+      }
+
+      // **************** دالة عرض بطاقة نتيجة الطالب ****************
+      function renderStudentResult(quiz, result) {
+        const card = document.createElement("div");
+        card.className =
+          "quiz-card p-6 bg-gray-900 rounded-xl gold-shadow flex flex-col justify-between";
+
+        const scoreText = result
+          ? `<span class="text-2xl font-bold gold-color">${result.score} / ${quiz.maxScore}</span>`
+          : `<span class="text-sm text-red-500">لم يتم رصد درجة بعد.</span>`;
+
+        const content = `
+              <div class="flex justify-between items-start mb-2">
+                  <h3 class="text-xl font-bold text-white">${quiz.title}</h3>
+                  <a href="${
+                    quiz.googleFormUrl
+                  }" target="_blank" rel="noopener noreferrer"
+                     class="live-btn py-2 px-4 rounded-lg text-white font-bold text-sm flex items-center gold-shadow hover:bg-green-600 transition">
+                      <i class="fas fa-external-link-alt ml-2"></i> ابدأ الاختبار (Google Form)
+                  </a>
+              </div>
+              <p class="text-sm text-gray-400 mb-3">${quiz.description}</p>
+              <div class="flex justify-between items-center pt-3 border-t border-gray-700/50 mt-2">
+                  <p class="text-sm text-gray-500">درجتك المسجلة:</p>
+                  ${scoreText}
+              </div>
+              ${
+                result?.notes
+                  ? `<p class="text-xs text-gray-400 mt-2">ملاحظات المدير: ${result.notes}</p>`
+                  : ""
+              }
+          `;
+        card.innerHTML = content;
+        quizzesListEl.appendChild(card);
+      }
+
+      // **************** دالة عرض بطاقة الاختبار للمدير ****************
+      function renderQuizCardForAdmin(quiz) {
+        const card = document.createElement("div");
+        card.className =
+          "quiz-card p-4 bg-gray-800 rounded-xl gold-border border flex justify-between items-center";
+
+        const content = `
+              <div>
+                  <h3 class="text-lg font-bold gold-color">${quiz.title}</h3>
+                  <p class="text-sm text-gray-400">الدرجة الكلية: ${quiz.maxScore}</p>
+                  <a href="${quiz.googleFormUrl}" target="_blank" class="text-xs text-blue-400 hover:underline flex items-center">
+                      <i class="fas fa-link ml-1"></i> رابط النموذج
+                  </a>
+              </div>
+              <button data-doc-id="${quiz.id}" data-type="quiz" class="py-1 px-3 rounded-md delete-btn text-white text-xs transition">حذف الاختبار</button>
+          `;
+        card.innerHTML = content;
+        quizzesListEl.appendChild(card);
+
+        card
+          .querySelector(".delete-btn")
+          ?.addEventListener("click", handleDelete);
+      }
+
+      // **************** دالة إضافة اختبار جديد (Google Form) ****************
+      document
+        .getElementById("add-quiz-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (!isUserAdmin || !isAdminMode) {
+            showMessage(
+              quizStatusMessageEl,
+              "غير مسموح. يمكن للمدير فقط الإضافة.",
+              true
+            );
+            return;
+          }
+
+          const title = document.getElementById("quiz-title").value;
+          const googleFormUrl = document.getElementById(
+            "quiz-google-form-url"
+          ).value;
+          const maxScore = parseInt(
+            document.getElementById("quiz-max-score").value
+          );
+          const description = document.getElementById("quiz-description").value;
+
+          if (!title || !googleFormUrl || isNaN(maxScore) || maxScore <= 0) {
+            showMessage(
+              quizStatusMessageEl,
+              "يجب ملء حقل العنوان ورابط Google Form والدرجة الكلية (أكبر من صفر).",
+              true
+            );
+            return;
+          }
+
+          addQuizBtn.disabled = true;
+          showMessage(
+            quizStatusMessageEl,
+            "جاري نشر الاختبار (Google Form)...",
+            false
+          );
+
+          try {
+            const quizzesRef = collection(
+              db,
+              "artifacts",
+              appId,
+              "public",
+              "data",
+              "quizzes"
+            );
+
+            await addDoc(quizzesRef, {
+              title: title,
+              maxScore: maxScore,
+              googleFormUrl: googleFormUrl,
+              description: description,
+              authorId: userId,
+              createdAt: new Date().toISOString(),
+            });
+
+            showMessage(
+              quizStatusMessageEl,
+              `✅ تم إضافة الاختبار بنجاح! يمكن للطلاب الوصول إليه الآن.`,
+              false
+            );
+            document.getElementById("add-quiz-form").reset();
+          } catch (e) {
+            console.error("Error adding quiz: ", e);
+            showMessage(
+              quizStatusMessageEl,
+              `❌ خطأ في نشر الاختبار: ${e.message}. يرجى مراجعة قواعد أمان Firestore.`,
+              true
+            );
+          } finally {
+            addQuizBtn.disabled = false;
+          }
+        });
+
+      // **************** وظيفة رصد الدرجات (جديد) ****************
+
+      const scoreStatusMessageEl = document.getElementById(
+        "score-status-message"
+      );
+      const scoreStudentSelect = document.getElementById(
+        "score-student-select"
+      );
+      const scoreQuizSelect = document.getElementById("score-quiz-select");
+      const scoreMaxDisplay = document.getElementById("score-max-display");
+
+      // تحديث قائمة الاختبارات في نموذج رصد الدرجات
+      function updateQuizSelectOptions() {
+        scoreQuizSelect.innerHTML =
+          '<option value="">-- حدد الاختبار --</option>';
+        allQuizzes.forEach((quiz) => {
+          const option = document.createElement("option");
+          option.value = quiz.id;
+          option.textContent = `${quiz.title} (الكلية: ${quiz.maxScore})`;
+          option.dataset.maxScore = quiz.maxScore;
+          scoreQuizSelect.appendChild(option);
+        });
+      }
+
+      // تحديث قائمة الطلاب المعتمدين لنموذج رصد الدرجات
+      function loadStudentsForScoreEntry() {
+        if (!db || !isAuthReady || !isUserAdmin) return;
+
+        const profilesRef = collection(db, "artifacts", appId, "user_profiles");
+        const studentsQuery = query(
+          profilesRef,
+          where("isApproved", "==", true),
+          where("role", "==", "student")
+        );
+
+        onSnapshot(
+          studentsQuery,
+          (snapshot) => {
+            scoreStudentSelect.innerHTML =
+              '<option value="">-- حدد الطالب --</option>';
+            studentsProfiles = [];
+
+            snapshot.forEach((doc) => {
+              const profile = doc.data();
+              studentsProfiles.push(profile);
+              const option = document.createElement("option");
+              option.value = profile.uid;
+              option.textContent = `${profile.name} (${profile.email})`;
+              scoreStudentSelect.appendChild(option);
+            });
+          },
+          (error) => {
+            console.error("Error loading students for scoring:", error);
+          }
+        );
+
+        // تأكد من تحميل قائمة الاختبارات أيضاً
+        loadQuizzesAndResults();
+      }
+
+      // تحديث الدرجة الكلية عند اختيار الاختبار
+      scoreQuizSelect.addEventListener("change", () => {
+        const selectedOption =
+          scoreQuizSelect.options[scoreQuizSelect.selectedIndex];
+        if (selectedOption && selectedOption.dataset.maxScore) {
+          scoreMaxDisplay.value = selectedOption.dataset.maxScore;
+        } else {
+          scoreMaxDisplay.value = "";
+        }
+      });
+
+      // معالجة إرسال رصد الدرجات
+      document
+        .getElementById("score-entry-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (!isUserAdmin || !isAdminMode) {
+            showMessage(
+              scoreStatusMessageEl,
+              "غير مسموح. يمكن للمدير فقط رصد الدرجات.",
+              true
+            );
+            return;
+          }
+
+          const studentId = scoreStudentSelect.value;
+          const quizId = scoreQuizSelect.value;
+          const score = parseInt(document.getElementById("score-value").value);
+          const notes = document.getElementById("score-notes").value;
+          const maxScore = parseInt(scoreMaxDisplay.value);
+
+          if (
+            !studentId ||
+            !quizId ||
+            isNaN(score) ||
+            score < 0 ||
+            score > maxScore
+          ) {
+            showMessage(
+              scoreStatusMessageEl,
+              "يرجى اختيار طالب واختبار وإدخال درجة صحيحة لا تتجاوز الدرجة الكلية.",
+              true
+            );
+            return;
+          }
+
+          document.getElementById("submit-score-btn").disabled = true;
+          showMessage(scoreStatusMessageEl, "جاري تسجيل الدرجة...", false);
+
+          try {
+            // مسار حفظ نتيجة الطالب
+            const resultDocRef = doc(
+              db,
+              "artifacts",
+              appId,
+              "users",
+              studentId,
+              "quiz_results",
+              quizId
+            );
+
+            await setDoc(resultDocRef, {
+              quizId: quizId,
+              score: score,
+              maxScore: maxScore,
+              notes: notes,
+              recordedBy: userId,
+              recordedAt: new Date().toISOString(),
+            });
+
+            showMessage(
+              scoreStatusMessageEl,
+              `✅ تم تسجيل الدرجة (${score}/${maxScore}) للطالب بنجاح!`,
+              false
+            );
+            document.getElementById("score-entry-form").reset();
+          } catch (e) {
+            console.error("Error recording score: ", e);
+            showMessage(
+              scoreStatusMessageEl,
+              `❌ خطأ في تسجيل الدرجة: ${e.message}. يرجى مراجعة قواعد أمان Firestore.`,
+              true
+            );
+          } finally {
+            document.getElementById("submit-score-btn").disabled = false;
+          }
+        });
+
+      // **************** دالة تحميل جميع المستخدمين (للمدير) ****************
+      function loadAllUsers() {
+        if (unsubscribeUsers) {
+          unsubscribeUsers();
+          unsubscribeUsers = null;
+        }
+
+        if (!db || !isAuthReady || !isUserAdmin || !isAdminMode) return;
+
+        const profilesRef = collection(db, "artifacts", appId, "user_profiles");
+        const usersQuery = query(profilesRef, limit(50));
+        const userSearchInput = document.getElementById("user-student-search");
+        const searchTerm = userSearchInput?.value?.trim().toLowerCase();
+
+        pendingUsersList.innerHTML = `<p class="text-gray-500" id="users-loading-status">جارٍ تحميل قائمة المستخدمين...</p>`;
+
+        unsubscribeUsers = onSnapshot(
+          usersQuery,
+          (snapshot) => {
+            pendingUsersList.innerHTML = "";
+            let users = [];
+
+            snapshot.forEach((doc) => {
+              const profile = doc.data();
+
+              if (
+                profile.uid !== userId &&
+                (!searchTerm ||
+                  profile.name?.toLowerCase().includes(searchTerm) ||
+                  profile.email?.toLowerCase().includes(searchTerm))
+              ) {
+                users.push(profile);
+              }
+            });
+
+            if (users.length === 0) {
+              pendingUsersList.innerHTML = `<p class="text-gray-500">لا يوجد مستخدمون مطابقون أو معلقون حالياً.</p>`;
+              return;
+            }
+
+            users.forEach((profile) => {
+              const userCard = document.createElement("div");
+              userCard.className =
+                "flex flex-col md:flex-row justify-between items-center p-4 bg-gray-800 rounded-lg gold-border border";
+
+              let statusBadge = profile.isApproved
+                ? profile.role === "admin"
+                  ? `<span class="text-green-400">مدير</span>`
+                  : `<span class="text-yellow-400">مُوافَق عليه</span>`
+                : `<span class="text-red-400">مُعَلَّق</span>`;
+
+              let actionButtons = "";
+              const uid = profile.uid;
+
+              if (profile.role === "student" && !profile.isApproved) {
+                actionButtons = `
+                          <button data-uid="${uid}" data-action="approve" class="py-1 px-3 rounded-md bg-green-700 text-white text-sm hover:bg-green-600 transition">موافقة (طالب)</button>
+                          <button data-uid="${uid}" data-action="set-admin" class="py-1 px-3 rounded-md admin-set-btn text-white text-sm hover:bg-yellow-700 transition">تعيين كمدير</button>
+                          <button data-uid="${uid}" data-action="reject" class="py-1 px-3 rounded-md delete-btn text-white text-sm hover:bg-red-700 transition">رفض/حذف</button>
+                      `;
+              } else if (profile.role === "student" && profile.isApproved) {
+                actionButtons = `
+                          <button data-uid="${uid}" data-action="set-admin" class="py-1 px-3 rounded-md admin-set-btn text-white text-sm hover:bg-yellow-700 transition">تعيين كمدير</button>
+                          <button data-uid="${uid}" data-action="reject" class="py-1 px-3 rounded-md delete-btn text-white text-sm hover:bg-red-700 transition">حذف</button>
+                      `;
+              } else if (profile.role === "admin") {
+                actionButtons = `<button data-uid="${uid}" data-action="demote" class="py-1 px-3 rounded-md bg-gray-600 text-white text-sm hover:bg-gray-500 transition">إلغاء دور المدير</button>`;
+              }
+
+              userCard.innerHTML = `
+                      <div class="mb-2 md:mb-0 text-center md:text-right">
+                          <p class="font-bold gold-color">${
+                            profile.name
+                          } (${statusBadge})</p>
+                          <p class="text-sm text-gray-400">البريد: ${
+                            profile.email
+                          }</p>
+                          <p class="text-xs text-gray-500">ID: ${uid.substring(
+                            0,
+                            8
+                          )}... | مسجل في: ${new Date(
+                profile.createdAt
+              ).toLocaleDateString("ar-EG")}</p>
+                      </div>
+                      <div class="space-x-2 space-x-reverse flex justify-center w-full md:w-auto mt-2 md:mt-0">
+                          ${actionButtons}
+                      </div>
+                  `;
+              pendingUsersList.appendChild(userCard);
+            });
+
+            pendingUsersList.querySelectorAll("button").forEach((btn) => {
+              btn.addEventListener("click", handleUserAction);
+            });
+          },
+          (error) => {
+            console.error("Error listening to users:", error);
+            pendingUsersList.innerHTML = `<p class="text-red-500">خطأ في تحميل المستخدمين: ${error.message}. يرجى مراجعة قواعد أمان Firestore.</p>`;
+          }
+        );
+      }
+
+      // **************** معالجة إجراءات المدير على المستخدم ****************
+      async function handleUserAction(e) {
+        const docId = e.currentTarget.dataset.uid;
+        const action = e.currentTarget.dataset.action;
+        const userDocRef = doc(db, "artifacts", appId, "user_profiles", docId);
+
+        if (!db || !isUserAdmin || !isAdminMode) {
           showMessage(
             currentUserInfoEl,
-            "غير مسموح. يمكن للمدير فقط الحذف.",
+            "غير مسموح لك بإجراء هذا الإجراء.",
             true
           );
           return;
         }
 
+        showMessage(
+          currentUserInfoEl,
+          `جاري تنفيذ الإجراء (${action}) على المستخدم...`,
+          false
+        );
+
+        try {
+          if (action === "approve") {
+            await updateDoc(userDocRef, { isApproved: true, role: "student" });
+          } else if (action === "set-admin") {
+            await updateDoc(userDocRef, { isApproved: true, role: "admin" });
+          } else if (action === "demote") {
+            await updateDoc(userDocRef, { role: "student" });
+          } else if (action === "reject") {
+            await deleteDoc(userDocRef);
+          }
+          showMessage(
+            currentUserInfoEl,
+            `✅ تم تنفيذ الإجراء بنجاح: ${action}`,
+            false
+          );
+        } catch (error) {
+          console.error(`Error performing action (${action}):`, error);
+          showMessage(
+            currentUserInfoEl,
+            `❌ فشل التنفيذ: ${error.message}`,
+            true
+          );
+        }
+      }
+
+      // **************** دالة حذف المحتوى (دروس/شخصيات/اختبارات) ****************
+      async function handleDelete(e) {
+        const docId = e.currentTarget.dataset.docId;
+        const docType = e.currentTarget.dataset.type;
+
+        if (!isUserAdmin || !isAdminMode) {
+          return;
+        }
+
         let collectionPath;
-        let successMessage;
 
         switch (docType) {
           case "lesson":
             collectionPath = "history_lessons";
-            successMessage = "تم حذف الدرس بنجاح.";
             break;
           case "character":
             collectionPath = "historical_characters";
-            successMessage = "تم حذف الشخصية بنجاح.";
             break;
           case "quiz":
             collectionPath = "quizzes";
-            successMessage = "تم حذف الاختبار بنجاح.";
             break;
           default:
-            showMessage(
-              currentUserInfoEl,
-              "نوع الوثيقة غير معروف للحذف.",
-              true
-            );
             return;
         }
-
-        showMessage(
-          currentUserInfoEl,
-          `جاري حذف ${docType} يرجى الانتظار!`,
-          false
-        );
 
         try {
           const docRef = doc(
@@ -2393,22 +2250,17 @@
             collectionPath,
             docId
           );
-
           await deleteDoc(docRef);
-          showMessage(currentUserInfoEl, successMessage, false);
         } catch (e) {
           console.error(`Error removing ${docType} document: `, e);
-          // تعديل رسالة الخطأ لتوجيه المستخدم للتحقق من القواعد
-          showMessage(
-            currentUserInfoEl,
-            `❌ خطأ في الحذف: ${e.message}. يرجى مراجعة قواعد أمان Firestore.`,
-            true
-          );
+          showMessage(currentUserInfoEl, `خطأ في الحذف: ${e.message}`, true);
         }
       }
 
-      // بدء الإعدادات عند تحميل الصفحة
-      setupAuthAndFirestore();
+      // **************** إضافة دالة لزر البحث ****************
+      userSearchInput?.addEventListener("input", () => {
+        loadAllUsers();
+      });
     </script>
   </body>
 </html>

@@ -367,6 +367,7 @@
           </div>
         </section>
 
+        <!-- ****** قسم إدارة الجلسة المباشرة (الذي طلبته) ****** -->
         <section
           id="admin-live-session-section"
           class="hidden max-w-7xl mx-auto my-12 p-6 md:p-12 bg-gray-900/80 rounded-xl border gold-border gold-shadow"
@@ -909,6 +910,11 @@
         "add-character-section"
       );
       const addQuizSection = document.getElementById("add-quiz-section");
+      // تم إضافة قسم رصد الدرجات هنا
+      const adminScoreEntrySection = document.getElementById(
+        "admin-score-entry-section"
+      );
+
       const liveSessionForm = document.getElementById("live-session-form");
       const liveSessionStatusMessageEl = document.getElementById(
         "live-session-status-message"
@@ -1145,7 +1151,8 @@
           addLessonSection,
           addCharacterSection,
           addQuizSection,
-          document.getElementById("admin-score-entry-section"), // أضيف قسم رصد الدرجات هنا
+          adminScoreEntrySection, // أضيف قسم رصد الدرجات هنا
+          document.getElementById("admin-live-session-section"), // أضيف قسم البث المباشر هنا
         ];
 
         adminSections.forEach((section) => {
@@ -2078,7 +2085,7 @@
 
         const profilesRef = collection(db, "artifacts", appId, "user_profiles");
         const usersQuery = query(profilesRef, limit(50));
-        const userSearchInput = document.getElementById("user-student-search");
+        const userSearchInput = document.getElementById("user-search-input");
         const searchTerm = userSearchInput?.value?.trim().toLowerCase();
 
         pendingUsersList.innerHTML = `<p class="text-gray-500" id="users-loading-status">جارٍ تحميل قائمة المستخدمين...</p>`;

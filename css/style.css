@@ -1,0 +1,129 @@
+/* تخصيص خط عربي مناسب */
+@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap");
+
+body {
+  font-family: "Tajawal", sans-serif;
+  color: #eaeaea;
+
+  /* ***** تطبيق الخلفية الثابتة المطلوبة ***** */
+  background-image: url(/imegs/bg.png);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-color: #0a0a0a; /* لون احتياطي */
+}
+/* الألوان الذهبية */
+.gold-color {
+  color: #d4af37;
+}
+.gold-border {
+  border-color: #d4af37;
+}
+.gold-bg {
+  background-color: #d4af37;
+}
+
+/* الظلال الذهبية المطلوبة */
+.gold-shadow {
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+
+.lesson-card,
+.char-card,
+.quiz-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  border-left: 4px solid #d4af3750;
+  background-color: rgba(10, 10, 10, 0.85); /* شفافية بسيطة */
+}
+.lesson-card:hover,
+.char-card:hover,
+.quiz-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 15px 30px rgba(212, 175, 55, 0.5);
+}
+
+.hero-bg {
+  background-color: rgba(10, 10, 10, 0.5);
+  backdrop-filter: blur(2px);
+}
+.hero-bg p {
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+}
+
+.delete-btn {
+  background-color: #5c0000;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+.delete-btn:hover {
+  background-color: #7a0000;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+/* تصميم حقل كلمة المرور مع الأيقونة */
+.password-container {
+  position: relative;
+}
+.toggle-password {
+  position: absolute;
+  left: 10px; /* Adjust for RTL */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #d4af37;
+  padding: 5px;
+  z-index: 10;
+}
+/* تصميم زر تعيين كمدير */
+.admin-set-btn {
+  background-color: #384210;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+.admin-set-btn:hover {
+  background-color: #5b7029;
+}
+
+/* لتكبير أيقونات التنقل قليلاً */
+.nav-icon {
+  font-size: 1.25rem; /* text-xl */
+  margin-left: 0.25rem;
+}
+
+/* تنسيق زر الانضمام للجلسة المباشرة */
+.live-btn {
+  background-color: #008000;
+  transition: background-color 0.3s, transform 0.3s;
+}
+.live-btn:hover {
+  background-color: #00a000;
+  transform: scale(1.05);
+}
+
+/* تصميم نموذج الدخول المنفصل */
+#auth-card {
+  background-color: #1a1a1a;
+  border: 2px solid #d4af37;
+  animation: fadeIn 0.5s ease-out;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* أقسام الأدمن */
+.admin-section {
+  background-color: rgba(17, 24, 39, 0.95); /* خلفية داكنة واضحة */
+}
+
+/* تصميم داخل نافذة الدرجات */
+.grading-input {
+  background-color: #1a1a1a;
+  border: 1px solid #d4af3750;
+  color: #fff;
+}

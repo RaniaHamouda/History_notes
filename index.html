@@ -266,27 +266,36 @@
           </form>
         </div>
       </div>
-      
+
       <!-- Modal اختيار المرحلة التعليمية (الجديد) -->
       <div
         id="grade-selector-modal"
         class="fixed inset-0 bg-black bg-opacity-75 z-[110] hidden flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300"
       >
-        <div id="grade-card" class="p-8 rounded-xl w-full max-w-lg gold-shadow bg-gray-900 border border-yellow-800">
-          <h3 class="text-2xl gold-color font-bold mb-4 border-b gold-border pb-2">
+        <div
+          id="grade-card"
+          class="p-8 rounded-xl w-full max-w-lg gold-shadow bg-gray-900 border border-yellow-800"
+        >
+          <h3
+            class="text-2xl gold-color font-bold mb-4 border-b gold-border pb-2"
+          >
             حدد المرحلة التعليمية
           </h3>
           <p class="text-gray-400 mb-6">
-            الرجاء اختيار المرحلة الدراسية لعرض المحتوى المناسب لك. يمكن تغيير هذا الخيار لاحقًا من إعدادات حسابك.
+            الرجاء اختيار المرحلة الدراسية لعرض المحتوى المناسب لك. يمكن تغيير
+            هذا الخيار لاحقًا من إعدادات حسابك.
           </p>
           <form id="grade-select-form" class="space-y-4">
             <div>
-              <label for="grade-level-select" class="block text-sm font-medium gold-color mb-1">
+              <label
+                for="grade-level-select"
+                class="block text-sm font-medium gold-color mb-1"
+              >
                 المرحلة الدراسية
               </label>
-              <select 
-                id="grade-level-select" 
-                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white" 
+              <select
+                id="grade-level-select"
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white"
                 required
               >
                 <option value="">-- يرجى الاختيار --</option>
@@ -306,17 +315,20 @@
           ></div>
         </div>
       </div>
-      
+
       <!-- Modal البحث العام (الجديد) -->
       <div
         id="search-modal"
         class="fixed inset-0 bg-black bg-opacity-75 z-[110] hidden flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300"
       >
-        <div id="search-card" class="p-8 rounded-xl w-full max-w-2xl gold-shadow bg-gray-900 border border-yellow-800">
-          <div class="flex justify-between items-center mb-6 border-b gold-border pb-2">
-            <h3 class="text-2xl gold-color font-bold">
-              البحث في المحتوى
-            </h3>
+        <div
+          id="search-card"
+          class="p-8 rounded-xl w-full max-w-2xl gold-shadow bg-gray-900 border border-yellow-800"
+        >
+          <div
+            class="flex justify-between items-center mb-6 border-b gold-border pb-2"
+          >
+            <h3 class="text-2xl gold-color font-bold">البحث في المحتوى</h3>
             <button
               onclick="closeSearchModal()"
               class="text-white hover:gold-color text-2xl"
@@ -324,7 +336,7 @@
               <i class="fas fa-times"></i>
             </button>
           </div>
-          
+
           <form id="global-search-form" class="space-y-4">
             <input
               type="search"
@@ -342,14 +354,20 @@
           </form>
 
           <div class="mt-6 border-t pt-4 border-gray-700/50">
-              <h4 class="text-xl gold-color mb-3" id="search-results-title">نتائج البحث:</h4>
-              <div id="search-results-list" class="space-y-4 max-h-96 overflow-y-auto">
-                  <p class="text-gray-500" id="search-status">ابدأ بكتابة كلمة للبحث...</p>
-              </div>
+            <h4 class="text-xl gold-color mb-3" id="search-results-title">
+              نتائج البحث:
+            </h4>
+            <div
+              id="search-results-list"
+              class="space-y-4 max-h-96 overflow-y-auto"
+            >
+              <p class="text-gray-500" id="search-status">
+                ابدأ بكتابة كلمة للبحث..
+              </p>
+            </div>
           </div>
         </div>
       </div>
-
 
       <header
         class="sticky top-0 z-50 p-4 bg-gray-900/90 backdrop-blur-sm shadow-xl border-b border-yellow-800/50"
@@ -359,9 +377,13 @@
         >
           <div class="flex items-center space-x-3 space-x-reverse mb-2 md:mb-0">
             <i class="fas fa-pyramid w-10 h-10 gold-color text-4xl"></i>
-            <img src="images/logo.png" alt="imge" class="w-[140px] h-[120px]" />
+            <img
+              src="images/logo.png"
+              alt="imge"
+              class="w-[80px] h-[80px] md:w-[150px] md:h-[150px]"
+            />
             <h1
-              class="text-xl md:text-2xl gold-color font-extrabold tracking-wider ml-5"
+              class="text-xl md:text-2xl gold-color font-extrabold tracking-wider ml-5 md:ml-0 hidden md:inline-block"
             >
               عاشق التاريخ
             </h1>
@@ -407,16 +429,15 @@
               ><i class="fas fa-clipboard-list nav-icon gold-color"></i>
               الاختبارات</a
             >
-            
+
             <!-- أيقونة البحث الجديدة -->
             <button
               id="search-button"
               onclick="openSearchModal()"
               class="gold-color text-xl p-2 rounded-full hover:bg-gray-800 transition"
             >
-                <i class="fas fa-search" id="search-icon"></i>
+              <i class="fas fa-search" id="search-icon"></i>
             </button>
-
 
             <button
               id="admin-toggle-btn"
@@ -462,7 +483,7 @@
             </a>
           </div>
         </section>
-        
+
         <!-- ****** قسم إدارة الجلسة المباشرة ****** -->
         <section
           id="admin-live-session-section"
@@ -542,7 +563,7 @@
             </p>
           </div>
         </section>
-        
+
         <!-- ****** قسم إدارة المراحل التعليمية (الجديد) ****** -->
         <section
           id="admin-grades-section"
@@ -551,41 +572,51 @@
           <h2
             class="text-2xl font-bold mb-6 text-white border-b pb-2 gold-border flex items-center"
           >
-            <i class="fas fa-graduation-cap gold-color ml-2"></i> إدارة المراحل التعليمية (الصفوف)
+            <i class="fas fa-graduation-cap gold-color ml-2"></i> إدارة المراحل
+            التعليمية (الصفوف)
           </h2>
-          <form id="add-grade-form" class="space-y-4 mb-6 border-b pb-4 border-gray-700/50">
+          <form
+            id="add-grade-form"
+            class="space-y-4 mb-6 border-b pb-4 border-gray-700/50"
+          >
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="md:col-span-2">
-                    <label for="new-grade-name" class="block text-sm font-medium gold-color mb-1">
-                        اسم المرحلة (الصف)
-                    </label>
-                    <input
-                        type="text"
-                        id="new-grade-name"
-                        required
-                        placeholder="مثال: الصف الأول الثانوي"
-                        class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-                    />
-                </div>
-                <div>
-                    <button
-                        type="submit"
-                        id="add-grade-btn"
-                        class="w-full py-3 px-4 rounded-lg bg-blue-700 text-white font-bold hover:bg-blue-600 transition gold-shadow mt-5 md:mt-0"
-                    >
-                        إضافة مرحلة جديدة
-                    </button>
-                </div>
+              <div class="md:col-span-2">
+                <label
+                  for="new-grade-name"
+                  class="block text-sm font-medium gold-color mb-1"
+                >
+                  اسم المرحلة (الصف)
+                </label>
+                <input
+                  type="text"
+                  id="new-grade-name"
+                  required
+                  placeholder="مثال: الصف الأول الثانوي"
+                  class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+                />
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  id="add-grade-btn"
+                  class="w-full py-3 px-4 rounded-lg bg-blue-700 text-white font-bold hover:bg-blue-600 transition gold-shadow mt-5 md:mt-0"
+                >
+                  إضافة مرحلة جديدة
+                </button>
+              </div>
             </div>
-            <div id="grade-add-status-message" class="mt-2 text-sm text-center font-medium text-yellow-300 hidden"></div>
+            <div
+              id="grade-add-status-message"
+              class="mt-2 text-sm text-center font-medium text-yellow-300 hidden"
+            ></div>
           </form>
-          
+
           <div id="grades-list-admin" class="space-y-3">
-             <p class="text-gray-500">جارٍ تحميل المراحل المضافة...</p>
+            <p class="text-gray-500">جارٍ تحميل المراحل المضافة...</p>
           </div>
         </section>
         <!-- ****** نهاية قسم إدارة المراحل التعليمية ****** -->
-        
+
         <!-- ****** قسم رصد الدرجات ****** -->
         <section
           id="admin-score-entry-section"
@@ -594,11 +625,15 @@
           <h2
             class="text-2xl font-bold mb-6 text-white border-b pb-2 gold-border flex items-center"
           >
-            <i class="fas fa-calculator gold-color ml-2"></i> رصد درجات الاختبارات
+            <i class="fas fa-calculator gold-color ml-2"></i> رصد درجات
+            الاختبارات
           </h2>
           <form id="score-entry-form" class="space-y-4">
             <div>
-              <label for="score-student-uid" class="block text-sm font-medium gold-color mb-1">
+              <label
+                for="score-student-uid"
+                class="block text-sm font-medium gold-color mb-1"
+              >
                 اسم/بريد الطالب (للبحث)
               </label>
               <input
@@ -607,49 +642,66 @@
                 placeholder="ابحث عن اسم الطالب أو بريده الإلكتروني"
                 class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
               />
-              <select id="score-student-select" class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white mt-2" required>
+              <select
+                id="score-student-select"
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white mt-2"
+                required
+              >
                 <option value="">-- حدد الطالب --</option>
               </select>
             </div>
 
             <div>
-              <label for="score-quiz-select" class="block text-sm font-medium gold-color mb-1">
+              <label
+                for="score-quiz-select"
+                class="block text-sm font-medium gold-color mb-1"
+              >
                 اسم الاختبار
               </label>
-              <select id="score-quiz-select" class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white" required>
+              <select
+                id="score-quiz-select"
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white"
+                required
+              >
                 <option value="">-- حدد الاختبار --</option>
               </select>
             </div>
-            
+
             <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label for="score-value" class="block text-sm font-medium gold-color mb-1">
-                        الدرجة المحققة
-                    </label>
-                    <input
-                        type="number"
-                        id="score-value"
-                        required
-                        min="0"
-                        placeholder="درجة الطالب"
-                        class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
-                    />
-                </div>
-                <div>
-                    <label class="block text-sm font-medium gold-color mb-1">
-                        الدرجة الكلية (تلقائي)
-                    </label>
-                    <input
-                        type="number"
-                        id="score-max-display"
-                        readonly
-                        class="w-full p-3 rounded-lg bg-gray-700 border gold-border text-white placeholder-gray-500"
-                    />
-                </div>
+              <div>
+                <label
+                  for="score-value"
+                  class="block text-sm font-medium gold-color mb-1"
+                >
+                  الدرجة المحققة
+                </label>
+                <input
+                  type="number"
+                  id="score-value"
+                  required
+                  min="0"
+                  placeholder="درجة الطالب"
+                  class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white placeholder-gray-500"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium gold-color mb-1">
+                  الدرجة الكلية (تلقائي)
+                </label>
+                <input
+                  type="number"
+                  id="score-max-display"
+                  readonly
+                  class="w-full p-3 rounded-lg bg-gray-700 border gold-border text-white placeholder-gray-500"
+                />
+              </div>
             </div>
 
             <div>
-              <label for="score-notes" class="block text-sm font-medium gold-color mb-1">
+              <label
+                for="score-notes"
+                class="block text-sm font-medium gold-color mb-1"
+              >
                 ملاحظات المدير (اختياري)
               </label>
               <textarea
@@ -692,15 +744,15 @@
                 class="block text-sm font-medium gold-color mb-1"
                 >المرحلة التعليمية</label
               >
-              <select 
-                id="lesson-grade-select" 
-                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white" 
+              <select
+                id="lesson-grade-select"
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white"
                 required
               >
                 <option value="">-- حدد المرحلة --</option>
               </select>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label
@@ -788,9 +840,9 @@
                 class="block text-sm font-medium gold-color mb-1"
                 >المرحلة التعليمية</label
               >
-              <select 
-                id="char-grade-select" 
-                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white" 
+              <select
+                id="char-grade-select"
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white"
                 required
               >
                 <option value="">-- حدد المرحلة --</option>
@@ -870,9 +922,9 @@
                 class="block text-sm font-medium gold-color mb-1"
                 >المرحلة التعليمية</label
               >
-              <select 
-                id="quiz-grade-select" 
-                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white" 
+              <select
+                id="quiz-grade-select"
+                class="w-full p-3 rounded-lg bg-gray-800 border gold-border text-white"
                 required
               >
                 <option value="">-- حدد المرحلة --</option>
@@ -950,7 +1002,10 @@
         </section>
 
         <!-- الأقسام الرئيسية للمحتوى (مخفية الآن) -->
-        <section id="lessons-section" class="max-w-7xl mx-auto p-6 md:p-12 hidden">
+        <section
+          id="lessons-section"
+          class="max-w-7xl mx-auto p-6 md:p-12 hidden"
+        >
           <h2
             class="text-2xl font-bold mb-8 text-white border-b pb-2 gold-border"
           >
@@ -965,7 +1020,10 @@
           ></div>
         </section>
 
-        <section id="characters-section" class="max-w-7xl mx-auto p-6 md:p-12 hidden">
+        <section
+          id="characters-section"
+          class="max-w-7xl mx-auto p-6 md:p-12 hidden"
+        >
           <h2
             class="text-2xl font-bold mb-8 text-white border-b pb-2 gold-border"
           >
@@ -983,7 +1041,10 @@
           ></div>
         </section>
 
-        <section id="quizzes-section" class="max-w-7xl mx-auto p-6 md:p-12 hidden">
+        <section
+          id="quizzes-section"
+          class="max-w-7xl mx-auto p-6 md:p-12 hidden"
+        >
           <h2
             id="quizzes-title"
             class="text-2xl font-bold mb-8 text-white border-b pb-2 gold-border"
@@ -999,20 +1060,27 @@
           ></div>
           <div id="quiz-admin-all-results" class="hidden mt-8"></div>
         </section>
-        
-        <!-- ****** شاشة نتائج البحث (نفس هيكلة الأقسام الرئيسية) ****** -->
-        <section id="search-results-section" class="max-w-7xl mx-auto p-6 md:p-12 hidden">
-            <h2 class="text-2xl font-bold mb-8 text-white border-b pb-2 gold-border flex items-center">
-                <i class="fas fa-search gold-color ml-2"></i> نتائج البحث عن: <span id="search-query-display" class="mr-2 text-yellow-400">...</span>
-            </h2>
-            <p id="search-status-main" class="text-gray-500 text-center my-8">
-                جارٍ البحث...
-            </p>
-            <div id="search-results-output" class="space-y-8">
-                <!-- النتائج ستُعرض هنا -->
-            </div>
-        </section>
 
+        <!-- ****** شاشة نتائج البحث (نفس هيكلة الأقسام الرئيسية) ****** -->
+        <section
+          id="search-results-section"
+          class="max-w-7xl mx-auto p-6 md:p-12 hidden"
+        >
+          <h2
+            class="text-2xl font-bold mb-8 text-white border-b pb-2 gold-border flex items-center"
+          >
+            <i class="fas fa-search gold-color ml-2"></i> نتائج البحث عن:
+            <span id="search-query-display" class="mr-2 text-yellow-400"
+              >...</span
+            >
+          </h2>
+          <p id="search-status-main" class="text-gray-500 text-center my-8">
+            جارٍ البحث...
+          </p>
+          <div id="search-results-output" class="space-y-8">
+            <!-- النتائج ستُعرض هنا -->
+          </div>
+        </section>
       </main>
     </div>
 
@@ -1077,17 +1145,25 @@
       const accessStatus = document.getElementById("access-status");
       const adminToggleBtn = document.getElementById("admin-toggle-btn");
 
-      const gradeSelectorModal = document.getElementById("grade-selector-modal");
+      const gradeSelectorModal = document.getElementById(
+        "grade-selector-modal"
+      );
       const gradeSelectForm = document.getElementById("grade-select-form");
       const gradeLevelSelect = document.getElementById("grade-level-select");
-      const gradeStatusMessage = document.getElementById("grade-status-message");
+      const gradeStatusMessage = document.getElementById(
+        "grade-status-message"
+      );
 
       const searchModal = document.getElementById("search-modal");
       const searchInput = document.getElementById("global-search-input");
       const searchResultsList = document.getElementById("search-results-list");
       const searchStatusMain = document.getElementById("search-status-main");
-      const searchQueryDisplay = document.getElementById("search-query-display");
-      const searchResultsSection = document.getElementById("search-results-section");
+      const searchQueryDisplay = document.getElementById(
+        "search-query-display"
+      );
+      const searchResultsSection = document.getElementById(
+        "search-results-section"
+      );
 
       const LIVE_SESSION_DOC_ID = "current_session";
 
@@ -1100,8 +1176,12 @@
         "add-character-section"
       );
       const addQuizSection = document.getElementById("add-quiz-section");
-      const adminScoreEntrySection = document.getElementById("admin-score-entry-section");
-      const adminGradesSection = document.getElementById("admin-grades-section");
+      const adminScoreEntrySection = document.getElementById(
+        "admin-score-entry-section"
+      );
+      const adminGradesSection = document.getElementById(
+        "admin-grades-section"
+      );
 
       const liveSessionForm = document.getElementById("live-session-form");
       const liveSessionStatusMessageEl = document.getElementById(
@@ -1131,16 +1211,16 @@
       const lessonsSection = document.getElementById("lessons-section");
       const charactersSection = document.getElementById("characters-section");
       const quizzesSection = document.getElementById("quizzes-section");
-      
+
       const navLessons = document.getElementById("nav-lessons");
       const navQuizzes = document.getElementById("nav-quizzes");
       const navCharacters = document.getElementById("nav-characters");
-      
+
       // متغيرات خاصة بالمراحل التعليمية
       const gradesListAdmin = document.getElementById("grades-list-admin");
       let availableGrades = [];
       let currentGradeId = null; // المرحلة التعليمية الحالية للمستخدم
-      
+
       // حالة التطبيق
       let userId = null;
       let userData = null;
@@ -1171,30 +1251,38 @@
         authModal.classList.remove("opacity-100");
         showMessage(authMessageBox, "", false);
       };
-      
-      window.closeGradeSelectorModal = function() {
+
+      window.closeGradeSelectorModal = function () {
         gradeSelectorModal.classList.add("opacity-0", "pointer-events-none");
         gradeSelectorModal.classList.remove("opacity-100");
         showMessage(gradeStatusMessage, "", false);
-      }
-      
-      window.closeSearchModal = function() {
+      };
+
+      window.closeSearchModal = function () {
         searchModal.classList.add("opacity-0", "pointer-events-none");
         searchModal.classList.remove("opacity-100");
-      }
-      
-      window.openSearchModal = function() {
-          if (!userData?.isApproved) {
-              showMessage(currentUserInfoEl, "يجب تسجيل الدخول للبحث في المحتوى.", true);
-              return;
-          }
-          searchModal.classList.remove("opacity-0", "pointer-events-none", "hidden");
-          searchModal.classList.add("opacity-100");
-          // إخفاء النتائج عند فتح النافذة
-          document.getElementById('search-status').textContent = 'ابدأ بكتابة كلمة للبحث...';
-          document.getElementById('search-results-list').innerHTML = '';
-      }
+      };
 
+      window.openSearchModal = function () {
+        if (!userData?.isApproved) {
+          showMessage(
+            currentUserInfoEl,
+            "يجب تسجيل الدخول للبحث في المحتوى.",
+            true
+          );
+          return;
+        }
+        searchModal.classList.remove(
+          "opacity-0",
+          "pointer-events-none",
+          "hidden"
+        );
+        searchModal.classList.add("opacity-100");
+        // إخفاء النتائج عند فتح النافذة
+        document.getElementById("search-status").textContent =
+          "ابدأ بكتابة كلمة للبحث...";
+        document.getElementById("search-results-list").innerHTML = "";
+      };
 
       function openAuthModal() {
         authTitle.textContent = "تسجيل الدخول";
@@ -1209,30 +1297,34 @@
         authModal.classList.add("opacity-100");
         showMessage(authMessageBox, "الرجاء إدخال بياناتك.", false);
       }
-      
+
       function openGradeSelectorModal() {
-        gradeSelectorModal.classList.remove("opacity-0", "pointer-events-none", "hidden");
+        gradeSelectorModal.classList.remove(
+          "opacity-0",
+          "pointer-events-none",
+          "hidden"
+        );
         gradeSelectorModal.classList.add("opacity-100");
         loadGradeSelectOptions(gradeLevelSelect);
       }
-      
+
       function renderMainContent(show) {
-          lessonsSection.classList.toggle('hidden', !show);
-          charactersSection.classList.toggle('hidden', !show);
-          quizzesSection.classList.toggle('hidden', !show);
-          searchResultsSection.classList.add('hidden'); // إخفاء نتائج البحث عند العودة للرئيسية
+        lessonsSection.classList.toggle("hidden", !show);
+        charactersSection.classList.toggle("hidden", !show);
+        quizzesSection.classList.toggle("hidden", !show);
+        searchResultsSection.classList.add("hidden"); // إخفاء نتائج البحث عند العودة للرئيسية
 
-
-          if (show) {
-              loadLessons();
-              loadCharacters();
-              loadQuizzesAndResults();
-          } else {
-              lessonsListEl.innerHTML = charactersListEl.innerHTML = quizzesListEl.innerHTML = 
-                `<p class="col-span-full text-center text-gray-500 py-10">الرجاء اختيار مرحلة تعليمية.</p>`;
-          }
+        if (show) {
+          loadLessons();
+          loadCharacters();
+          loadQuizzesAndResults();
+        } else {
+          lessonsListEl.innerHTML =
+            charactersListEl.innerHTML =
+            quizzesListEl.innerHTML =
+              `<p class="col-span-full text-center text-gray-500 py-10">الرجاء اختيار مرحلة تعليمية.</p>`;
+        }
       }
-
 
       window.togglePasswordVisibility = function (iconElement) {
         const targetId = iconElement.getAttribute("data-target");
@@ -1317,7 +1409,7 @@
         }
 
         // تحديد دور وموافقة المدير بناءً على البيانات المتفق عليها
-        const is_admin_match = name === 'admin' && email === 'admin@gmail.com';
+        const is_admin_match = name === "admin" && email === "admin@gmail.com";
         const userRole = is_admin_match ? "admin" : "student";
         const isApprovedStatus = is_admin_match;
 
@@ -1385,102 +1477,138 @@
           console.error("Logout Error:", error);
         });
       }
-      
+
       // **********************************************
       // ************ منطق اختيار المرحلة التعليمية (جديد) ************
       // **********************************************
-      
-      const GRADES_COLLECTION = collection(db, "artifacts", appId, "public", "data", "grade_levels");
+
+      const GRADES_COLLECTION = collection(
+        db,
+        "artifacts",
+        appId,
+        "public",
+        "data",
+        "grade_levels"
+      );
 
       // تحميل خيارات المراحل التعليمية في القائمة المنسدلة
       function loadGradeSelectOptions(selectElement) {
-          selectElement.innerHTML = '<option value="">-- يرجى الاختيار --</option>';
-          if (availableGrades.length > 0) {
-              availableGrades.forEach(grade => {
-                  const option = document.createElement('option');
-                  option.value = grade.id;
-                  option.textContent = grade.name;
-                  if (grade.id === currentGradeId && selectElement.id === 'grade-level-select') {
-                      option.selected = true; // تحديد الخيار الحالي في modal الاختيار
-                  }
-                  selectElement.appendChild(option);
-              });
-          }
+        selectElement.innerHTML =
+          '<option value="">-- يرجى الاختيار --</option>';
+        if (availableGrades.length > 0) {
+          availableGrades.forEach((grade) => {
+            const option = document.createElement("option");
+            option.value = grade.id;
+            option.textContent = grade.name;
+            if (
+              grade.id === currentGradeId &&
+              selectElement.id === "grade-level-select"
+            ) {
+              option.selected = true; // تحديد الخيار الحالي في modal الاختيار
+            }
+            selectElement.appendChild(option);
+          });
+        }
       }
 
       // 1. معالجة تحديث المرحلة التعليمية من الـ Modal
-      gradeSelectForm.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          const selectedGradeId = gradeLevelSelect.value;
-          
-          if (!selectedGradeId) {
-              showMessage(gradeStatusMessage, "الرجاء اختيار مرحلة تعليمية.", true);
-              return;
-          }
+      gradeSelectForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const selectedGradeId = gradeLevelSelect.value;
 
-          if (!userId || !userData) {
-             showMessage(gradeStatusMessage, "خطأ: يجب أن تكون مسجلاً للدخول.", true);
-             return;
-          }
-          
-          // حفظ الخيار في ملف المستخدم
-          try {
-              const userDocRef = doc(db, "artifacts", appId, "user_profiles", userId);
-              await updateDoc(userDocRef, { gradeLevel: selectedGradeId });
-              
-              // تحديث البيانات المحلية وإغلاق الـ modal
-              userData.gradeLevel = selectedGradeId;
-              currentGradeId = selectedGradeId;
-              closeGradeSelectorModal();
-              
-              showMessage(currentUserInfoEl, `✅ تم تحديث المرحلة التعليمية بنجاح!`, false);
-              
-              // إعادة تحميل المحتوى الخاص بهذا الصف الجديد
-              renderMainContent(true);
-              
-          } catch (error) {
-              showMessage(gradeStatusMessage, `❌ فشل حفظ المرحلة: ${error.message}`, true);
-          }
+        if (!selectedGradeId) {
+          showMessage(gradeStatusMessage, "الرجاء اختيار مرحلة تعليمية.", true);
+          return;
+        }
+
+        if (!userId || !userData) {
+          showMessage(
+            gradeStatusMessage,
+            "خطأ: يجب أن تكون مسجلاً للدخول.",
+            true
+          );
+          return;
+        }
+
+        // حفظ الخيار في ملف المستخدم
+        try {
+          const userDocRef = doc(
+            db,
+            "artifacts",
+            appId,
+            "user_profiles",
+            userId
+          );
+          await updateDoc(userDocRef, { gradeLevel: selectedGradeId });
+
+          // تحديث البيانات المحلية وإغلاق الـ modal
+          userData.gradeLevel = selectedGradeId;
+          currentGradeId = selectedGradeId;
+          closeGradeSelectorModal();
+
+          showMessage(
+            currentUserInfoEl,
+            `✅ تم تحديث المرحلة التعليمية بنجاح!`,
+            false
+          );
+
+          // إعادة تحميل المحتوى الخاص بهذا الصف الجديد
+          renderMainContent(true);
+        } catch (error) {
+          showMessage(
+            gradeStatusMessage,
+            `❌ فشل حفظ المرحلة: ${error.message}`,
+            true
+          );
+        }
       });
-      
+
       // 2. إدارة المراحل التعليمية (للمدير)
-      document.getElementById('add-grade-form').addEventListener('submit', async (e) => {
+      document
+        .getElementById("add-grade-form")
+        .addEventListener("submit", async (e) => {
           e.preventDefault();
-          const name = document.getElementById('new-grade-name').value.trim();
-          const statusEl = document.getElementById('grade-add-status-message');
-          
+          const name = document.getElementById("new-grade-name").value.trim();
+          const statusEl = document.getElementById("grade-add-status-message");
+
           if (!isUserAdmin || !isAdminMode) {
-              showMessage(statusEl, "غير مسموح. المدير فقط.", true);
-              return;
+            showMessage(statusEl, "غير مسموح. المدير فقط.", true);
+            return;
           }
           if (!name) return;
 
           try {
-              await addDoc(GRADES_COLLECTION, { name: name, createdAt: new Date().toISOString() });
-              showMessage(statusEl, `✅ تم إضافة المرحلة: ${name}`, false);
-              document.getElementById('add-grade-form').reset();
+            await addDoc(GRADES_COLLECTION, {
+              name: name,
+              createdAt: new Date().toISOString(),
+            });
+            showMessage(statusEl, `✅ تم إضافة المرحلة: ${name}`, false);
+            document.getElementById("add-grade-form").reset();
           } catch (e) {
-              showMessage(statusEl, `❌ خطأ في الإضافة: ${e.message}`, true);
+            showMessage(statusEl, `❌ خطأ في الإضافة: ${e.message}`, true);
           }
-      });
+        });
 
       // 3. تحميل المراحل التعليمية من Firestore
-      onSnapshot(GRADES_COLLECTION, (snapshot) => {
+      onSnapshot(
+        GRADES_COLLECTION,
+        (snapshot) => {
           availableGrades = [];
-          gradesListAdmin.innerHTML = '';
+          gradesListAdmin.innerHTML = "";
           if (snapshot.empty) {
-              gradesListAdmin.innerHTML = `<p class="text-gray-500">لا توجد مراحل تعليمية مضافة حالياً.</p>`;
-              return;
+            gradesListAdmin.innerHTML = `<p class="text-gray-500">لا توجد مراحل تعليمية مضافة حالياً.</p>`;
+            return;
           }
-          
-          snapshot.forEach(doc => {
-              const grade = { id: doc.id, ...doc.data() };
-              availableGrades.push(grade);
-              
-              // عرض بطاقة للمدير
-              const card = document.createElement('div');
-              card.className = 'flex justify-between items-center p-3 bg-gray-800 rounded-lg border gold-border/50';
-              card.innerHTML = `
+
+          snapshot.forEach((doc) => {
+            const grade = { id: doc.id, ...doc.data() };
+            availableGrades.push(grade);
+
+            // عرض بطاقة للمدير
+            const card = document.createElement("div");
+            card.className =
+              "flex justify-between items-center p-3 bg-gray-800 rounded-lg border gold-border/50";
+            card.innerHTML = `
                   <span class="font-medium gold-color">${grade.name}</span>
                   <button 
                       data-id="${grade.id}" 
@@ -1490,21 +1618,24 @@
                       حذف
                   </button>
               `;
-              gradesListAdmin.appendChild(card);
-              card.querySelector('button').addEventListener('click', handleDelete);
+            gradesListAdmin.appendChild(card);
+            card
+              .querySelector("button")
+              .addEventListener("click", handleDelete);
           });
-          
+
           // تحديث القوائم المنسدلة للمدير (إضافة محتوى)
           const gradeSelects = [
-              document.getElementById('lesson-grade-select'),
-              document.getElementById('char-grade-select'),
-              document.getElementById('quiz-grade-select')
+            document.getElementById("lesson-grade-select"),
+            document.getElementById("char-grade-select"),
+            document.getElementById("quiz-grade-select"),
           ];
-          gradeSelects.forEach(sel => loadGradeSelectOptions(sel));
-          
-      }, (error) => {
+          gradeSelects.forEach((sel) => loadGradeSelectOptions(sel));
+        },
+        (error) => {
           console.error("Error loading grades:", error);
-      });
+        }
+      );
 
       // ****************************************************
       // ************ منطق حالة المستخدم (Auth State) ************
@@ -1513,19 +1644,19 @@
       function toggleAdminUI(show) {
         // حماية: تم التأكد من وجود العناصر هنا
         const adminSections = [
-            adminUsersApprovalSection,
-            addLessonSection,
-            addCharacterSection,
-            addQuizSection,
-            adminScoreEntrySection,
-            document.getElementById("admin-live-session-section"),
-            adminGradesSection // إضافة قسم إدارة المراحل التعليمية
+          adminUsersApprovalSection,
+          addLessonSection,
+          addCharacterSection,
+          addQuizSection,
+          adminScoreEntrySection,
+          document.getElementById("admin-live-session-section"),
+          adminGradesSection, // إضافة قسم إدارة المراحل التعليمية
         ];
-        
-        adminSections.forEach(section => {
-            if (section) {
-                section.classList.toggle("hidden", !show);
-            }
+
+        adminSections.forEach((section) => {
+          if (section) {
+            section.classList.toggle("hidden", !show);
+          }
         });
 
         if (show) {
@@ -1536,11 +1667,10 @@
           unsubscribeUsers = null;
         }
       }
-      
+
       // دالة تحديث أقسام المحتوى الرئيسية (الدروس/الشخصيات/الاختبارات)
       // تم دمج هذه الدالة مرة واحدة
       // function renderMainContent(show) { ... }
-
 
       onAuthStateChanged(auth, async (user) => {
         isAuthReady = true;
@@ -1552,34 +1682,52 @@
           authIcon.classList.add("fa-sign-out-alt");
           authButton.onclick = handleLogout;
 
-          const userDocRef = doc(db, "artifacts", appId, "user_profiles", user.uid);
+          const userDocRef = doc(
+            db,
+            "artifacts",
+            appId,
+            "user_profiles",
+            user.uid
+          );
 
           try {
             const userDoc = await getDoc(userDocRef);
 
             let profileData = null;
             if (userDoc.exists()) {
-                profileData = userDoc.data();
+              profileData = userDoc.data();
             } else {
-                console.log("User profile missing in Firestore. Creating default profile (Pending Student).");
-                const defaultProfile = {
-                    uid: user.uid, name: user.displayName || "طالب جديد", email: user.email,
-                    role: "student", isApproved: false, gradeLevel: null,
-                    createdAt: new Date().toISOString(),
-                };
-                await setDoc(userDocRef, defaultProfile);
-                profileData = defaultProfile;
+              console.log(
+                "User profile missing in Firestore. Creating default profile (Pending Student)."
+              );
+              const defaultProfile = {
+                uid: user.uid,
+                name: user.displayName || "طالب جديد",
+                email: user.email,
+                role: "student",
+                isApproved: false,
+                gradeLevel: null,
+                createdAt: new Date().toISOString(),
+              };
+              await setDoc(userDocRef, defaultProfile);
+              profileData = defaultProfile;
             }
-            
+
             // 3. التحقق من حالة المدير (إعادة فحص البريد/الاسم حتى لو تم إنشاء الملف يدوياً)
-            if (profileData.email === 'admin@gmail.com') { 
-                if (profileData.role !== 'admin' || profileData.isApproved !== true) {
-                    await updateDoc(userDocRef, { role: 'admin', isApproved: true });
-                    profileData.role = 'admin';
-                    profileData.isApproved = true;
-                }
+            if (profileData.email === "admin@gmail.com") {
+              if (
+                profileData.role !== "admin" ||
+                profileData.isApproved !== true
+              ) {
+                await updateDoc(userDocRef, {
+                  role: "admin",
+                  isApproved: true,
+                });
+                profileData.role = "admin";
+                profileData.isApproved = true;
+              }
             }
-            
+
             userData = profileData;
             currentGradeId = userData.gradeLevel; // تعيين المرحلة الحالية للمستخدم
 
@@ -1589,23 +1737,24 @@
 
             // 4. تحديث UI وعرض المحتوى
             if (isApproved) {
-              closeAuthModal(); 
+              closeAuthModal();
               heroSection.classList.remove("opacity-50");
               accessStatus.classList.add("hidden");
 
               adminToggleBtn.classList.toggle("hidden", !isUserAdmin);
-              adminToggleBtn.textContent = isAdminMode ? "(User View)" : "(Admin Mode)";
+              adminToggleBtn.textContent = isAdminMode
+                ? "(User View)"
+                : "(Admin Mode)";
               toggleAdminUI(isAdminMode && isUserAdmin);
               loadLiveSession(); // تحميل رابط البث المباشر
 
               // منطق ظهور المحتوى بناءً على اختيار المرحلة
               if (currentGradeId || isUserAdmin) {
-                  renderMainContent(true); // إذا اختار صفاً أو كان مديراً، أظهر المحتوى
+                renderMainContent(true); // إذا اختار صفاً أو كان مديراً، أظهر المحتوى
               } else {
-                  renderMainContent(false); // إخفاء المحتوى
-                  openGradeSelectorModal(); // افتح نافذة اختيار المرحلة
+                renderMainContent(false); // إخفاء المحتوى
+                openGradeSelectorModal(); // افتح نافذة اختيار المرحلة
               }
-              
             } else {
               // دور pending (عرض حالة الانتظار)
               heroSection.classList.add("opacity-50");
@@ -1616,19 +1765,28 @@
               navLiveSession.classList.add("hidden");
               renderMainContent(false);
             }
-            
           } catch (error) {
             console.error("Error fetching or creating user profile:", error);
-            showMessage(currentUserInfoEl, `خطأ في جلب بيانات ملفك الشخصي. تحقق من قواعد Firestore: ${error.message}`, true);
+            showMessage(
+              currentUserInfoEl,
+              `خطأ في جلب بيانات ملفك الشخصي. تحقق من قواعد Firestore: ${error.message}`,
+              true
+            );
           }
         } else {
           // لا يوجد مستخدم مسجل (حالة الخروج)
-          isUserAdmin = false; isAdminMode = false; userData = null;
-          authIcon.classList.remove("fa-sign-out-alt"); authIcon.classList.add("fa-sign-in-alt");
+          isUserAdmin = false;
+          isAdminMode = false;
+          userData = null;
+          authIcon.classList.remove("fa-sign-out-alt");
+          authIcon.classList.add("fa-sign-in-alt");
           authButton.onclick = openAuthModal;
-          heroSection.classList.add("opacity-50"); accessStatus.classList.remove("hidden");
+          heroSection.classList.add("opacity-50");
+          accessStatus.classList.remove("hidden");
           accessStatus.textContent = `🔒 يُرجى تسجيل الدخول للوصول إلى المحتوى.`;
-          adminToggleBtn.classList.add("hidden"); toggleAdminUI(false); navLiveSession.classList.add("hidden");
+          adminToggleBtn.classList.add("hidden");
+          toggleAdminUI(false);
+          navLiveSession.classList.add("hidden");
           renderMainContent(false); // إخفاء المحتوى الرئيسي
         }
       });
@@ -1676,168 +1834,232 @@
 
       // **************** دالة معالجة النقر على روابط الـ Navbar ****************
       function handleNavClick(e) {
-          e.preventDefault();
-          
-          if (!userData?.isApproved || (userData.role === 'student' && !currentGradeId)) {
-              openGradeSelectorModal();
-              return;
-          }
-          
-          const targetSectionId = e.currentTarget.getAttribute('href');
-          const targetSection = document.querySelector(targetSectionId);
-          
-          // إظهار المحتوى الرئيسي أولاً
-          renderMainContent(true); 
+        e.preventDefault();
 
-          // إخفاء جميع أقسام المحتوى
-          lessonsSection.classList.add('hidden');
-          charactersSection.classList.add('hidden');
-          quizzesSection.classList.add('hidden');
-          searchResultsSection.classList.add('hidden'); // إخفاء نتائج البحث عند الانتقال
+        if (
+          !userData?.isApproved ||
+          (userData.role === "student" && !currentGradeId)
+        ) {
+          openGradeSelectorModal();
+          return;
+        }
 
-          
-          // إظهار القسم المطلوب
-          if (targetSection) {
-              targetSection.classList.remove('hidden');
-          }
-          
-          // إعادة تحميل بيانات القسم المطلوب إذا لزم الأمر
-          if (targetSectionId === '#lessons-section') loadLessons();
-          if (targetSectionId === '#characters-section') loadCharacters();
-          if (targetSectionId === '#quizzes-section') loadQuizzesAndResults();
-          
-          
+        const targetSectionId = e.currentTarget.getAttribute("href");
+        const targetSection = document.querySelector(targetSectionId);
+
+        // إظهار المحتوى الرئيسي أولاً
+        renderMainContent(true);
+
+        // إخفاء جميع أقسام المحتوى
+        lessonsSection.classList.add("hidden");
+        charactersSection.classList.add("hidden");
+        quizzesSection.classList.add("hidden");
+        searchResultsSection.classList.add("hidden"); // إخفاء نتائج البحث عند الانتقال
+
+        // إظهار القسم المطلوب
+        if (targetSection) {
+          targetSection.classList.remove("hidden");
+        }
+
+        // إعادة تحميل بيانات القسم المطلوب إذا لزم الأمر
+        if (targetSectionId === "#lessons-section") loadLessons();
+        if (targetSectionId === "#characters-section") loadCharacters();
+        if (targetSectionId === "#quizzes-section") loadQuizzesAndResults();
       }
-      
-      document.querySelectorAll('#main-nav-links a').forEach(link => {
+
+      document.querySelectorAll("#main-nav-links a").forEach((link) => {
         // نربط الـ links بوظيفتنا الجديدة
-        link.addEventListener('click', handleNavClick);
+        link.addEventListener("click", handleNavClick);
       });
-      
+
       // **********************************************
       // ************ وظائف إدارة المحتوى والنتائج ************
       // **********************************************
 
       // **************** دالة البحث العام ****************
-      document.getElementById('global-search-form').addEventListener('submit', async (e) => {
+      document
+        .getElementById("global-search-form")
+        .addEventListener("submit", async (e) => {
           e.preventDefault();
           const queryText = searchInput.value.trim();
-          
+
           if (queryText.length < 2) {
-              document.getElementById('search-status').textContent = 'الرجاء إدخال حرفين على الأقل للبحث.';
-              return;
+            document.getElementById("search-status").textContent =
+              "الرجاء إدخال حرفين على الأقل للبحث.";
+            return;
           }
-          
+
           closeSearchModal(); // إغلاق نافذة البحث
           renderMainContent(false); // إخفاء أقسام المحتوى الرئيسية
-          searchResultsSection.classList.remove('hidden'); // إظهار قسم نتائج البحث
+          searchResultsSection.classList.remove("hidden"); // إظهار قسم نتائج البحث
           searchQueryDisplay.textContent = queryText;
-          searchStatusMain.textContent = 'جارٍ البحث في جميع المراحل...';
-          document.getElementById('search-results-output').innerHTML = '';
+          searchStatusMain.textContent = "جارٍ البحث في جميع المراحل...";
+          document.getElementById("search-results-output").innerHTML = "";
 
           try {
-              const collections = ['history_lessons', 'historical_characters', 'quizzes'];
-              let allResults = [];
-              const lowerCaseQuery = queryText.toLowerCase();
+            const collections = [
+              "history_lessons",
+              "historical_characters",
+              "quizzes",
+            ];
+            let allResults = [];
+            const lowerCaseQuery = queryText.toLowerCase();
 
-              const searchInCollection = async (collectionName, titleKey, summaryKey) => {
-                  const ref = collection(db, "artifacts", appId, "public", "data", collectionName);
-                  const docsSnapshot = await getDocs(ref);
-                  
-                  docsSnapshot.forEach(docSnap => {
-                      const data = docSnap.data();
-                      const docId = docSnap.id;
-                      
-                      const matchesGrade = isUserAdmin || !currentGradeId || data.gradeLevel === currentGradeId;
-                      
-                      if (matchesGrade && (data[titleKey]?.toLowerCase().includes(lowerCaseQuery) || data[summaryKey]?.toLowerCase().includes(lowerCaseQuery))) {
-                           allResults.push({ id: docId, type: collectionName, ...data });
-                      }
-                  });
-              };
-              
-              await searchInCollection('history_lessons', 'title', 'summary');
-              await searchInCollection('historical_characters', 'name', 'bio');
-              await searchInCollection('quizzes', 'title', 'description');
+            const searchInCollection = async (
+              collectionName,
+              titleKey,
+              summaryKey
+            ) => {
+              const ref = collection(
+                db,
+                "artifacts",
+                appId,
+                "public",
+                "data",
+                collectionName
+              );
+              const docsSnapshot = await getDocs(ref);
 
+              docsSnapshot.forEach((docSnap) => {
+                const data = docSnap.data();
+                const docId = docSnap.id;
 
-              searchStatusMain.textContent = `تم العثور على ${allResults.length} نتائج مطابقة لـ "${queryText}"`;
-              
-              if (allResults.length === 0) {
-                   document.getElementById('search-results-output').innerHTML = `<p class="text-gray-500 text-center">لم يتم العثور على نتائج مطابقة.</p>`;
-                   return;
+                const matchesGrade =
+                  isUserAdmin ||
+                  !currentGradeId ||
+                  data.gradeLevel === currentGradeId;
+
+                if (
+                  matchesGrade &&
+                  (data[titleKey]?.toLowerCase().includes(lowerCaseQuery) ||
+                    data[summaryKey]?.toLowerCase().includes(lowerCaseQuery))
+                ) {
+                  allResults.push({ id: docId, type: collectionName, ...data });
+                }
+              });
+            };
+
+            await searchInCollection("history_lessons", "title", "summary");
+            await searchInCollection("historical_characters", "name", "bio");
+            await searchInCollection("quizzes", "title", "description");
+
+            searchStatusMain.textContent = `تم العثور على ${allResults.length} نتائج مطابقة لـ "${queryText}"`;
+
+            if (allResults.length === 0) {
+              document.getElementById(
+                "search-results-output"
+              ).innerHTML = `<p class="text-gray-500 text-center">لم يتم العثور على نتائج مطابقة.</p>`;
+              return;
+            }
+
+            // عرض النتائج
+            const outputEl = document.getElementById("search-results-output");
+            outputEl.innerHTML = "";
+
+            allResults.forEach((result) => {
+              const card = document.createElement("div");
+              const gradeName =
+                availableGrades.find((g) => g.id === result.gradeLevel)?.name ||
+                "غير محدد";
+
+              let icon,
+                color,
+                subtitle,
+                linkHtml = "";
+
+              if (result.type === "history_lessons") {
+                icon = "fa-book-open";
+                color = "gold-color";
+                subtitle = "درس";
+                linkHtml = `<a href="#lessons-section" onclick="handleNavClick({currentTarget: {getAttribute: () => '#lessons-section'}})" class="text-sm text-yellow-500 hover:underline ml-3"><i class="fas fa-eye ml-1"></i> عرض</a>`;
+              } else if (result.type === "historical_characters") {
+                icon = "fa-user-friends";
+                color = "text-purple-400";
+                subtitle = "شخصية تاريخية";
+                linkHtml = `<a href="#characters-section" onclick="handleNavClick({currentTarget: {getAttribute: () => '#characters-section'}})" class="text-sm text-yellow-500 hover:underline ml-3"><i class="fas fa-eye ml-1"></i> عرض</a>`;
+              } else if (result.type === "quizzes") {
+                icon = "fa-clipboard-list";
+                color = "text-green-400";
+                subtitle = "اختبار";
+                linkHtml = `<a href="${result.googleFormUrl}" target="_blank" class="text-sm text-green-400 hover:underline ml-3"><i class="fas fa-external-link-alt ml-1"></i> ابدأ الاختبار</a>`;
               }
-              
-              // عرض النتائج
-              const outputEl = document.getElementById('search-results-output');
-              outputEl.innerHTML = '';
-              
-              allResults.forEach(result => {
-                  const card = document.createElement('div');
-                  const gradeName = availableGrades.find(g => g.id === result.gradeLevel)?.name || 'غير محدد';
-                  
-                  let icon, color, subtitle, linkHtml = '';
 
-                  if (result.type === 'history_lessons') {
-                      icon = 'fa-book-open'; color = 'gold-color'; subtitle = 'درس';
-                      linkHtml = `<a href="#lessons-section" onclick="handleNavClick({currentTarget: {getAttribute: () => '#lessons-section'}})" class="text-sm text-yellow-500 hover:underline ml-3"><i class="fas fa-eye ml-1"></i> عرض</a>`;
-                  } else if (result.type === 'historical_characters') {
-                      icon = 'fa-user-friends'; color = 'text-purple-400'; subtitle = 'شخصية تاريخية';
-                      linkHtml = `<a href="#characters-section" onclick="handleNavClick({currentTarget: {getAttribute: () => '#characters-section'}})" class="text-sm text-yellow-500 hover:underline ml-3"><i class="fas fa-eye ml-1"></i> عرض</a>`;
-                  } else if (result.type === 'quizzes') {
-                      icon = 'fa-clipboard-list'; color = 'text-green-400'; subtitle = 'اختبار';
-                      linkHtml = `<a href="${result.googleFormUrl}" target="_blank" class="text-sm text-green-400 hover:underline ml-3"><i class="fas fa-external-link-alt ml-1"></i> ابدأ الاختبار</a>`;
-                  }
-                  
-                  card.className = `p-4 bg-gray-900 rounded-xl gold-shadow flex justify-between items-start`;
-                  card.innerHTML = `
+              card.className = `p-4 bg-gray-900 rounded-xl gold-shadow flex justify-between items-start`;
+              card.innerHTML = `
                       <div>
                           <div class="flex items-center space-x-2 space-x-reverse mb-1">
                               <i class="fas ${icon} ${color}"></i>
                               <span class="text-xs text-gray-500">${subtitle} (${gradeName})</span>
                           </div>
-                          <h5 class="text-lg font-bold text-white">${result.title || result.name}</h5>
-                          <p class="text-sm text-gray-400 mt-1">${result.summary || result.bio || result.description || 'لا يوجد وصف.'}</p>
+                          <h5 class="text-lg font-bold text-white">${
+                            result.title || result.name
+                          }</h5>
+                          <p class="text-sm text-gray-400 mt-1">${
+                            result.summary ||
+                            result.bio ||
+                            result.description ||
+                            "لا يوجد وصف."
+                          }</p>
                       </div>
                       <div class="mt-2">${linkHtml}</div>
                   `;
-                  outputEl.appendChild(card);
-              });
-
-
+              outputEl.appendChild(card);
+            });
           } catch (error) {
-              console.error("Error during global search:", error);
-              searchStatusMain.textContent = `❌ حدث خطأ أثناء البحث: ${error.message}`;
+            console.error("Error during global search:", error);
+            searchStatusMain.textContent = `❌ حدث خطأ أثناء البحث: ${error.message}`;
           }
-      });
-      
+        });
+
       // **************** دالة تحميل وعرض الدروس (مع تصفية الصف) ****************
       function loadLessons() {
         // إذا كان طالباً ولم يختر صفاً، لا يحمل شيئاً
-        if (!db || !isAuthReady || userData?.isApproved !== true || (userData.role === 'student' && !currentGradeId)) {
-             lessonsListEl.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">الرجاء اختيار مرحلة تعليمية لعرض الدروس.</p>`;
-             return;
+        if (
+          !db ||
+          !isAuthReady ||
+          userData?.isApproved !== true ||
+          (userData.role === "student" && !currentGradeId)
+        ) {
+          lessonsListEl.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">الرجاء اختيار مرحلة تعليمية لعرض الدروس.</p>`;
+          return;
         }
 
-        const lessonsRef = collection(db, "artifacts", appId, "public", "data", "history_lessons");
-        
+        const lessonsRef = collection(
+          db,
+          "artifacts",
+          appId,
+          "public",
+          "data",
+          "history_lessons"
+        );
+
         let lessonsQuery = query(lessonsRef, limit(50));
-        
+
         // تصفية حسب المرحلة التعليمية إذا لم يكن مديراً
-        if (userData.role !== 'admin' && currentGradeId) {
-            lessonsQuery = query(lessonsRef, where("gradeLevel", "==", currentGradeId), limit(50));
+        if (userData.role !== "admin" && currentGradeId) {
+          lessonsQuery = query(
+            lessonsRef,
+            where("gradeLevel", "==", currentGradeId),
+            limit(50)
+          );
         } else if (isAdminMode && isUserAdmin) {
-            // المدير في وضع الإدارة يرى كل شيء
-             lessonsQuery = query(lessonsRef, limit(100)); 
-        } else if (userData.role === 'student' && currentGradeId) {
-             lessonsQuery = query(lessonsRef, where("gradeLevel", "==", currentGradeId), limit(50));
+          // المدير في وضع الإدارة يرى كل شيء
+          lessonsQuery = query(lessonsRef, limit(100));
+        } else if (userData.role === "student" && currentGradeId) {
+          lessonsQuery = query(
+            lessonsRef,
+            where("gradeLevel", "==", currentGradeId),
+            limit(50)
+          );
         }
 
         onSnapshot(
           lessonsQuery,
           (snapshot) => {
             lessonsListEl.innerHTML = "";
-            document.getElementById("lessons-loading-status").classList.add("hidden");
+            document
+              .getElementById("lessons-loading-status")
+              .classList.add("hidden");
 
             if (snapshot.empty) {
               lessonsListEl.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">لا توجد دروس حالياً لهذه المرحلة.</p>`;
@@ -1850,7 +2072,8 @@
           },
           (error) => {
             console.error("Error listening to Firestore lessons:", error);
-            document.getElementById("lessons-loading-status").textContent = "خطأ في تحميل الدروس.";
+            document.getElementById("lessons-loading-status").textContent =
+              "خطأ في تحميل الدروس.";
           }
         );
       }
@@ -1861,10 +2084,11 @@
         card.className =
           "lesson-card p-6 bg-gray-900 rounded-xl gold-shadow flex flex-col justify-between";
         card.dataset.docId = docId;
-        
-        // جلب اسم المرحلة التعليمية للعرض
-        const gradeName = availableGrades.find(g => g.id === data.gradeLevel)?.name || 'غير محدد';
 
+        // جلب اسم المرحلة التعليمية للعرض
+        const gradeName =
+          availableGrades.find((g) => g.id === data.gradeLevel)?.name ||
+          "غير محدد";
 
         let mediaLinks = "";
         if (data.pdfUrl) {
@@ -1919,17 +2143,22 @@
             return;
           }
 
-          const gradeLevel = document.getElementById("lesson-grade-select").value;
+          const gradeLevel = document.getElementById(
+            "lesson-grade-select"
+          ).value;
           const title = document.getElementById("lesson-title").value;
           const summary = document.getElementById("lesson-summary").value;
           const pdfUrl = document.getElementById("lesson-pdf-url").value;
           const videoUrl = document.getElementById("lesson-video-url").value;
-          
-          if (!gradeLevel) {
-               showMessage(lessonStatusMessageEl, "يجب تحديد المرحلة التعليمية.", true);
-               return;
-          }
 
+          if (!gradeLevel) {
+            showMessage(
+              lessonStatusMessageEl,
+              "يجب تحديد المرحلة التعليمية.",
+              true
+            );
+            return;
+          }
 
           addLessonBtn.disabled = true;
           showMessage(lessonStatusMessageEl, "جاري حفظ الدرس...", false);
@@ -1973,9 +2202,14 @@
 
       // **************** دالة تحميل وعرض الشخصيات التاريخية (مع تصفية الصف) ****************
       function loadCharacters() {
-        if (!db || !isAuthReady || userData?.isApproved !== true || (userData.role === 'student' && !currentGradeId)) {
-            charactersListEl.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">الرجاء اختيار مرحلة تعليمية لعرض الشخصيات.</p>`;
-            return;
+        if (
+          !db ||
+          !isAuthReady ||
+          userData?.isApproved !== true ||
+          (userData.role === "student" && !currentGradeId)
+        ) {
+          charactersListEl.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">الرجاء اختيار مرحلة تعليمية لعرض الشخصيات.</p>`;
+          return;
         }
 
         const charsRef = collection(
@@ -1987,14 +2221,21 @@
           "historical_characters"
         );
         let charsQuery = query(charsRef, limit(50));
-        
-        // تصفية حسب المرحلة التعليمية
-        if (userData.role !== 'admin' && currentGradeId) {
-             charsQuery = query(charsRef, where("gradeLevel", "==", currentGradeId), limit(50));
-        } else if (userData.role === 'student' && currentGradeId) {
-             charsQuery = query(charsRef, where("gradeLevel", "==", currentGradeId), limit(50));
-        }
 
+        // تصفية حسب المرحلة التعليمية
+        if (userData.role !== "admin" && currentGradeId) {
+          charsQuery = query(
+            charsRef,
+            where("gradeLevel", "==", currentGradeId),
+            limit(50)
+          );
+        } else if (userData.role === "student" && currentGradeId) {
+          charsQuery = query(
+            charsRef,
+            where("gradeLevel", "==", currentGradeId),
+            limit(50)
+          );
+        }
 
         onSnapshot(
           charsQuery,
@@ -2029,8 +2270,9 @@
         card.dataset.docId = docId;
 
         const showDeleteButton = isAdminMode && isUserAdmin;
-        const gradeName = availableGrades.find(g => g.id === data.gradeLevel)?.name || 'غير محدد';
-
+        const gradeName =
+          availableGrades.find((g) => g.id === data.gradeLevel)?.name ||
+          "غير محدد";
 
         const content = `
               <i class="fas fa-crown gold-color text-2xl mb-2"></i>
@@ -2080,10 +2322,14 @@
           const name = document.getElementById("char-name").value;
           const era = document.getElementById("char-era").value;
           const bio = document.getElementById("char-bio").value;
-          
+
           if (!gradeLevel) {
-               showMessage(charStatusMessageEl, "يجب تحديد المرحلة التعليمية.", true);
-               return;
+            showMessage(
+              charStatusMessageEl,
+              "يجب تحديد المرحلة التعليمية.",
+              true
+            );
+            return;
           }
 
           if (!name || !era || !bio) {
@@ -2227,9 +2473,14 @@
 
       // **************** دالة تحميل الاختبارات والنتائج (مع تصفية الصف) ****************
       function loadQuizzesAndResults() {
-        if (!db || !isAuthReady || userData?.isApproved !== true || (userData.role === 'student' && !currentGradeId)) {
-            quizzesListEl.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">الرجاء اختيار مرحلة تعليمية لعرض الاختبارات.</p>`;
-            return;
+        if (
+          !db ||
+          !isAuthReady ||
+          userData?.isApproved !== true ||
+          (userData.role === "student" && !currentGradeId)
+        ) {
+          quizzesListEl.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">الرجاء اختيار مرحلة تعليمية لعرض الاختبارات.</p>`;
+          return;
         }
 
         document.getElementById("quizzes-title").textContent =
@@ -2260,10 +2511,18 @@
 
         let quizzesQuery = query(quizzesRef);
         // تصفية حسب المرحلة التعليمية
-        if (userData.role !== 'admin' && currentGradeId) {
-             quizzesQuery = query(quizzesRef, where("gradeLevel", "==", currentGradeId), limit(50));
-        } else if (userData.role === 'student' && currentGradeId) {
-             quizzesQuery = query(quizzesRef, where("gradeLevel", "==", currentGradeId), limit(50));
+        if (userData.role !== "admin" && currentGradeId) {
+          quizzesQuery = query(
+            quizzesRef,
+            where("gradeLevel", "==", currentGradeId),
+            limit(50)
+          );
+        } else if (userData.role === "student" && currentGradeId) {
+          quizzesQuery = query(
+            quizzesRef,
+            where("gradeLevel", "==", currentGradeId),
+            limit(50)
+          );
         }
 
         onSnapshot(
@@ -2296,9 +2555,8 @@
                   renderQuizCardForAdmin(quiz);
                 }
               });
-              
+
               updateQuizSelectOptions();
-              
             });
           },
           (error) => {
@@ -2318,9 +2576,10 @@
         const scoreText = result
           ? `<span class="text-2xl font-bold gold-color">${result.score} / ${quiz.maxScore}</span>`
           : `<span class="text-sm text-red-500">لم يتم رصد درجة بعد.</span>`;
-        
-        const gradeName = availableGrades.find(g => g.id === quiz.gradeLevel)?.name || 'غير محدد';
 
+        const gradeName =
+          availableGrades.find((g) => g.id === quiz.gradeLevel)?.name ||
+          "غير محدد";
 
         const content = `
               <div class="flex justify-between items-start mb-2">
@@ -2352,9 +2611,10 @@
         const card = document.createElement("div");
         card.className =
           "quiz-card p-4 bg-gray-800 rounded-xl gold-border border flex justify-between items-center";
-          
-        const gradeName = availableGrades.find(g => g.id === quiz.gradeLevel)?.name || 'غير محدد';
 
+        const gradeName =
+          availableGrades.find((g) => g.id === quiz.gradeLevel)?.name ||
+          "غير محدد";
 
         const content = `
               <div>
@@ -2397,12 +2657,15 @@
             document.getElementById("quiz-max-score").value
           );
           const description = document.getElementById("quiz-description").value;
-          
-          if (!gradeLevel) {
-               showMessage(quizStatusMessageEl, "يجب تحديد المرحلة التعليمية.", true);
-               return;
-          }
 
+          if (!gradeLevel) {
+            showMessage(
+              quizStatusMessageEl,
+              "يجب تحديد المرحلة التعليمية.",
+              true
+            );
+            return;
+          }
 
           if (!title || !googleFormUrl || isNaN(maxScore) || maxScore <= 0) {
             showMessage(
@@ -2460,115 +2723,164 @@
 
       // **************** وظيفة رصد الدرجات (جديد) ****************
 
-      const scoreStatusMessageEl = document.getElementById("score-status-message");
-      const scoreStudentSelect = document.getElementById("score-student-select");
+      const scoreStatusMessageEl = document.getElementById(
+        "score-status-message"
+      );
+      const scoreStudentSelect = document.getElementById(
+        "score-student-select"
+      );
       const scoreQuizSelect = document.getElementById("score-quiz-select");
       const scoreMaxDisplay = document.getElementById("score-max-display");
 
       // تحديث قائمة الاختبارات في نموذج رصد الدرجات
       function updateQuizSelectOptions() {
-          scoreQuizSelect.innerHTML = '<option value="">-- حدد الاختبار --</option>';
-          allQuizzes.forEach(quiz => {
-              const option = document.createElement('option');
-              option.value = quiz.id;
-              
-              // عرض اسم المرحلة التعليمية في القائمة المنسدلة للمدير
-              const gradeName = availableGrades.find(g => g.id === quiz.gradeLevel)?.name || 'غير محدد';
-              
-              option.textContent = `${quiz.title} (${gradeName} | الكلية: ${quiz.maxScore})`;
-              option.dataset.maxScore = quiz.maxScore;
-              scoreQuizSelect.appendChild(option);
-          });
+        scoreQuizSelect.innerHTML =
+          '<option value="">-- حدد الاختبار --</option>';
+        allQuizzes.forEach((quiz) => {
+          const option = document.createElement("option");
+          option.value = quiz.id;
+
+          // عرض اسم المرحلة التعليمية في القائمة المنسدلة للمدير
+          const gradeName =
+            availableGrades.find((g) => g.id === quiz.gradeLevel)?.name ||
+            "غير محدد";
+
+          option.textContent = `${quiz.title} (${gradeName} | الكلية: ${quiz.maxScore})`;
+          option.dataset.maxScore = quiz.maxScore;
+          scoreQuizSelect.appendChild(option);
+        });
       }
 
       // تحديث قائمة الطلاب المعتمدين لنموذج رصد الدرجات
       function loadStudentsForScoreEntry() {
-          if (!db || !isAuthReady || !isUserAdmin) return;
-          
-          const profilesRef = collection(db, "artifacts", appId, "user_profiles");
-          // نحتاج فقط الطلاب المعتمدين
-          const studentsQuery = query(profilesRef, where('isApproved', '==', true), where('role', '==', 'student'));
+        if (!db || !isAuthReady || !isUserAdmin) return;
 
-          onSnapshot(studentsQuery, (snapshot) => {
-              scoreStudentSelect.innerHTML = '<option value="">-- حدد الطالب --</option>';
-              studentsProfiles = []; 
-              
-              snapshot.forEach((doc) => {
-                  const profile = doc.data();
-                  studentsProfiles.push(profile);
-                  
-                  // عرض اسم المرحلة للطالب
-                  const gradeName = availableGrades.find(g => g.id === profile.gradeLevel)?.name || 'لم يختر مرحلة';
+        const profilesRef = collection(db, "artifacts", appId, "user_profiles");
+        // نحتاج فقط الطلاب المعتمدين
+        const studentsQuery = query(
+          profilesRef,
+          where("isApproved", "==", true),
+          where("role", "==", "student")
+        );
 
-                  const option = document.createElement('option');
-                  option.value = profile.uid;
-                  option.textContent = `${profile.name} (${profile.email} | ${gradeName})`;
-                  scoreStudentSelect.appendChild(option);
-              });
-          }, (error) => {
-              console.error("Error loading students for scoring:", error);
-          });
-          
-          // تأكد من تحميل قائمة الاختبارات أيضاً
-          loadQuizzesAndResults();
-      }
-      
-      // تحديث الدرجة الكلية عند اختيار الاختبار
-      scoreQuizSelect.addEventListener('change', () => {
-          const selectedOption = scoreQuizSelect.options[scoreQuizSelect.selectedIndex];
-          if (selectedOption && selectedOption.dataset.maxScore) {
-              scoreMaxDisplay.value = selectedOption.dataset.maxScore;
-          } else {
-              scoreMaxDisplay.value = '';
+        onSnapshot(
+          studentsQuery,
+          (snapshot) => {
+            scoreStudentSelect.innerHTML =
+              '<option value="">-- حدد الطالب --</option>';
+            studentsProfiles = [];
+
+            snapshot.forEach((doc) => {
+              const profile = doc.data();
+              studentsProfiles.push(profile);
+
+              // عرض اسم المرحلة للطالب
+              const gradeName =
+                availableGrades.find((g) => g.id === profile.gradeLevel)
+                  ?.name || "لم يختر مرحلة";
+
+              const option = document.createElement("option");
+              option.value = profile.uid;
+              option.textContent = `${profile.name} (${profile.email} | ${gradeName})`;
+              scoreStudentSelect.appendChild(option);
+            });
+          },
+          (error) => {
+            console.error("Error loading students for scoring:", error);
           }
+        );
+
+        // تأكد من تحميل قائمة الاختبارات أيضاً
+        loadQuizzesAndResults();
+      }
+
+      // تحديث الدرجة الكلية عند اختيار الاختبار
+      scoreQuizSelect.addEventListener("change", () => {
+        const selectedOption =
+          scoreQuizSelect.options[scoreQuizSelect.selectedIndex];
+        if (selectedOption && selectedOption.dataset.maxScore) {
+          scoreMaxDisplay.value = selectedOption.dataset.maxScore;
+        } else {
+          scoreMaxDisplay.value = "";
+        }
       });
-      
+
       // معالجة إرسال رصد الدرجات
-      document.getElementById('score-entry-form').addEventListener('submit', async (e) => {
+      document
+        .getElementById("score-entry-form")
+        .addEventListener("submit", async (e) => {
           e.preventDefault();
           if (!isUserAdmin || !isAdminMode) {
-              showMessage(scoreStatusMessageEl, "غير مسموح. يمكن للمدير فقط رصد الدرجات.", true);
-              return;
+            showMessage(
+              scoreStatusMessageEl,
+              "غير مسموح. يمكن للمدير فقط رصد الدرجات.",
+              true
+            );
+            return;
           }
-          
+
           const studentId = scoreStudentSelect.value;
           const quizId = scoreQuizSelect.value;
-          const score = parseInt(document.getElementById('score-value').value);
-          const notes = document.getElementById('score-notes').value;
+          const score = parseInt(document.getElementById("score-value").value);
+          const notes = document.getElementById("score-notes").value;
           const maxScore = parseInt(scoreMaxDisplay.value);
 
-          if (!studentId || !quizId || isNaN(score) || score < 0 || score > maxScore) {
-              showMessage(scoreStatusMessageEl, "يرجى اختيار طالب واختبار وإدخال درجة صحيحة لا تتجاوز الدرجة الكلية.", true);
-              return;
+          if (
+            !studentId ||
+            !quizId ||
+            isNaN(score) ||
+            score < 0 ||
+            score > maxScore
+          ) {
+            showMessage(
+              scoreStatusMessageEl,
+              "يرجى اختيار طالب واختبار وإدخال درجة صحيحة لا تتجاوز الدرجة الكلية.",
+              true
+            );
+            return;
           }
-          
-          document.getElementById('submit-score-btn').disabled = true;
+
+          document.getElementById("submit-score-btn").disabled = true;
           showMessage(scoreStatusMessageEl, "جاري تسجيل الدرجة...", false);
 
           try {
-              // مسار حفظ نتيجة الطالب
-              const resultDocRef = doc(db, "artifacts", appId, "users", studentId, "quiz_results", quizId);
-              
-              await setDoc(resultDocRef, {
-                  quizId: quizId,
-                  score: score,
-                  maxScore: maxScore,
-                  notes: notes,
-                  recordedBy: userId,
-                  recordedAt: new Date().toISOString()
-              });
-              
-              showMessage(scoreStatusMessageEl, `✅ تم تسجيل الدرجة (${score}/${maxScore}) للطالب بنجاح!`, false);
-              document.getElementById('score-entry-form').reset();
+            // مسار حفظ نتيجة الطالب
+            const resultDocRef = doc(
+              db,
+              "artifacts",
+              appId,
+              "users",
+              studentId,
+              "quiz_results",
+              quizId
+            );
 
+            await setDoc(resultDocRef, {
+              quizId: quizId,
+              score: score,
+              maxScore: maxScore,
+              notes: notes,
+              recordedBy: userId,
+              recordedAt: new Date().toISOString(),
+            });
+
+            showMessage(
+              scoreStatusMessageEl,
+              `✅ تم تسجيل الدرجة (${score}/${maxScore}) للطالب بنجاح!`,
+              false
+            );
+            document.getElementById("score-entry-form").reset();
           } catch (e) {
-              console.error("Error recording score: ", e);
-              showMessage(scoreStatusMessageEl, `❌ خطأ في تسجيل الدرجة: ${e.message}. يرجى مراجعة قواعد أمان Firestore.`, true);
+            console.error("Error recording score: ", e);
+            showMessage(
+              scoreStatusMessageEl,
+              `❌ خطأ في تسجيل الدرجة: ${e.message}. يرجى مراجعة قواعد أمان Firestore.`,
+              true
+            );
           } finally {
-              document.getElementById('submit-score-btn').disabled = false;
+            document.getElementById("submit-score-btn").disabled = false;
           }
-      });
-      
+        });
 
       // **************** دالة تحميل جميع المستخدمين (للمدير) ****************
       function loadAllUsers() {
@@ -2620,9 +2932,10 @@
                   ? `<span class="text-green-400">مدير</span>`
                   : `<span class="text-yellow-400">مُوافَق عليه</span>`
                 : `<span class="text-red-400">مُعَلَّق</span>`;
-              
-              const gradeName = availableGrades.find(g => g.id === profile.gradeLevel)?.name || 'غير محدد';
 
+              const gradeName =
+                availableGrades.find((g) => g.id === profile.gradeLevel)
+                  ?.name || "غير محدد";
 
               let actionButtons = "";
               const uid = profile.uid;
@@ -2651,11 +2964,11 @@
                             profile.email
                           }</p>
                           <p class="text-xs text-gray-500">المرحلة: ${gradeName} | ID: ${uid.substring(
-                            0,
-                            8
-                          )}... | مسجل في: ${new Date(
-                profile.createdAt
-              ).toLocaleDateString("ar-EG")}</p>
+                0,
+                8
+              )}... | مسجل في: ${new Date(profile.createdAt).toLocaleDateString(
+                "ar-EG"
+              )}</p>
                       </div>
                       <div class="space-x-2 space-x-reverse flex justify-center w-full md:w-auto mt-2 md:mt-0">
                           ${actionButtons}
@@ -2750,14 +3063,14 @@
         }
 
         try {
-            const docRef = doc(
-                db,
-                "artifacts",
-                appId,
-                docType === 'grade' ? "public/data/grade_levels" : "public/data",
-                collectionPath,
-                docId
-            );
+          const docRef = doc(
+            db,
+            "artifacts",
+            appId,
+            docType === "grade" ? "public/data/grade_levels" : "public/data",
+            collectionPath,
+            docId
+          );
           await deleteDoc(docRef);
         } catch (e) {
           console.error(`Error removing ${docType} document: `, e);
